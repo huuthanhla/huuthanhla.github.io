@@ -5603,7 +5603,7 @@ html #wpadminbar {
   bottom: -999em;
   width: 300px;
   opacity: 0;
-  visibility: hidden
+  visibility: visible
 }
 
 .background-music-toggle.active~.background-music-embed {
