@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<optiongroups>
+  <group group_id="acp" display_order="3000" debug_only="0"/>
+  <group group_id="alerts" display_order="130" debug_only="0"/>
+  <group group_id="appearance" display_order="40" debug_only="0"/>
+  <group group_id="attachments" display_order="540" debug_only="0"/>
+  <group group_id="basicBoard" display_order="20" debug_only="0"/>
+  <group group_id="boardActive" display_order="10" debug_only="0"/>
+  <group group_id="censoringOptions" display_order="60" debug_only="0"/>
+  <group group_id="debug" display_order="0" debug_only="1"/>
+  <group group_id="discourager" display_order="140" debug_only="0"/>
+  <group group_id="discussionOptions" display_order="520" debug_only="0"/>
+  <group group_id="emailOptions" display_order="50" debug_only="0"/>
+  <group group_id="facebook" display_order="210" debug_only="0"/>
+  <group group_id="google" display_order="225" debug_only="0"/>
+  <group group_id="logging" display_order="560" debug_only="0"/>
+  <group group_id="messageOptions" display_order="530" debug_only="0"/>
+  <group group_id="newsfeed" display_order="1000" debug_only="0"/>
+  <group group_id="nodeList" display_order="510" debug_only="0"/>
+  <group group_id="performance" display_order="30" debug_only="0"/>
+  <group group_id="searchOptions" display_order="550" debug_only="0"/>
+  <group group_id="seo" display_order="80" debug_only="0"/>
+  <group group_id="serviceProviders" display_order="2000" debug_only="0"/>
+  <group group_id="sitemap" display_order="35" debug_only="0"/>
+  <group group_id="spam" display_order="550" debug_only="0"/>
+  <group group_id="stats" display_order="70" debug_only="0"/>
+  <group group_id="twitter" display_order="220" debug_only="0"/>
+  <group group_id="users" display_order="120" debug_only="0"/>
+  <group group_id="usersAndRegistration" display_order="110" debug_only="0"/>
+  <option option_id="addBanUserGroup" edit_format="callback" data_type="integer" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params>XenForo_Option_UserGroupChooser::renderSelect</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discourager" display_order="410"/>
+  </option>
+  <option option_id="addThis" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:2:{s:7:"enabled";s:1:"1";s:5:"pubId";s:0:"";}</default_value>
+    <edit_format_params>option_template_addThis</edit_format_params>
+    <sub_options>enabled
+pubId</sub_options>
+    <relation group_id="seo" display_order="1000"/>
+    <relation group_id="stats" display_order="110"/>
+  </option>
+  <option option_id="adjustTitleCase" edit_format="template" data_type="string" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params>option_template_adjustTitleCase</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discussionOptions" display_order="410"/>
+  </option>
+  <option option_id="adminSearchExclusions" edit_format="callback" data_type="array" can_backup="1" validation_class="XenForo_Option_AdminSearchExclusions" validation_method="verifyOption">
+    <default_value>a:1:{s:14:"admin_template";b:1;}</default_value>
+    <edit_format_params>XenForo_Option_AdminSearchExclusions::renderOption</edit_format_params>
+    <sub_options>*</sub_options>
+    <relation group_id="acp" display_order="10"/>
+  </option>
+  <option option_id="adminSearchMaxResults" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>5</default_value>
+    <edit_format_params>min=1
+step=1</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="acp" display_order="120"/>
+  </option>
+  <option option_id="akismetKey" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="spam" display_order="150"/>
+  </option>
+  <option option_id="alertExpiryDays" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>4</default_value>
+    <edit_format_params>min=0
+step=1</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="alerts" display_order="1"/>
+  </option>
+  <option option_id="alertsPerPage" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>30</default_value>
+    <edit_format_params>min=1
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="alerts" display_order="30"/>
+  </option>
+  <option option_id="alertsPopupExpiryHours" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>3</default_value>
+    <edit_format_params>min=1
+step=6</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="alerts" display_order="210"/>
+  </option>
+  <option option_id="attachmentExtensions" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>zip
+txt
+pdf
+png
+jpg
+jpeg
+jpe
+gif</default_value>
+    <edit_format_params>rows=6</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="attachments" display_order="20"/>
+  </option>
+  <option option_id="attachmentMaxDimensions" edit_format="template" data_type="array" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params>option_template_attachmentMaxDimensions</edit_format_params>
+    <sub_options>width
+height</sub_options>
+    <relation group_id="attachments" display_order="110"/>
+  </option>
+  <option option_id="attachmentMaxFileSize" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>1024</default_value>
+    <edit_format_params>min=0
+step=128</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="attachments" display_order="10"/>
+  </option>
+  <option option_id="attachmentMaxPerMessage" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>10</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="attachments" display_order="15"/>
+  </option>
+  <option option_id="attachmentThumbnailDimensions" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>100</default_value>
+    <edit_format_params>min=25
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="attachments" display_order="120"/>
+  </option>
+  <option option_id="autoEmbedMedia" edit_format="template" data_type="array" can_backup="1" validation_class="XenForo_Option_AutoEmbedMedia" validation_method="verifyOption">
+    <default_value>a:2:{s:9:"embedType";s:1:"1";s:10:"linkBbCode";s:52:"[i][size=2][url={$url}]View: {$url}[/url][/size][/i]";}</default_value>
+    <edit_format_params>option_template_autoEmbedMedia</edit_format_params>
+    <sub_options>embedType
+linkBbCode</sub_options>
+    <relation group_id="messageOptions" display_order="220"/>
+  </option>
+  <option option_id="bbCodeCacheTrimDays" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>30</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="435"/>
+  </option>
+  <option option_id="bbCodeCacheVersion" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="debug" display_order="1000"/>
+  </option>
+  <option option_id="boardActive" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="boardActive" display_order="1"/>
+  </option>
+  <option option_id="boardDescription" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>Forum software by XenForo</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="20"/>
+  </option>
+  <option option_id="boardInactiveMessage" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>Sorry, we're currently unavailable. Please check back later.</default_value>
+    <edit_format_params>rows=3</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="boardActive" display_order="1"/>
+  </option>
+  <option option_id="boardTitle" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>XenForo</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="10"/>
+  </option>
+  <option option_id="boardUrl" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params>type=url</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="30"/>
+  </option>
+  <option option_id="bounceEmailAddress" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="emailOptions" display_order="310"/>
+  </option>
+  <option option_id="cacheBbCodeTree" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="430"/>
+  </option>
+  <option option_id="captcha" edit_format="callback" data_type="string" can_backup="1">
+    <default_value>ReCaptcha</default_value>
+    <edit_format_params>XenForo_Option_Captcha::renderOption</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="320"/>
+    <relation group_id="spam" display_order="610"/>
+    <relation group_id="usersAndRegistration" display_order="140"/>
+  </option>
+  <option option_id="categoryOwnPage" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="nodeList" display_order="220"/>
+  </option>
+  <option option_id="censorCharacter" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>*</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="censoringOptions" display_order="10"/>
+  </option>
+  <option option_id="censorWords" edit_format="callback" data_type="array" can_backup="1" validation_class="XenForo_Option_CensorWords" validation_method="verifyOption">
+    <default_value>a:0:{}</default_value>
+    <edit_format_params>XenForo_Option_CensorWords::renderOption</edit_format_params>
+    <sub_options>*</sub_options>
+    <relation group_id="censoringOptions" display_order="110"/>
+  </option>
+  <option option_id="contactEmailAddress" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="40"/>
+    <relation group_id="emailOptions" display_order="20"/>
+  </option>
+  <option option_id="contactEmailSenderHeader" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="emailOptions" display_order="25"/>
+  </option>
+  <option option_id="contactUrl" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:3:{s:4:"type";s:7:"default";s:6:"custom";b:0;s:7:"overlay";b:0;}</default_value>
+    <edit_format_params>option_template_contactUrl</edit_format_params>
+    <sub_options>type
+custom
+overlay</sub_options>
+    <relation group_id="basicBoard" display_order="230"/>
+  </option>
+  <option option_id="conversationPopupExpiryHours" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>72</default_value>
+    <edit_format_params>min=1
+step=6</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="alerts" display_order="220"/>
+  </option>
+  <option option_id="currentVersionId" edit_format="textbox" data_type="positive_integer" can_backup="1">
+    <default_value>1000011</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="debug" display_order="0"/>
+  </option>
+  <option option_id="defaultEmailAddress" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="35"/>
+    <relation group_id="emailOptions" display_order="10"/>
+  </option>
+  <option option_id="defaultLanguageId" edit_format="callback" data_type="positive_integer" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params>XenForo_Option_LanguageChooser::renderRadio</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="appearance" display_order="210"/>
+  </option>
+  <option option_id="defaultStyleId" edit_format="callback" data_type="positive_integer" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params>XenForo_Option_StyleChooser::renderRadioSelectable</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="appearance" display_order="110"/>
+  </option>
+  <option option_id="delayPostResponses" edit_format="spinbox" data_type="unsigned_numeric" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params>min=0
+step=0.5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="debug" display_order="1000"/>
+  </option>
+  <option option_id="disallowedCustomTitles" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>admin
+moderator</default_value>
+    <edit_format_params>rows=2
+inputclass=Elastic</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="users" display_order="510"/>
+    <relation group_id="usersAndRegistration" display_order="330"/>
+  </option>
+  <option option_id="discourageBlankChance" edit_format="spinbox" data_type="string" can_backup="1">
+    <default_value>15</default_value>
+    <edit_format_params>min=0
+max=100
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discourager" display_order="50"/>
+  </option>
+  <option option_id="discourageDelay" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:2:{s:3:"min";s:1:"5";s:3:"max";s:2:"20";}</default_value>
+    <edit_format_params>option_template_minMax</edit_format_params>
+    <sub_options>min
+max</sub_options>
+    <relation group_id="discourager" display_order="10"/>
+  </option>
+  <option option_id="discourageFloodMultiplier" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>10</default_value>
+    <edit_format_params>min=1
+step=1</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discourager" display_order="60"/>
+  </option>
+  <option option_id="discourageNewsFeedChance" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>25</default_value>
+    <edit_format_params>min=0
+max=100
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discourager" display_order="120"/>
+  </option>
+  <option option_id="discourageRedirectChance" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>15</default_value>
+    <edit_format_params>min=0
+max=100
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discourager" display_order="210"/>
+  </option>
+  <option option_id="discourageRedirectUrl" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discourager" display_order="220"/>
+  </option>
+  <option option_id="discourageSearchChance" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>min=0
+max=100
+step=5</default_value>
+    <edit_format_params>40</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discourager" display_order="110"/>
+  </option>
+  <option option_id="discussionPreviewLength" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>200</default_value>
+    <edit_format_params>min=0
+step=10</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discussionOptions" display_order="30"/>
+  </option>
+  <option option_id="discussionRssContentLength" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>500</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discussionOptions" display_order="40"/>
+  </option>
+  <option option_id="discussionsPerPage" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>20</default_value>
+    <edit_format_params>min=5
+max=100
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discussionOptions" display_order="10"/>
+  </option>
+  <option option_id="editHistory" edit_format="onofftextbox" data_type="array" can_backup="1">
+    <default_value>a:2:{s:7:"enabled";s:1:"1";s:6:"length";s:2:"60";}</default_value>
+    <edit_format_params>min=0
+onoff=enabled
+value=length
+default=60
+type=spinbox</edit_format_params>
+    <sub_options>enabled
+length</sub_options>
+    <relation group_id="logging" display_order="110"/>
+  </option>
+  <option option_id="editLogDisplay" edit_format="onofftextbox" data_type="array" can_backup="1">
+    <default_value>a:2:{s:7:"enabled";s:1:"1";s:5:"delay";s:1:"5";}</default_value>
+    <edit_format_params>onoff=enabled
+value=delay
+type=spinbox
+min=0
+default=5</edit_format_params>
+    <sub_options>enabled
+delay</sub_options>
+    <relation group_id="logging" display_order="100"/>
+  </option>
+  <option option_id="emailBounceHandler" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:7:{s:7:"enabled";b:0;s:4:"type";b:0;s:4:"host";b:0;s:4:"port";b:0;s:8:"username";b:0;s:8:"password";b:0;s:10:"encryption";b:0;}</default_value>
+    <edit_format_params>option_template_emailBounceHandler</edit_format_params>
+    <sub_options>enabled
+type
+host
+port
+username
+password
+encryption</sub_options>
+    <relation group_id="emailOptions" display_order="320"/>
+  </option>
+  <option option_id="emailConversationIncludeMessage" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discussionOptions" display_order="520"/>
+    <relation group_id="emailOptions" display_order="420"/>
+  </option>
+  <option option_id="emailSenderName" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="emailOptions" display_order="110"/>
+  </option>
+  <option option_id="emailSoftBounceThreshold" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:3:{s:12:"bounce_total";s:1:"3";s:11:"unique_days";s:1:"3";s:12:"days_between";s:1:"5";}</default_value>
+    <edit_format_params>option_template_emailSoftBounceThreshold</edit_format_params>
+    <sub_options>bounce_total
+unique_days
+days_between</sub_options>
+    <relation group_id="emailOptions" display_order="330"/>
+  </option>
+  <option option_id="emailTransport" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:2:{s:14:"emailTransport";s:8:"sendmail";s:18:"sendmailReturnPath";s:1:"1";}</default_value>
+    <edit_format_params>option_template_emailTransport</edit_format_params>
+    <sub_options>emailTransport
+*</sub_options>
+    <relation group_id="emailOptions" display_order="210"/>
+  </option>
+  <option option_id="emailWatchedThreadIncludeMessage" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discussionOptions" display_order="510"/>
+    <relation group_id="emailOptions" display_order="410"/>
+  </option>
+  <option option_id="enableInsertDelayed" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="410"/>
+  </option>
+  <option option_id="enableMemberList" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="users" display_order="100"/>
+  </option>
+  <option option_id="enableNewsFeed" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="newsfeed" display_order="10"/>
+    <relation group_id="performance" display_order="110"/>
+  </option>
+  <option option_id="enableNotices" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="210"/>
+  </option>
+  <option option_id="enableSearch" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="10"/>
+    <relation group_id="searchOptions" display_order="10"/>
+  </option>
+  <option option_id="enableVerp" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="emailOptions" display_order="315"/>
+  </option>
+  <option option_id="extraCaptchaKeys" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:0:{}</default_value>
+    <edit_format_params>option_template_extraCaptchaKeys</edit_format_params>
+    <sub_options>*</sub_options>
+    <relation group_id="debug" display_order="500"/>
+  </option>
+  <option option_id="facebookAdmins" edit_format="template" data_type="array" can_backup="1" validation_class="XenForo_Option_FacebookAdmins" validation_method="verifyOption">
+    <default_value>a:0:{}</default_value>
+    <edit_format_params>option_template_facebookAdmins</edit_format_params>
+    <sub_options>*</sub_options>
+    <relation group_id="facebook" display_order="110"/>
+  </option>
+  <option option_id="facebookAppId" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="facebook" display_order="10"/>
+  </option>
+  <option option_id="facebookAppSecret" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="facebook" display_order="20"/>
+  </option>
+  <option option_id="facebookFacepile" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="facebook" display_order="310"/>
+  </option>
+  <option option_id="facebookLike" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="facebook" display_order="220"/>
+    <relation group_id="seo" display_order="520"/>
+  </option>
+  <option option_id="facebookLikeAction" edit_format="radio" data_type="string" can_backup="1">
+    <default_value>recommend</default_value>
+    <edit_format_params>recommend={xen:phrase facebook_recommend}
+like={xen:phrase facebook_like}</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="facebook" display_order="210"/>
+  </option>
+  <option option_id="floodCheckLength" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>30</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="310"/>
+    <relation group_id="performance" display_order="810"/>
+  </option>
+  <option option_id="forumListNewProfilePosts" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>5</default_value>
+    <edit_format_params>min=0
+step=1</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="nodeList" display_order="310"/>
+  </option>
+  <option option_id="geoLocationUrl" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>http://maps.google.com/maps?q={location}</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="serviceProviders" display_order="210"/>
+  </option>
+  <option option_id="googleAnalyticsWebPropertyId" edit_format="textbox" data_type="string" can_backup="1" validation_class="XenForo_DataWriter_Helper_Option" validation_method="verifyGoogleAnalyticsWebPropertyId">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="google" display_order="100"/>
+    <relation group_id="stats" display_order="10"/>
+  </option>
+  <option option_id="googleClientId" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="google" display_order="10"/>
+  </option>
+  <option option_id="googleClientSecret" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="google" display_order="11"/>
+  </option>
+  <option option_id="gravatarEnable" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="users" display_order="410"/>
+    <relation group_id="usersAndRegistration" display_order="120"/>
+  </option>
+  <option option_id="guestShowSignatures" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="410"/>
+    <relation group_id="seo" display_order="110"/>
+  </option>
+  <option option_id="guestTimeZone" edit_format="callback" data_type="string" can_backup="1">
+    <default_value>Europe/London</default_value>
+    <edit_format_params>XenForo_Option_GuestTimeZone::renderOption</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="310"/>
+    <relation group_id="usersAndRegistration" display_order="220"/>
+  </option>
+  <option option_id="homePageUrl" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="150"/>
+  </option>
+  <option option_id="imageCacheRefresh" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="135"/>
+  </option>
+  <option option_id="imageCacheTTL" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>7</default_value>
+    <edit_format_params>min=0
+step=1</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="130"/>
+  </option>
+  <option option_id="imageLibrary" edit_format="callback" data_type="array" can_backup="1" validation_class="XenForo_Option_ImageLibrary" validation_method="verifyOption">
+    <default_value>a:2:{s:5:"class";s:2:"gd";s:11:"convertPath";b:0;}</default_value>
+    <edit_format_params>XenForo_Option_ImageLibrary::renderOption</edit_format_params>
+    <sub_options>class
+convertPath</sub_options>
+    <relation group_id="attachments" display_order="210"/>
+  </option>
+  <option option_id="imageLinkProxy" edit_format="checkbox" data_type="array" can_backup="1">
+    <default_value>a:2:{s:6:"images";b:0;s:5:"links";b:0;}</default_value>
+    <edit_format_params>images={xen:phrase proxy_images}
+links={xen:phrase proxy_links}</edit_format_params>
+    <sub_options>images
+links</sub_options>
+    <relation group_id="messageOptions" display_order="110"/>
+  </option>
+  <option option_id="imageLinkProxyKey" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="120"/>
+  </option>
+  <option option_id="imageLinkProxyLogLength" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>90</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="logging" display_order="300"/>
+    <relation group_id="messageOptions" display_order="160"/>
+  </option>
+  <option option_id="imageProxyMaxSize" edit_format="spinbox" data_type="integer" can_backup="1">
+    <default_value>5120</default_value>
+    <edit_format_params>min=0
+step=256</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="140"/>
+  </option>
+  <option option_id="includeTitleInUrls" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="seo" display_order="20"/>
+  </option>
+  <option option_id="indexRoute" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>forums/</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="100"/>
+  </option>
+  <option option_id="ipInfoUrl" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>http://whatismyipaddress.com/ip/{ip}</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="serviceProviders" display_order="110"/>
+    <relation group_id="spam" display_order="520"/>
+  </option>
+  <option option_id="ipLogCleanUp" edit_format="onofftextbox" data_type="array" can_backup="1">
+    <default_value>a:2:{s:7:"enabled";s:1:"1";s:5:"delay";s:3:"365";}</default_value>
+    <edit_format_params>onoff=enabled
+value=delay
+type=spinbox
+min=1
+default=365</edit_format_params>
+    <sub_options>enabled
+delay</sub_options>
+    <relation group_id="logging" display_order="210"/>
+  </option>
+  <option option_id="ipv6InfoUrl" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>http://ip-lookup.net/index.php?ip={ip}</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="serviceProviders" display_order="120"/>
+  </option>
+  <option option_id="jQuerySource" edit_format="radio" data_type="string" can_backup="1">
+    <default_value>local</default_value>
+    <edit_format_params>local={xen:phrase locally_hosted}
+google=Google Ajax API CDN
+microsoft=Microsoft CDN
+jquery=jQuery CDN</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="1000"/>
+    <relation group_id="serviceProviders" display_order="5000"/>
+  </option>
+  <option option_id="jsLastUpdate" edit_format="textbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="debug" display_order="2010"/>
+  </option>
+  <option option_id="lastPageLinks" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>3</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discussionOptions" display_order="20"/>
+  </option>
+  <option option_id="lightBoxUniversal" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="attachments" display_order="130"/>
+    <relation group_id="messageOptions" display_order="30"/>
+  </option>
+  <option option_id="loginLimit" edit_format="radio" data_type="string" can_backup="1">
+    <default_value>block</default_value>
+    <edit_format_params>captcha={xen:phrase captcha}
+block={xen:phrase lock_out}</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="users" display_order="630"/>
+  </option>
+  <option option_id="logoLink" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="160"/>
+  </option>
+  <option option_id="lostPasswordCaptcha" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="users" display_order="620"/>
+  </option>
+  <option option_id="lostPasswordTimeLimit" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>180</default_value>
+    <edit_format_params>min=0
+step=10</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="820"/>
+    <relation group_id="users" display_order="610"/>
+  </option>
+  <option option_id="maxContentSpamMessages" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>5</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="spam" display_order="110"/>
+  </option>
+  <option option_id="maximumSearchResults" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>200</default_value>
+    <edit_format_params>min=20
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="searchOptions" display_order="120"/>
+  </option>
+  <option option_id="membersOnlineLimit" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>50</default_value>
+    <edit_format_params>min=0
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="users" display_order="210"/>
+  </option>
+  <option option_id="membersPerPage" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>20</default_value>
+    <edit_format_params>min=5
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="users" display_order="110"/>
+  </option>
+  <option option_id="messageInlineEdit" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="40"/>
+  </option>
+  <option option_id="messageMaxImages" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>20</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="20"/>
+  </option>
+  <option option_id="messageMaxLength" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>10000</default_value>
+    <edit_format_params>min=0
+step=50</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="10"/>
+  </option>
+  <option option_id="messageMaxMedia" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>5</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="210"/>
+  </option>
+  <option option_id="messagesPerPage" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>20</default_value>
+    <edit_format_params>step=5
+min=5
+max=100</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="510"/>
+  </option>
+  <option option_id="minifyCss" edit_format="onoff" data_type="boolean" can_backup="1" validation_class="XenForo_Option_MinifyCss" validation_method="verifyOption">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="410"/>
+  </option>
+  <option option_id="moderatorLogLength" edit_format="spinbox" data_type="integer" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="logging" display_order="1"/>
+  </option>
+  <option option_id="multiQuote" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="45"/>
+  </option>
+  <option option_id="newsFeedCache" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>10</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="newsfeed" display_order="120"/>
+    <relation group_id="performance" display_order="120"/>
+  </option>
+  <option option_id="newsFeedMaxItems" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>15</default_value>
+    <edit_format_params>min=1
+max=50
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="newsfeed" display_order="110"/>
+  </option>
+  <option option_id="newsFeedMessageSnippetLength" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>140</default_value>
+    <edit_format_params>step=10
+min=10
+max=250</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="newsfeed" display_order="210"/>
+  </option>
+  <option option_id="onlineStatusTimeout" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>15</default_value>
+    <edit_format_params>min=1
+step=5
+max=60</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="users" display_order="310"/>
+  </option>
+  <option option_id="payPalAlternateAccounts" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params>rows=2
+inputclass=Elastic</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="debug" display_order="220"/>
+  </option>
+  <option option_id="payPalPrimaryAccount" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="debug" display_order="210"/>
+  </option>
+  <option option_id="plusone" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="google" display_order="200"/>
+    <relation group_id="seo" display_order="530"/>
+  </option>
+  <option option_id="pollMaximumResponses" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>10</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discussionOptions" display_order="110"/>
+  </option>
+  <option option_id="preventDiscouragedRegistration" edit_format="template" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params>option_template_preventDiscouragedRegistration</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discourager" display_order="310"/>
+    <relation group_id="usersAndRegistration" display_order="130"/>
+  </option>
+  <option option_id="privacyPolicyUrl" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="210"/>
+  </option>
+  <option option_id="quickNavMenuNodeTypes" edit_format="callback" data_type="array" can_backup="1">
+    <default_value>a:1:{s:5:"_type";s:4:"_all";}</default_value>
+    <edit_format_params>XenForo_Option_JumpMenuNodeTypes::renderOption</edit_format_params>
+    <sub_options>*</sub_options>
+    <relation group_id="nodeList" display_order="110"/>
+  </option>
+  <option option_id="readMarkingDataLifetime" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>30</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discussionOptions" display_order="210"/>
+  </option>
+  <option option_id="registerModerateSharedBannedIp" edit_format="onofftextbox" data_type="array" can_backup="1">
+    <default_value>a:2:{s:7:"enabled";s:1:"1";s:4:"days";s:1:"7";}</default_value>
+    <edit_format_params>onoff=enabled
+value=days
+type=spinbox
+min=1
+default=7</edit_format_params>
+    <sub_options>enabled
+days</sub_options>
+    <relation group_id="spam" display_order="25"/>
+    <relation group_id="usersAndRegistration" display_order="145"/>
+  </option>
+  <option option_id="registrationCheckDnsBl" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:2:{s:5:"check";s:1:"1";s:6:"action";s:8:"moderate";}</default_value>
+    <edit_format_params>option_template_registrationCheckDnsBl</edit_format_params>
+    <sub_options>check
+action
+projectHoneyPotKey</sub_options>
+    <relation group_id="spam" display_order="20"/>
+    <relation group_id="usersAndRegistration" display_order="140"/>
+  </option>
+  <option option_id="registrationDefaults" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:13:{s:7:"visible";s:1:"1";s:16:"activity_visible";s:1:"1";s:22:"content_show_signature";s:1:"1";s:13:"show_dob_date";s:1:"1";s:13:"show_dob_year";s:1:"1";s:19:"receive_admin_email";s:1:"1";s:21:"email_on_conversation";s:1:"1";s:19:"default_watch_state";s:11:"watch_email";s:18:"allow_view_profile";s:8:"everyone";s:18:"allow_post_profile";s:7:"members";s:23:"allow_receive_news_feed";s:8:"everyone";s:32:"allow_send_personal_conversation";s:7:"members";s:21:"allow_view_identities";s:8:"everyone";}</default_value>
+    <edit_format_params>option_template_registrationDefaults</edit_format_params>
+    <sub_options>visible
+activity_visible
+content_show_signature
+show_dob_date
+show_dob_year
+receive_admin_email
+email_on_conversation
+*</sub_options>
+    <relation group_id="usersAndRegistration" display_order="210"/>
+  </option>
+  <option option_id="registrationSetup" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:5:{s:7:"enabled";s:1:"1";s:17:"emailConfirmation";s:1:"1";s:10:"moderation";b:0;s:10:"requireDob";s:1:"1";s:10:"minimumAge";s:2:"13";}</default_value>
+    <edit_format_params>option_template_registrationSetup</edit_format_params>
+    <sub_options>enabled
+emailConfirmation
+moderation
+requireDob
+minimumAge
+requireLocation</sub_options>
+    <relation group_id="usersAndRegistration" display_order="110"/>
+  </option>
+  <option option_id="registrationTimer" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>10</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="spam" display_order="30"/>
+    <relation group_id="usersAndRegistration" display_order="150"/>
+  </option>
+  <option option_id="reportIntoForumId" edit_format="callback" data_type="unsigned_integer" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params>XenForo_Option_ForumChooser::renderOption</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="discourager" display_order="520"/>
+  </option>
+  <option option_id="romanizeUrls" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="420"/>
+  </option>
+  <option option_id="saveDrafts" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:3:{s:7:"enabled";s:1:"1";s:8:"lifetime";s:2:"24";s:13:"saveFrequency";s:2:"60";}</default_value>
+    <edit_format_params>option_template_saveDrafts</edit_format_params>
+    <sub_options>enabled
+lifetime
+saveFrequency</sub_options>
+    <relation group_id="messageOptions" display_order="50"/>
+  </option>
+  <option option_id="searchMinWordLength" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>4</default_value>
+    <edit_format_params>min=1</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="searchOptions" display_order="130"/>
+  </option>
+  <option option_id="searchResultsPerPage" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>20</default_value>
+    <edit_format_params>min=5
+step=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="searchOptions" display_order="110"/>
+  </option>
+  <option option_id="searchUsersWithContent" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="searchOptions" display_order="210"/>
+  </option>
+  <option option_id="selectQuotable" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="47"/>
+  </option>
+  <option option_id="showFirstCookieNotice" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="240"/>
+  </option>
+  <option option_id="showMessageOnlineStatus" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="messageOptions" display_order="25"/>
+  </option>
+  <option option_id="sitemapAutoRebuild" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="sitemap" display_order="10"/>
+  </option>
+  <option option_id="sitemapAutoSubmit" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="sitemap" display_order="20"/>
+  </option>
+  <option option_id="sitemapExclude" edit_format="callback" data_type="array" can_backup="1" validation_class="XenForo_Option_SitemapExclude" validation_method="verifyOption">
+    <default_value>a:0:{}</default_value>
+    <edit_format_params>XenForo_Option_SitemapExclude::renderCheckbox</edit_format_params>
+    <sub_options>*</sub_options>
+    <relation group_id="sitemap" display_order="30"/>
+  </option>
+  <option option_id="sitemapExtraUrls" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params>rows=5</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="sitemap" display_order="40"/>
+  </option>
+  <option option_id="spamCheckIpsDaysLimit" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+    <default_value>7</default_value>
+    <edit_format_params>min=1
+step=1</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="spam" display_order="510"/>
+  </option>
+  <option option_id="spamDefaultOptions" edit_format="checkbox" data_type="array" can_backup="1">
+    <default_value>a:6:{s:8:"ban_user";s:1:"1";s:15:"delete_messages";s:1:"1";s:20:"delete_conversations";s:1:"1";s:14:"action_threads";s:1:"1";s:9:"check_ips";s:1:"1";s:10:"email_user";b:0;}</default_value>
+    <edit_format_params>action_threads = {xen:phrase move_delete_spammers_threads}
+delete_messages = {xen:phrase delete_spammers_messages}
+delete_conversations = {xen:phrase delete_conversations_by_spammer}
+ban_user = {xen:phrase ban_spammer}
+check_ips = {xen:phrase check_spammers_ips}
+email_user = {xen:phrase email_spammer}</edit_format_params>
+    <sub_options>ban_user
+delete_messages
+delete_conversations
+action_threads
+check_ips
+email_user</sub_options>
+    <relation group_id="spam" display_order="220"/>
+  </option>
+  <option option_id="spamEmailText" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value>{username},
+
+Your spam has been removed from {boardTitle}. If you believe this was not correct, please reply or use the contact form:
+{contactUrl}</default_value>
+    <edit_format_params>rows=2</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="spam" display_order="250"/>
+  </option>
+  <option option_id="spamMessageAction" edit_format="radio" data_type="string" can_backup="1">
+    <default_value>soft-delete</default_value>
+    <edit_format_params>delete = {xen:phrase permanently_delete}
+soft-delete = {xen:phrase remove_from_public_view}</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="spam" display_order="240"/>
+  </option>
+  <option option_id="spamPhrases" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:2:{s:7:"phrases";s:0:"";s:6:"action";s:8:"moderate";}</default_value>
+    <edit_format_params>option_template_spamPhrases</edit_format_params>
+    <sub_options>phrases
+action</sub_options>
+    <relation group_id="spam" display_order="120"/>
+  </option>
+  <option option_id="spamThreadAction" edit_format="callback" data_type="array" can_backup="1" validation_class="XenForo_Option_SpamThreadAction" validation_method="verifyOption">
+    <default_value>a:2:{s:6:"action";s:11:"soft-delete";s:7:"node_id";s:1:"0";}</default_value>
+    <edit_format_params>XenForo_Option_SpamThreadAction::renderOption</edit_format_params>
+    <sub_options>action
+node_id</sub_options>
+    <relation group_id="spam" display_order="230"/>
+  </option>
+  <option option_id="spamUserCriteria" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:3:{s:13:"message_count";s:2:"30";s:13:"register_date";s:2:"30";s:10:"like_count";s:1:"5";}</default_value>
+    <edit_format_params>option_template_spamUserCriteria</edit_format_params>
+    <sub_options>message_count
+register_date
+like_count</sub_options>
+    <relation group_id="spam" display_order="210"/>
+  </option>
+  <option option_id="stopForumSpam" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:7:{s:7:"enabled";s:1:"1";s:13:"denyThreshold";s:1:"3";s:17:"moderateThreshold";s:1:"1";s:15:"frequencyCutOff";s:1:"5";s:14:"lastSeenCutOff";s:1:"7";s:16:"submitRejections";b:0;s:6:"apiKey";b:0;}</default_value>
+    <edit_format_params>option_template_stopForumSpam</edit_format_params>
+    <sub_options>enabled
+denyThreshold
+moderateThreshold
+frequencyCutOff
+lastSeenCutOff
+submitRejections
+apiKey</sub_options>
+    <relation group_id="spam" display_order="10"/>
+    <relation group_id="usersAndRegistration" display_order="135"/>
+  </option>
+  <option option_id="swfUpload" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="attachments" display_order="310"/>
+  </option>
+  <option option_id="templateFiles" edit_format="onoff" data_type="boolean" can_backup="1" validation_class="XenForo_Option_TemplateFiles" validation_method="verifyOption">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="420"/>
+  </option>
+  <option option_id="templateHistoryLength" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>30</default_value>
+    <edit_format_params>min=i</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="acp" display_order="200"/>
+  </option>
+  <option option_id="tosUrl" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:2:{s:4:"type";s:7:"default";s:6:"custom";b:0;}</default_value>
+    <edit_format_params>option_template_tosUrl</edit_format_params>
+    <sub_options>type
+custom</sub_options>
+    <relation group_id="basicBoard" display_order="220"/>
+  </option>
+  <option option_id="tweet" edit_format="template" data_type="array" can_backup="1" validation_class="XenForo_Option_Twitter" validation_method="verifyTweetOption">
+    <default_value>a:3:{s:7:"enabled";s:1:"1";s:3:"via";s:0:"";s:7:"related";s:0:"";}</default_value>
+    <edit_format_params>option_template_tweet</edit_format_params>
+    <sub_options>enabled
+via
+related</sub_options>
+    <relation group_id="seo" display_order="510"/>
+    <relation group_id="twitter" display_order="100"/>
+  </option>
+  <option option_id="twitterAppKey" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="twitter" display_order="10"/>
+  </option>
+  <option option_id="twitterAppSecret" edit_format="textbox" data_type="string" can_backup="1">
+    <default_value></default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="twitter" display_order="11"/>
+  </option>
+  <option option_id="uncompressedJs" edit_format="radio" data_type="unsigned_integer" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params>0={xen:phrase use_compressed_files_from_x, 'path=js/xenforo/'}
+1={xen:phrase use_uncompressed_files_from_x, 'path=js/xenforo/full/'}
+2={xen:phrase use_compressed_files_from_x, 'path=js/xenforo/min/'}
+3={xen:phrase use_uncompressed_files_from_x, 'path=js/xenforo/'}</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="debug" display_order="2000"/>
+  </option>
+  <option option_id="updateContentOnUsernameChange" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="performance" display_order="310"/>
+  </option>
+  <option option_id="useFriendlyUrls" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>0</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="basicBoard" display_order="410"/>
+    <relation group_id="seo" display_order="10"/>
+  </option>
+  <option option_id="userBanners" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:4:{s:9:"showStaff";s:1:"1";s:15:"displayMultiple";s:1:"1";s:13:"hideUserTitle";b:0;s:17:"showStaffAndOther";b:0;}</default_value>
+    <edit_format_params>option_template_userBanners</edit_format_params>
+    <sub_options>showStaff
+displayMultiple
+hideUserTitle
+showStaffAndOther</sub_options>
+    <relation group_id="users" display_order="710"/>
+  </option>
+  <option option_id="userChangeLogLength" edit_format="spinbox" data_type="unsigned_integer" can_backup="1">
+    <default_value>60</default_value>
+    <edit_format_params>min=0</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="logging" display_order="10"/>
+  </option>
+  <option option_id="userTagKeepAt" edit_format="onoff" data_type="boolean" can_backup="1">
+    <default_value>1</default_value>
+    <edit_format_params></edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="alerts" display_order="300"/>
+  </option>
+  <option option_id="userTitleLadderField" edit_format="radio" data_type="string" can_backup="1">
+    <default_value>trophy_points</default_value>
+    <edit_format_params>trophy_points={xen:phrase trophy_points}
+message_count={xen:phrase messages}
+like_count={xen:phrase likes}</edit_format_params>
+    <sub_options></sub_options>
+    <relation group_id="users" display_order="420"/>
+  </option>
+  <option option_id="usernameLength" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:2:{s:3:"min";s:1:"3";s:3:"max";s:2:"25";}</default_value>
+    <edit_format_params>option_template_minMax</edit_format_params>
+    <sub_options>min
+max</sub_options>
+    <relation group_id="usersAndRegistration" display_order="310"/>
+  </option>
+  <option option_id="usernameValidation" edit_format="template" data_type="array" can_backup="1">
+    <default_value>a:2:{s:15:"disallowedNames";s:0:"";s:10:"matchRegex";s:0:"";}</default_value>
+    <edit_format_params>option_template_usernameValidation</edit_format_params>
+    <sub_options>disallowedNames
+matchRegex</sub_options>
+    <relation group_id="usersAndRegistration" display_order="320"/>
+  </option>
+  <option option_id="watchAlertActiveOnly" edit_format="onofftextbox" data_type="array" can_backup="1">
+    <default_value>a:2:{s:7:"enabled";s:1:"1";s:4:"days";s:3:"180";}</default_value>
+    <edit_format_params>onoff=enabled
+value=days
+type=spinbox
+min=1
+default=180</edit_format_params>
+    <sub_options>enabled
+days</sub_options>
+    <relation group_id="emailOptions" display_order="430"/>
+  </option>
+</optiongroups>

@@ -1,0 +1,1150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<email_templates>
+  <template title="contact">
+    <subject><![CDATA[{xen:phrase contact_email_subject, 'subject={$subject}', 'board_title={$xenOptions.boardTitle}'}]]></subject>
+    <body_text><![CDATA[{xen:phrase contact_email_body_text,
+	'name={$user.username}',
+	'user_id={$user.user_id}',
+	'email={$user.email}',
+	'ip={$ip}',
+	'subject={$subject}',
+	'message={$message}',
+	'board_title={$xenOptions.boardTitle}'
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase contact_email_body_html,
+	'user=<a href="mailto:{$user.email}" style="color: #176093; text-decoration: none">{$user.username} &lt;{$user.email}&gt;</a>',
+	'ip={$ip}',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0">{$subject}</h2>
+
+<hr style="height: 1px; margin: 10px 0; border: 0; color: #D7EDFC; background-color: #D7EDFC" />
+
+<table cellpadding="0" cellspacing="0" border="0">
+<tr valign="top">
+<xen:if is="{$user.user_id}">
+<td style="font-size: 13px; line-height: 1.231; padding-{xen:if $emailIsRtl, left, right}: 20px">
+	<a href="{xen:link canonical:members, $user}" title="{$user.username}" style="color: #176093; text-decoration: none; font-size: 9px; display: block; background-color: #D7EDFC; border: 1px solid #D7EDFC; border-radius: 5px">
+		<span style="display: block; background-color: #F0F7FC; padding: 5px; border-radius: 4px">
+			<img src="{xen:helper avatar, $user, s, '', 1}" alt="{$user.username}" title="{$user.username}" style="display: block; width: 48px; height: 48px; background-color: #FCFCFF; border: 1px solid #A5CAE4; padding: 2px; border-radius: 4px" />
+		</span>
+		<span style="padding: 3px 5px; display: block"><!--{$user.username}-->&nbsp;</span>
+	</a>
+</td>
+</xen:if>
+<td style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.4">
+	{xen:string nl2br, $message}
+</td>	
+</tr>
+</table>
+
+<hr style="height: 1px; margin: 10px 0; border: 0; color: #D7EDFC; background-color: #D7EDFC" />]]></body_html>
+  </template>
+  <template title="conversation_insert">
+    <subject><![CDATA[{xen:phrase conversation_insert_email_subject, 
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}"
+}]]></subject>
+    <body_text><![CDATA[{xen:phrase conversation_insert_email_text, 
+	"receiver_username={$receiver.username}",
+	"user_link={xen:link 'canonical:members', $conversation}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"inbox_link={xen:link 'canonical:conversations'}",
+	"prefs_link={xen:link 'canonical:account/contact-details'}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase conversation_insert_email_html,
+	'receiver={$receiver.username}',
+	'sender=<a href="{xen:link canonical:members, $sender}" style="color: #176093; text-decoration: none">{$sender.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:conversations/unread, $conversation}" style="color: #176093; text-decoration: none">{$conversation.titleCensored}</a></h2>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:conversations/unread, $conversation}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_conversation}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:conversations}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase view_all_your_conversations}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_1,
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_2,
+	'prefs_link={xen:link canonical:account/contact-details}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="conversation_insert_messagetext">
+    <subject><![CDATA[{xen:phrase conversation_insert_email_subject, 
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}"
+}]]></subject>
+    <body_text><![CDATA[{xen:phrase conversation_insert_messagetext_email_text, 
+	"receiver_username={$receiver.username}",
+	"user_link={xen:link 'canonical:members', $conversation}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"message={$message.messageText}",
+	"inbox_link={xen:link 'canonical:conversations'}",
+	"prefs_link={xen:link 'canonical:account/contact-details'}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase conversation_insert_email_html,
+	'receiver={$receiver.username}',
+	'sender=<a href="{xen:link canonical:members, $sender}" style="color: #176093; text-decoration: none">{$sender.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:conversations/unread, $conversation}" style="color: #176093; text-decoration: none">{$conversation.titleCensored}</a></h2>
+
+<hr style="height: 1px; margin: 20px 0 10px; border: 0; color: #D7EDFC; background-color: #D7EDFC" />
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 10px 0 20px">
+<tr valign="top">
+	<td style="font-size: 13px; line-height: 1.231; padding-{xen:if $emailIsRtl, left, right}: 20px">
+		<div style="
+			background-color: #D7EDFC;
+			border: 1px solid #D7EDFC;
+			border-radius: 5px">
+			<table cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td style="
+					background-color: #F0F7FC;
+					padding: 5px;
+					border-radius: 4px">
+					<a href="{xen:link canonical:members, $sender}" title="{$sender.username}"
+						><img src="{xen:helper avatar, $sender, s, '', 1}" alt="{$sender.username}" title="{$sender.username}" style="
+							width: 48px;
+							height: 48px;
+							background-color: #FCFCFF;
+							border: 1px solid #A5CAE4;
+							padding: 2px;
+							border-radius: 4px"
+						/></a>
+					</td>
+				</tr>
+			</table>
+			<span style="
+				padding: 3px 5px;
+				display: block"><!--{$sender.username}-->&nbsp;</span>
+		</div>
+	</td>
+	<td width="100%" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.4">
+		{xen:raw $message.messageHtml}
+	</td>	
+</tr>
+</table>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:conversations/unread, $conversation}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_conversation}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:conversations}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase view_all_your_conversations}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase please_do_not_reply_to_this_email_visit_to_reply, 'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_1,
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_2,
+	'prefs_link={xen:link canonical:account/contact-details}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="conversation_join">
+    <subject><![CDATA[{xen:phrase conversation_join_email_subject, 
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}"
+}]]></subject>
+    <body_text><![CDATA[{xen:phrase conversation_join_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"inbox_link={xen:link 'canonical:conversations'}",
+	"prefs_link={xen:link 'canonical:account/contact-details'}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase conversation_join_email_html,
+	'receiver={$receiver.username}',
+	'sender=<a href="{xen:link canonical:members, $sender}" style="color: #176093; text-decoration: none">{$sender.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:conversations/unread, $conversation}" style="color: #176093; text-decoration: none">{$conversation.titleCensored}</a></h2>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:conversations, $conversation}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_conversation}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:conversations}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase view_all_your_conversations}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_1,
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_2,
+	'prefs_link={xen:link canonical:account/contact-details}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="conversation_join_messagetext">
+    <subject><![CDATA[{xen:phrase conversation_join_email_subject, 
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}"
+}]]></subject>
+    <body_text><![CDATA[{xen:phrase conversation_join_messagetext_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"message={$message.messageText}",
+	"inbox_link={xen:link 'canonical:conversations'}",
+	"prefs_link={xen:link 'canonical:account/contact-details'}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase conversation_join_email_html,
+	'receiver={$receiver.username}',
+	'sender=<a href="{xen:link canonical:members, $sender}" style="color: #176093; text-decoration: none">{$sender.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:conversations, $conversation}"style="color: #176093; text-decoration: none">{$conversation.titleCensored}</a></h2>
+
+<hr style="height: 1px; margin: 20px 0 10px; border: 0; color: #D7EDFC; background-color: #D7EDFC" />
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 10px 0 20px">
+<tr valign="top">
+	<td style="font-size: 13px; line-height: 1.231; padding-{xen:if $emailIsRtl, left, right}: 20px">
+		<div style="
+			background-color: #D7EDFC;
+			border: 1px solid #D7EDFC;
+			border-radius: 5px">
+			<table cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td style="
+					background-color: #F0F7FC;
+					padding: 5px;
+					border-radius: 4px">
+					<a href="{xen:link canonical:members, $sender}" title="{$sender.username}"
+						><img src="{xen:helper avatar, $sender, s, '', 1}" alt="{$sender.username}" title="{$sender.username}" style="
+							width: 48px;
+							height: 48px;
+							background-color: #FCFCFF;
+							border: 1px solid #A5CAE4;
+							padding: 2px;
+							border-radius: 4px"
+						/></a>
+					</td>
+				</tr>
+			</table>
+			<span style="
+				padding: 3px 5px;
+				display: block"><!--{$sender.username}-->&nbsp;</span>
+		</div>
+	</td>
+	<td width="100%" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.4">
+		{xen:raw $message.messageHtml}
+	</td>	
+</tr>
+</table>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:conversations, $conversation}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_conversation}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:conversations}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase view_all_your_conversations}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase please_do_not_reply_to_this_email_visit_to_reply, 'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_1,
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_2,
+	'prefs_link={xen:link canonical:account/contact-details}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="conversation_reply">
+    <subject><![CDATA[{xen:phrase conversation_reply_email_subject, 
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}"
+}]]></subject>
+    <body_text><![CDATA[{xen:phrase conversation_reply_email_text, 
+	"receiver_username={$receiver.username}",
+	"user_link={xen:link 'canonical:members', $conversation}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"inbox_link={xen:link 'canonical:conversations'}",
+	"prefs_link={xen:link 'canonical:account/contact-details'}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase conversation_reply_email_html,
+	'receiver={$receiver.username}',
+	'sender=<a href="{xen:link canonical:members, $sender}" style="color: #176093; text-decoration: none">{$sender.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:conversations/unread, $conversation}" style="color: #176093; text-decoration: none">{$conversation.titleCensored}</a></h2>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:conversations/unread, $conversation}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_conversation}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:conversations}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase view_all_your_conversations}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_1,
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_2,
+	'prefs_link={xen:link canonical:account/contact-details}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="conversation_reply_messagetext">
+    <subject><![CDATA[{xen:phrase conversation_reply_email_subject, 
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}"
+}]]></subject>
+    <body_text><![CDATA[{xen:phrase conversation_reply_messagetext_email_text, 
+	"receiver_username={$receiver.username}",
+	"user_link={xen:link 'canonical:members', $conversation}",
+	"username={$sender.username}",
+	"title={$conversation.titleCensored}",
+	"view_link={xen:link 'canonical:conversations/unread', $conversation}",
+	"message={$message.messageText}",
+	"inbox_link={xen:link 'canonical:conversations'}",
+	"prefs_link={xen:link 'canonical:account/contact-details'}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase conversation_reply_email_html,
+	'receiver={$receiver.username}',
+	'sender=<a href="{xen:link canonical:members, $sender}" style="color: #176093; text-decoration: none">{$sender.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:conversations/unread, $conversation}" style="color: #176093; text-decoration: none">{$conversation.titleCensored}</a></h2>
+
+<hr style="height: 1px; margin: 20px 0 10px; border: 0; color: #D7EDFC; background-color: #D7EDFC" />
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 10px 0 20px">
+<tr valign="top">
+	<td style="font-size: 13px; line-height: 1.231; padding-{xen:if $emailIsRtl, left, right}: 20px">
+		<div style="
+			background-color: #D7EDFC;
+			border: 1px solid #D7EDFC;
+			border-radius: 5px;
+			margin: 0">
+			<table cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td style="
+					background-color: #F0F7FC;
+					padding: 5px;
+					border-radius: 4px">
+					<a href="{xen:link canonical:members, $sender}" title="{$sender.username}"
+						><img src="{xen:helper avatar, $sender, s, '', 1}" alt="{$sender.username}" title="{$sender.username}" style="
+							width: 48px;
+							height: 48px;
+							background-color: #FCFCFF;
+							border: 1px solid #A5CAE4;
+							padding: 2px;
+							border-radius: 4px"
+						/></a>
+					</td>
+				</tr>
+			</table>
+			<span style="
+				padding: 3px 5px;
+				display: block"><!--{$sender.username}-->&nbsp;</span>
+		</div>
+	</td>
+	<td width="100%" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.4">
+		{xen:raw $message.messageHtml}
+	</td>	
+</tr>
+</table>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:conversations/unread, $conversation}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_conversation}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:conversations}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase view_all_your_conversations}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase please_do_not_reply_to_this_email_visit_to_reply, 'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_1,
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase conversation_email_html_footer_2,
+	'prefs_link={xen:link canonical:account/contact-details}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="MAIL_CONTAINER">
+    <subject><![CDATA[{xen:raw $subject}]]></subject>
+    <body_text><![CDATA[{xen:raw $bodyText}]]></body_text>
+    <body_html><![CDATA[<html lang="{$emailLanguage.language_code}" dir="{$emailLanguage.text_direction}">
+<head>
+	<meta charset="UTF-8" />
+	<base href="{$xenOptions.boardUrl}/" />
+	<title>{xen:raw $subject}</title>
+</head>
+<body dir="{$emailLanguage.text_direction}" text="#141414" bgcolor="#F0F0F0" link="#176093" alink="#176093" vlink="#176093" style="padding: 10px">
+
+	<table cellpadding="0" cellspacing="0" border="0" dir="{$emailLanguage.text_direction}" style="
+		background-color: #F0F7FC;
+		border: 1px solid #A5CAE4;
+		border-radius: 5px;
+		direction: {$emailLanguage.text_direction};">
+	<tr>
+		<td style="
+			background-color: #D7EDFC;
+			padding: 5px 10px;
+			border-bottom: 1px solid #A5CAE4;
+			border-top-left-radius: 4px;
+			border-top-right-radius: 4px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			line-height: 1.231;">
+			<a href="{xen:link canonical:index}" style="color: #176093; text-decoration:none">{$xenOptions.boardTitle}</a>
+		</td>
+	</tr>
+	<tr>
+		<td style="
+			background-color: #FCFCFF;
+			padding: 1em;
+			color: #141414;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 13px;
+			line-height: 1.231;">
+			{xen:raw $bodyHtml}
+		</td>
+	</tr>
+	<tr>
+		<td style="
+			background-color: #F0F7FC;
+			padding: 5px 10px;
+			border-top: 1px solid #D7EDFC;
+			border-bottom-left-radius: 4px;
+			border-bottom-right-radius: 4px;
+			text-align: {xen:if $emailIsRtl, left, right};
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			line-height: 1.231;">
+			<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{xen:link canonical:index}</a>
+		</td>
+	</tr>
+	</table>	
+
+</body>
+</html>]]></body_html>
+  </template>
+  <template title="spam_cleaner_applied">
+    <subject><![CDATA[{xen:phrase spam_cleaner_applied_subject, 'board_title={$xenOptions.boardTitle}'}]]></subject>
+    <body_text><![CDATA[{$plainText}]]></body_text>
+    <body_html><![CDATA[{xen:raw $htmlText}]]></body_html>
+  </template>
+  <template title="user_account_approved">
+    <subject><![CDATA[{xen:phrase user_account_approved_subject, 'board_title={$boardTitle}'}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_account_approved_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"forum_link={xen:link 'canonical:index'}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase user_account_approved_body_html,
+	'username={$user.username}',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:index}" style="color: #141414; text-decoration: none">{xen:link canonical:index}<br />
+	<span style="color: #176093; font-size: 10px">{xen:link canonical:index}</span></a></h2>
+
+<p>{xen:phrase thanks_for_registering_complete}<br />
+{$xenOptions.boardTitle}</p>]]></body_html>
+  </template>
+  <template title="user_account_rejected">
+    <subject><![CDATA[{xen:phrase user_account_rejected_subject, "board_title={$boardTitle}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_account_rejected_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"forum_link={xen:link 'canonical:index'}",
+	"reason={xen:if {$rejectionReason}, {$rejectionReason}, 'N/A'}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase user_account_rejected_body_html,
+	'username={$user.username}',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<xen:if is="{$rejectionReason}">
+<p>{xen:phrase the_following_reason_was_given}</p>
+
+<hr style="height: 1px; margin: 10px 0; border: 0; color: #D7EDFC; background-color: #D7EDFC" />
+
+<div style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.4">{$rejectionReason}</div>
+
+<hr style="height: 1px; margin: 10px 0; border: 0; color: #D7EDFC; background-color: #D7EDFC" />
+</xen:if>
+
+<p>{xen:phrase sorry}<br />
+{$xenOptions.boardTitle}</p>]]></body_html>
+  </template>
+  <template title="user_email_confirmation">
+    <subject><![CDATA[{xen:phrase user_email_confirmation_subject, "boardTitle={$boardTitle}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_email_confirmation_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"confirm_link={xen:link 'canonical:account-confirmation/email', $user, 'c={$confirmation.confirmation_key}'}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase user_email_confirmation_body_html,
+	'username={$user.username}',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link 'canonical:account-confirmation/email', $user, 'c={$confirmation.confirmation_key}'}" style="color: #176093; text-decoration: none">{xen:link 'canonical:account-confirmation/email', $user, 'c={$confirmation.confirmation_key}'}</a></h2>
+
+<p>{xen:phrase thanks_for_registering}<br />
+{$xenOptions.boardTitle}</p>]]></body_html>
+  </template>
+  <template title="user_lost_password">
+    <subject><![CDATA[{xen:phrase user_lost_password_subject, "boardTitle={$boardTitle}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_lost_password_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"confirm_link={xen:link 'canonical:lost-password/confirm', $user, 'c={$confirmation.confirmation_key}'}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase user_lost_password_body_html,
+	'username={$user.username}',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link 'canonical:lost-password/confirm', $user, 'c={$confirmation.confirmation_key}'}" style="color: #176093; text-decoration: none">{xen:phrase reset_password}</a></h2>
+<div style="color: #176093; font-size: 10px; margin: 10px 0"><a href="{xen:link 'canonical:lost-password/confirm', $user, 'c={$confirmation.confirmation_key}'}" style="color: #176093; text-decoration: none">{xen:link 'canonical:lost-password/confirm', $user, 'c={$confirmation.confirmation_key}'}</a></div>
+
+<p>{xen:phrase ignore_email_if_not_requested}</p>
+
+<p>{xen:phrase thanks}<br />
+{$xenOptions.boardTitle}</p>]]></body_html>
+  </template>
+  <template title="user_lost_password_reset">
+    <subject><![CDATA[{xen:phrase user_lost_password_reset_subject, "boardTitle={$boardTitle}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase user_lost_password_reset_body_text,
+	"username={$user.username}",
+	"board_title={$boardTitle}",
+	"board_url={$boardUrl}",
+	"password={$password}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase user_lost_password_reset_body_html,
+	'username={$user.username}',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<p>{xen:phrase user_name}: <b>{$user.username}</b>,<br />
+{xen:phrase password}:</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0">{$password}</h2>
+
+<p><a href="{xen:link canonical:index}" style="color: #176093">{xen:phrase log_in}</a></p>
+
+<p>{xen:phrase thanks}<br />
+{$xenOptions.boardTitle}</p>]]></body_html>
+  </template>
+  <template title="watched_forum_message">
+    <subject><![CDATA[{xen:phrase new_message_in_watched_forum_x, "title={$thread.titleCensored}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase watched_forum_message_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$reply.username}",
+	"title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}",
+	"node_title={$thread.node_title}",
+	"view_link={xen:link 'canonical:threads/post-permalink', $thread, 'post={$reply}'}",
+	"message={$reply.messageText}",
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=forum', 'id={$thread.node_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	"manage_link={xen:link 'canonical:watched/forums'}",
+	"watch_link={xen:link 'canonical:threads/watch-confirm', $thread}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase watched_forum_message_email_html,
+	'receiver={$receiver.username}',
+	'replier=<a href="{xen:link canonical:members, $reply}" style="color: #176093; text-decoration: none">{$reply.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:threads/post-permalink, $thread, 'post={$reply}'}" style="color: #176093; text-decoration: none">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a></h2>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:threads/unread, $thread}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_thread}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:watched/forums}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase watched_forums}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_forum_email_html_footer_1,
+	'thread=<a href="{xen:link canonical:threads, $thread}" style="color: #969696; text-decoration: underline">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a>',
+	'node_title={$thread.node_title}',
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_forum_email_html_footer_2,
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=forum', 'id={$thread.node_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="watched_forum_message_messagetext">
+    <subject><![CDATA[{xen:phrase new_message_in_watched_forum_x, "title={$thread.titleCensored}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase watched_forum_message_messagetext_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$reply.username}",
+	"title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}",
+	"node_title={$thread.node_title}",
+	"view_link={xen:link 'canonical:threads/post-permalink', $thread, 'post={$reply}'}",
+	"message={$reply.messageText}",
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=forum', 'id={$thread.node_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	"manage_link={xen:link 'canonical:watched/forums'}",
+	"watch_link={xen:link 'canonical:threads/watch-confirm', $thread}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase watched_forum_message_email_html,
+	'receiver={$receiver.username}',
+	'replier=<a href="{xen:link canonical:members, $reply}" style="color: #176093; text-decoration: none">{$reply.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:threads/post-permalink, $thread, 'post={$reply}'}" style="color: #176093; text-decoration: none">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a></h2>
+
+<hr style="height: 1px; margin: 10px 0; border: 0; color: #D7EDFC; background-color: #D7EDFC" />
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 10px 0 20px">
+<tr valign="top">
+	<td style="font-size: 13px; line-height: 1.231; padding-{xen:if $emailIsRtl, left, right}: 20px">
+		<div style="
+			background-color: #D7EDFC;
+			border: 1px solid #D7EDFC;
+			border-radius: 5px">
+			<table cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td style="
+					background-color: #F0F7FC;
+					padding: 5px;
+					border-radius: 4px">
+					<a href="{xen:link canonical:members, $reply}" title="{$reply.username}"
+						><img src="{xen:helper avatar, $reply, s, '', 1}" alt="{$reply.username}" title="{$reply.username}" style="
+							width: 48px;
+							height: 48px;
+							background-color: #FCFCFF;
+							border: 1px solid #A5CAE4;
+							padding: 2px;
+							border-radius: 4px"
+						/></a>
+					</td>
+				</tr>
+			</table>
+			<span style="
+				padding: 3px 5px;
+				display: block"><!--{$reply.username}-->&nbsp;</span>
+		</div>
+	</td>
+	<td width="100%" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.4">
+		{xen:raw $reply.messageHtml}
+	</td>	
+</tr>
+</table>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:threads/unread, $thread}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_thread}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:watched/forums}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase watched_forums}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase please_do_not_reply_to_this_email_visit_to_reply, 'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_forum_email_html_footer_1,
+	'thread=<a href="{xen:link canonical:threads, $thread}" style="color: #969696; text-decoration: underline">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a>',
+	'node_title={$thread.node_title}',
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_forum_email_html_footer_2,
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=forum', 'id={$thread.node_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="watched_forum_thread">
+    <subject><![CDATA[{xen:phrase new_thread_in_watched_forum_x, "title={$thread.titleCensored}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase watched_forum_thread_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$reply.username}",
+	"title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}",
+	"node_title={$thread.node_title}",
+	"view_link={xen:link 'canonical:threads/post-permalink', $thread, 'post={$reply}'}",
+	"message={$reply.messageText}",
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=forum', 'id={$thread.node_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	"manage_link={xen:link 'canonical:watched/forums'}",
+	"watch_link={xen:link 'canonical:threads/watch-confirm', $thread}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase watched_forum_thread_email_html,
+	'receiver={$receiver.username}',
+	'replier=<a href="{xen:link canonical:members, $reply}" style="color: #176093; text-decoration: none">{$reply.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:threads/post-permalink, $thread, 'post={$reply}'}" style="color: #176093; text-decoration: none">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a></h2>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:threads/unread, $thread}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_thread}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:watched/forums}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase watched_forums}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_forum_email_html_footer_1,
+	'thread=<a href="{xen:link canonical:threads, $thread}" style="color: #969696; text-decoration: underline">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a>',
+	'node_title={$thread.node_title}',
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_forum_email_html_footer_2,
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=forum', 'id={$thread.node_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="watched_forum_thread_messagetext">
+    <subject><![CDATA[{xen:phrase new_thread_in_watched_forum_x, "title={$thread.titleCensored}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase watched_forum_thread_messagetext_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$reply.username}",
+	"title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}",
+	"node_title={$thread.node_title}",
+	"view_link={xen:link 'canonical:threads/post-permalink', $thread, 'post={$reply}'}",
+	"message={$reply.messageText}",
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=forum', 'id={$thread.node_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	"manage_link={xen:link 'canonical:watched/forums'}",
+	"watch_link={xen:link 'canonical:threads/watch-confirm', $thread}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase watched_forum_thread_email_html,
+	'receiver={$receiver.username}',
+	'replier=<a href="{xen:link canonical:members, $reply}" style="color: #176093; text-decoration: none">{$reply.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:threads/post-permalink, $thread, 'post={$reply}'}" style="color: #176093; text-decoration: none">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a></h2>
+
+<hr style="height: 1px; margin: 10px 0; border: 0; color: #D7EDFC; background-color: #D7EDFC" />
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 10px 0 20px">
+<tr valign="top">
+	<td style="font-size: 13px; line-height: 1.231; padding-{xen:if $emailIsRtl, left, right}: 20px">
+		<div style="
+			background-color: #D7EDFC;
+			border: 1px solid #D7EDFC;
+			border-radius: 5px">
+			<table cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td style="
+					background-color: #F0F7FC;
+					padding: 5px;
+					border-radius: 4px">
+					<a href="{xen:link canonical:members, $reply}" title="{$reply.username}"
+						><img src="{xen:helper avatar, $reply, s, '', 1}" alt="{$reply.username}" title="{$reply.username}" style="
+							width: 48px;
+							height: 48px;
+							background-color: #FCFCFF;
+							border: 1px solid #A5CAE4;
+							padding: 2px;
+							border-radius: 4px"
+						/></a>
+					</td>
+				</tr>
+			</table>
+			<span style="
+				padding: 3px 5px;
+				display: block"><!--{$reply.username}-->&nbsp;</span>
+		</div>
+	</td>
+	<td width="100%" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.4">
+		{xen:raw $reply.messageHtml}
+	</td>	
+</tr>
+</table>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:threads/unread, $thread}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_thread}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:watched/forums}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase watched_forums}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase please_do_not_reply_to_this_email_visit_to_reply, 'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_forum_email_html_footer_1,
+	'thread=<a href="{xen:link canonical:threads, $thread}" style="color: #969696; text-decoration: underline">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a>',
+	'node_title={$thread.node_title}',
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_forum_email_html_footer_2,
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=forum', 'id={$thread.node_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="watched_thread_reply">
+    <subject><![CDATA[{xen:phrase reply_to_watched_thread_x, "title={$thread.titleCensored}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase watched_thread_reply_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$reply.username}",
+	"title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}",
+	"view_link={xen:link 'canonical:threads/post-permalink', $thread, 'post={$reply}'}",
+	"message={$reply.messageText}",
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=thread', 'id={$thread.thread_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	"manage_link={xen:link 'canonical:watched/threads/all'}",
+	"watch_link={xen:link 'canonical:threads/watch-confirm', $thread}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase watched_thread_reply_email_html,
+	'receiver={$receiver.username}',
+	'replier=<a href="{xen:link canonical:members, $reply}" style="color: #176093; text-decoration: none">{$reply.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:threads/post-permalink, $thread, 'post={$reply}'}" style="color: #176093; text-decoration: none">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a></h2>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:threads/unread, $thread}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_thread}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:watched/threads}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase unread_watched_threads}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_thread_email_html_footer_1,
+	'thread=<a href="{xen:link canonical:threads, $thread}" style="color: #969696; text-decoration: underline">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_thread_email_html_footer_2,
+	'watch_link={xen:link canonical:threads/watch-confirm, $thread}',
+	'manage_link={xen:link canonical:watched/threads/all}',
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=thread', 'id={$thread.thread_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+  <template title="watched_thread_reply_messagetext">
+    <subject><![CDATA[{xen:phrase reply_to_watched_thread_x, "title={$thread.titleCensored}"}]]></subject>
+    <body_text><![CDATA[{xen:phrase watched_thread_reply_messagetext_email_text, 
+	"receiver_username={$receiver.username}",
+	"username={$reply.username}",
+	"title={xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}",
+	"message={$reply.messageText}",
+	"view_link={xen:link 'canonical:threads/post-permalink', $thread, 'post={$reply}'}",
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=thread', 'id={$thread.thread_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	"manage_link={xen:link 'canonical:watched/threads/all'}",
+	"watch_link={xen:link 'canonical:threads/watch-confirm', $thread}",
+	"board_link={xen:link 'canonical:index'}",
+	"board_title={$xenOptions.boardTitle}"
+}]]></body_text>
+    <body_html><![CDATA[<p style="margin-top: 0">{xen:phrase watched_thread_reply_email_html,
+	'receiver={$receiver.username}',
+	'replier=<a href="{xen:link canonical:members, $reply}" style="color: #176093; text-decoration: none">{$reply.username}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #176093; text-decoration: none">{$xenOptions.boardTitle}</a>'}</p>
+
+<h2 style="font-size: 18pt; font-weight: normal; margin: 10px 0"><a href="{xen:link canonical:threads/post-permalink, $thread, 'post={$reply}'}" style="color: #176093; text-decoration: none">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a></h2>
+
+<hr style="height: 1px; margin: 10px 0; border: 0; color: #D7EDFC; background-color: #D7EDFC" />
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 10px 0 20px">
+<tr valign="top">
+	<td style="font-size: 13px; line-height: 1.231; padding-{xen:if $emailIsRtl, left, right}: 20px">
+		<div style="
+			background-color: #D7EDFC;
+			border: 1px solid #D7EDFC;
+			border-radius: 5px">
+			<table cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td style="
+					background-color: #F0F7FC;
+					padding: 5px;
+					border-radius: 4px">
+					<a href="{xen:link canonical:members, $reply}" title="{$reply.username}"
+						><img src="{xen:helper avatar, $reply, s, '', 1}" alt="{$reply.username}" title="{$reply.username}" style="
+							width: 48px;
+							height: 48px;
+							background-color: #FCFCFF;
+							border: 1px solid #A5CAE4;
+							padding: 2px;
+							border-radius: 4px"
+						/></a>
+					</td>
+				</tr>
+			</table>
+			<span style="
+				padding: 3px 5px;
+				display: block"><!--{$reply.username}-->&nbsp;</span>
+		</div>
+	</td>
+	<td width="100%" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.4">
+		{xen:raw $reply.messageHtml}
+	</td>	
+</tr>
+</table>
+
+<table cellpadding="10" cellspacing="0" border="0" width="100%" style="margin: 20px 0; background-color: #f0f7fc; border-top: 1px solid #d7edfc">
+<tr>
+	<td>
+		<a href="{xen:link canonical:threads/unread, $thread}" style="
+			display: block;
+			float: {xen:if $emailIsRtl, right, left};
+			padding: 5px 10px;
+			background-color: #65a5d1;
+			border: none;
+			border-radius: 3px;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: white;
+			text-decoration: none">{xen:phrase view_this_thread}</a>
+	</td>
+	<td align="{xen:if $emailIsRtl, left, right}">
+		<a href="{xen:link canonical:watched/threads}" style="
+			display: block;
+			padding: 5px 0;
+			font-family: 'Trebuchet MS', Helvetica, Arial, sans-serif;
+			font-size: 11px;
+			color: #176093;
+			text-decoration: none">{xen:phrase unread_watched_threads}</a>
+	</td>
+</tr>
+</table>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase please_do_not_reply_to_this_email_visit_to_reply, 'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_thread_email_html_footer_1,
+	'thread=<a href="{xen:link canonical:threads, $thread}" style="color: #969696; text-decoration: underline">{xen:helper threadPrefix, $thread, plain}{$thread.titleCensored}</a>',
+	'board=<a href="{xen:link canonical:index}" style="color: #969696; text-decoration: underline">{$xenOptions.boardTitle}</a>'}</p>
+
+<p style="font-size: 11px; color: #969696">{xen:phrase watched_thread_email_html_footer_2,
+	'watch_link={xen:link canonical:threads/watch-confirm, $thread}',
+	'manage_link={xen:link canonical:watched/threads/all}',
+	'disable_this_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email', 't=thread', 'id={$thread.thread_id}'}',
+	'disable_all_link={xen:link canonical:watched/via-email, '', 'u={$receiver.user_id}', 'c={$receiver.email_confirm_key}', 'a=no_email'}',
+	'link_style=color: #969696; text-decoration: underline'}</p>]]></body_html>
+  </template>
+</email_templates>

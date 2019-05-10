@@ -1,0 +1,7 @@
+icons.png includes icons from the CKEditor project which are triple licensed with GPL, LGPL, and MPL:
+
+http://ckeditor.com/about/license
+
+icons.png also includes icons from the Fugue set (http://p.yusukekamiyamane.com/) which are released under the Creative Commons Attribution 3.0 license:
+
+http://creativecommons.org/licenses/by/3.0/

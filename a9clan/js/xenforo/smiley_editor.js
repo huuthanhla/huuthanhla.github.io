@@ -1,0 +1,9 @@
+/*
+ * XenForo smiley_editor.min.js
+ * Copyright 2010-2014 XenForo Ltd.
+ * Released under the XenForo License Agreement: http://xenforo.com/license-agreement
+ */
+(function(b){XenForo.SmileyEditor=function(a){var c=b(a.data("smiley-output"));a.find('input[name="image_url"]');var d=a.find('input[name="sprite_mode"]'),e=a.find('input[name="sprite_params[w]"]'),f=a.find('input[name="sprite_params[h]"]'),g=a.find('input[name="sprite_params[x]"]'),h=a.find('input[name="sprite_params[y]"]');c.length?a.find("input").not("input[type=button]").not("input[type=submit]").bind("change",function(){var b=a.find("#ctrl_image_url");d.is(":checked")?c.attr("src","styles/default/xenforo/clear.png").css({width:e.val(),
+height:f.val(),background:"url("+b.val()+") no-repeat "+g.val()+"px "+h.val()+"px"}):c.attr("src",b.val()).css({width:"auto",height:"auto",background:"none"})}):console.warn("Unable to locate the smiley output element as specified by data-smiley-output on the form %o",a)};XenForo.SmilieImportForm=function(a){a.find("input.Hider").change(function(){var a=b(b(this).data("target"));this.checked?a.xfFadeDown(XenForo.speed.fast):a.xfHide()});a.bind({AutoValidationBeforeSubmit:function(){var c=a.serialize(),
+d=a.find("input:not(input[type=hidden]), select, textarea"),e=b('<input type="hidden" name="_xfSmilieImportData" />');d.each(function(){var a=b(this);a.data("attr-name",a.attr("name"));a.removeAttr("name")});e.val(c).appendTo(a);setTimeout(function(){d.each(function(){var a=b(this);a.attr("name",a.data("attr-name"))});e.remove()},100)},AutoValidationError:function(a){a=b(a.target);a.is(":hidden")&&a.closest(".advanced").show()}})};XenForo.register("form.SmileyEditor","XenForo.SmileyEditor");XenForo.register("#SmilieImportForm",
+"XenForo.SmilieImportForm")})(jQuery,this,document);
