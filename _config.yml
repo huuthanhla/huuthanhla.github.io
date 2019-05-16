@@ -1,0 +1,33 @@
+# Site settings
+title: Thành Lã
+description: </>
+bio: >
+  Hi, I'm Lã.
+  I'm passionate about creating awesome products that help plenty of people improving their lives.
+url: 'https://huuthanhla.github.io/'
+blog_url: 'https://docbohanh.github.io/'
+baseurl:
+
+author:
+  name: 'MILIKET'
+  email: huuthanhla@gmail.com
+  twitter_username: docbohanh
+  facebook_username: docbohanh
+  github_username: docbohanh
+  #linkedin_username: ethan605
+facebook:
+  #app_id: 1783427568545702
+  #admins: 1119670477
+  #publisher: 1119670477
+  #page: 275993682774772
+
+# Build settings
+destination: _site
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock']
+
+gems:
+  - github-pages
+  - jekyll-github-metadata
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
