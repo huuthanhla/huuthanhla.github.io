@@ -11,19 +11,19 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>https://huuthanhla.github.io/QuizApp/app/Runner.ipa</string>
+					<string>https://raw.githubusercontent.com/huuthanhla/huuthanhla.github.io/master/quiz/app/Runner.ipa</string>
 				</dict>
 				<dict>
 					<key>kind</key>
 					<string>display-image</string>
 					<key>url</key>
-					<string>https://huuthanhla.github.io/QuizApp/icon/quiz57x57.png</string>
+					<string>https://raw.githubusercontent.com/huuthanhla/huuthanhla.github.io/master/quiz/icon/quiz57x57.png</string>
 				</dict>
 				<dict>
 					<key>kind</key>
 					<string>full-size-image</string>
 					<key>url</key>
-					<string>https://huuthanhla.github.io/QuizApp/icon/quiz512x512.png</string>
+					<string>https://raw.githubusercontent.com/huuthanhla/huuthanhla.github.io/master/quiz/icon/quiz512x512.png</string>
 				</dict>
 			</array>
 			<key>metadata</key>
