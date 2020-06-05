@@ -267,7 +267,7 @@ body{
 
 .text_2{
   top: 33%;
-  right: 28%;
+  left: 28%;
   animation: flash 1s infinite;
 }
 
@@ -288,8 +288,8 @@ body{
 
 iframe{
   vertical-align: baseline;
-  height: 72px;
-  width: 72px;
+  height: 90px;
+  width: 80%;
 }
 
 footer{
