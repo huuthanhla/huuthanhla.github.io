@@ -189,8 +189,8 @@ body{
 .note{
   position: absolute;
   width: 15%;
-  top: 30%;
-  right: 10%;
+  top: 31.5%;
+  right: 16%;
 }
 
 
@@ -288,8 +288,8 @@ body{
 
 iframe{
   vertical-align: baseline;
-  height: 20px;
-  width: 106px;
+  height: 72px;
+  width: 72px;
 }
 
 footer{
