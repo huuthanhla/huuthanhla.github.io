@@ -1,4 +1,3 @@
-<script type="text/javascript">
 // <![CDATA[
 var bits=80;
 var speed=40; // Tốc độ như thế nào, càng nhỏ càng nhanh
@@ -131,4 +130,4 @@ function set_width() {
   shigh=sh_min;
 }
 // ]]>
-</script>
+
