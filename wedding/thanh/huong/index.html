@@ -76,8 +76,9 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
                             </div>
             <div class="swiper-pagination"></div>
         </div>
-    </section><section class="box-bride-groom wow fadeInUp" data-wow-duration="2s">
-    <!-- <div class="container">
+    </section>
+    <!-- <section class="box-bride-groom wow fadeInUp" data-wow-duration="2s">
+    <div class="container">
         <div class="row --bride-groom">
             <div class="groom">
                 <div class="content">
@@ -130,21 +131,22 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
                 </div>
             </div>
         </div>
-    </div> -->
-<!-- </section><section id="test" class="box-love-story" style="background-image: url(wp-content/themes/love-story-opt1/assets/images/love-story-bg.jpg);">
+    </div> 
+</section>-->
+<section id="test" class="box-love-story" style="background-image: url(wp-content/themes/love-story-opt1/assets/images/love-story-bg.jpg);">
     <div class="container">
         <div class="row --love-story">
             <div class="left">
                 <div class="img-list">
                     <div class="img wow fadeIn" data-wow-duration="2s" data-wow-delay=".5s">
-                        <img src="wp-content/uploads/sites/7/2023/03/NDK06808-1.jpg" alt="Groom and Bride">
+                        <img src="wp-content/uploads/sites/7/2023/03/lov_story_1.jpg" alt="Groom and Bride">
                     </div>
                     <div class="img wow fadeInUp" data-wow-duration="2s" data-wow-delay="1s">
-                        <img src="wp-content/uploads/sites/7/2023/03/NDK07255-1-1.jpg" alt="Groom and Bride">
+                        <img src="wp-content/uploads/sites/7/2023/03/lov_story_2.jpg" alt="Groom and Bride">
                     </div>
                 </div>
                 <div class="box-head --love-story" data-wow-duration="2s" data-wow-delay="2s">
-                    <span>Tada</span>
+                    <span></span>
                     <h2 class="main-title"><span>Love</span> Story</h2>
                 </div>
             </div>
@@ -157,39 +159,31 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
     jQuery(document).ready(function($){
         if ($(window).width() >= 1200) {
             const typeIt = new TypeIt(".right.desc", {
-            strings: [`<p>Anh và em, từ hai người xa lạ, bỗng một ngày 2 trái tim rớt vào nhau&#8230;</p>
-<p>Bắc Giang thật lung linh, nhưng sao thật rộng lớn, nên mãi ta mới tìm thấy nhau</p>
-<p>Hải Phòng, nơi cho ta biết bao kỷ niệm.</p>
-<p>18/10/2022</p>
-<p>Có lẽ chúng ta sẽ bên nhau mãi mãi, vì thế giới này dường như chỉ có 2 ta</p>
-<p>26/03/2023</p>
-<p>&#8220;Từ đây, chúng ta sẽ là vợ chồng, sẽ cùng nhau viết thêm những câu chuyện đẹp, của 2 ta và của cả thế giới xung quanh ta&#8230;&#8221;</p>
-<p><strong>Anh Yêu Em &lt;3</strong></p>
+            strings: [`
+<p>Cho dù là cỏ dại<br>Bình dị cũng được mà<br>Cần gì đua hương sắc<br>Giữa tấp nập phồn hoa<br></p>
+<p>-</p>
+<p>Mẹ sinh anh ra làm tấm gỗ<br>Kễ giúp đời em đỡ cập kênh</p>
 `],
             speed: 25,
             waitUntilVisible: false,
             cursor: false,
             }).go();
         } else {
-            $('.right.desc').html(`<p>Anh và em, từ hai người xa lạ, bỗng một ngày 2 trái tim rớt vào nhau&#8230;</p>
-<p>Bắc Giang thật lung linh, nhưng sao thật rộng lớn, nên mãi ta mới tìm thấy nhau</p>
-<p>Hải Phòng, nơi cho ta biết bao kỷ niệm.</p>
-<p>18/10/2022</p>
-<p>Có lẽ chúng ta sẽ bên nhau mãi mãi, vì thế giới này dường như chỉ có 2 ta</p>
-<p>26/03/2023</p>
-<p>&#8220;Từ đây, chúng ta sẽ là vợ chồng, sẽ cùng nhau viết thêm những câu chuyện đẹp, của 2 ta và của cả thế giới xung quanh ta&#8230;&#8221;</p>
-<p><strong>Anh Yêu Em &lt;3</strong></p>
+            $('.right.desc').html(`
+            <p>Cho dù là cỏ dại<br>Bình dị cũng được mà<br>Cần gì đua hương sắc<br>Giữa tấp nập phồn hoa<br></p>
+<p>-</p>
+<p>Mẹ sinh anh ra làm tấm gỗ<br>Kễ giúp đời em đỡ cập kênh</p>
 `)
         }
 
         console.log($(window).width())
     })
-</script> -->
+</script>
 
 <section class="box-gallery wow fadeInUp" data-wow-duration="2s">
     <div class="container">
         <div class="box-head --has-flower text-center">
-            <h2 class="main-title --lg-title">Our wedding</h2>
+            <h2 class="main-title --lg-title">Our gallery</h2>
             <span class="sm">Hữu Thành - Đinh Hương</span>
         </div>
                 <div class="gallery-list"> 
@@ -213,7 +207,7 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
                             <img src="wp-content/uploads/sites/7/2023/03/de ban 20x30.jpg" alt="Gallery">
                         </a>
                     </div>
-                    <div class="gallery-item">
+                    <!-- <div class="gallery-item">
                         <a href="wp-content/uploads/sites/7/2023/03/khung  (1).jpg" data-fancybox="gallery">
                             <img src="wp-content/uploads/sites/7/2023/03/khung  (1).jpg" alt="Gallery">
                         </a>
@@ -227,7 +221,7 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
                         <a href="wp-content/uploads/sites/7/2023/03/khung  (3).jpg" data-fancybox="gallery">
                             <img src="wp-content/uploads/sites/7/2023/03/khung  (3).jpg" alt="Gallery">
                         </a>
-                    </div>
+                    </div> -->
                     <div class="gallery-item">
                         <a href="wp-content/uploads/sites/7/2023/03/khung  (4).jpg" data-fancybox="gallery">
                             <img src="wp-content/uploads/sites/7/2023/03/khung  (4).jpg" alt="Gallery">
