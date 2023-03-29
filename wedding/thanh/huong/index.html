@@ -36,16 +36,21 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 <script type='text/javascript' src='wp-includes/js/jquery/jquery.mina7a0.js?ver=3.6.1' id='jquery-core-js'></script>
 
 <style>
+    /* general styling */
+    /* :root {
+    --smaller: .75;
+    } */
+
+    * {
+    /* box-sizing: border-box; */
+    margin: 0;
+    padding: 0;
+    }
+
     .container {
     color: #333;
     margin: 0 auto;
     text-align: center;
-    }
-
-    h1 {
-    font-weight: normal;
-    letter-spacing: .125rem;
-    text-transform: uppercase;
     }
 
     li {
@@ -72,17 +77,17 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
     }
 
     @media all and (max-width: 768px) {
-    h1 {
-        font-size: calc(1.5rem * var(--smaller));
-    }
-    
-    li {
-        font-size: calc(1.125rem * var(--smaller));
-    }
-    
-    li span {
-        font-size: calc(3.375rem * var(--smaller));
-    }
+        h1 {
+            font-size: calc(1.5rem * var(--smaller));
+        }
+        
+        li {
+            font-size: calc(1.125rem * var(--smaller));
+        }
+        
+        li span {
+            font-size: calc(3.375rem * var(--smaller));
+        }
     }
 </style>
 
@@ -347,7 +352,6 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
             <span class="sm text-uppercase">Save the date</span>
             <h2 class="main-title">Celebrate love with us</h2>
             <div class="container">
-                <!-- <h1 id="headline">Countdown to my birthday</h1> -->
                 <div id="countdown">
                   <ul>
                     <li><span id="days"></span>Ngày</li>
@@ -356,40 +360,37 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
                     <li><span id="seconds"></span>Giây</li>
                   </ul>
                 </div>
-                <div id="content" class="emoji">
-                  <span>🥳</span>
-                  <span>🎉</span>
-                  <span>🎂</span>
-                </div>
+                
+                <span id="headline"></span>
             </div>
             <script>
-            (function () {
-                const second = 1000,
-                        minute = second * 60,
-                        hour = minute * 60,
-                        day = hour * 24;
-        
-                //I'm adding this section so I don't have to keep updating this pen every year :-)
-                //remove this if you don't need it
-                let today = new Date(),
+                (function () {
+                    const second = 1000,
+                    minute = second * 60,
+                    hour = minute * 60,
+                    day = hour * 24;
+            
+                    //I'm adding this section so I don't have to keep updating this pen every year :-)
+                    //remove this if you don't need it
+                    let today = new Date(),
                     dd = String(today.getDate()).padStart(2, "0"),
                     mm = String(today.getMonth() + 1).padStart(2, "0"),
                     yyyy = today.getFullYear(),
                     nextYear = yyyy + 1,
-                    dayMonth = "04/01/",
-                    birthday = dayMonth + yyyy;
-                
-                today = mm + "/" + dd + "/" + yyyy;
-                if (today > birthday) {
-                    birthday = dayMonth + nextYear;
-                }
-                //end
-                
-                const countDown = new Date(birthday).getTime(),
+                    dayMonth = "04/02/",
+                    wedding = dayMonth + yyyy;
+                    
+                    today = mm + "/" + dd + "/" + yyyy;
+                    // if (today > wedding) {
+                    //     wedding = dayMonth + nextYear;
+                    // }
+                    //end
+                    
+                    const countDown = new Date(wedding).getTime(),
                     x = setInterval(function() {    
         
                         const now = new Date().getTime(),
-                            distance = countDown - now;
+                        distance = countDown - now;
         
                         document.getElementById("days").innerText = Math.floor(distance / (day)),
                         document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
@@ -398,10 +399,10 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
         
                         //do something later when date is reached
                         if (distance < 0) {
-                        document.getElementById("headline").innerText = "It's my birthday!";
-                        document.getElementById("countdown").style.display = "none";
-                        document.getElementById("content").style.display = "block";
-                        clearInterval(x);
+                            document.getElementById("headline").innerText = "🤵🏻‍♂️💍👰🏻‍♀️";
+                            document.getElementById("countdown").style.display = "none";
+                            document.getElementById("content").style.display = "block";
+                            clearInterval(x);
                         }
                         //seconds
                     }, 0)
