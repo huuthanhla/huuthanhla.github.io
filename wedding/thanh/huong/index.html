@@ -379,13 +379,7 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
                     nextYear = yyyy + 1,
                     dayMonth = "04/02/",
                     wedding = dayMonth + yyyy;
-                    
-                    today = mm + "/" + dd + "/" + yyyy;
-                    // if (today > wedding) {
-                    //     wedding = dayMonth + nextYear;
-                    // }
-                    //end
-                    
+                                        
                     const countDown = new Date(wedding).getTime(),
                     x = setInterval(function() {    
         
