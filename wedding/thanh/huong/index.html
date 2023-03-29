@@ -35,6 +35,57 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 <link rel='stylesheet' id='wow-css' href='wp-content/themes/love-story-opt1/assets/css/animate.min.css' type='text/css' media='all' />
 <script type='text/javascript' src='wp-includes/js/jquery/jquery.mina7a0.js?ver=3.6.1' id='jquery-core-js'></script>
 
+<style>
+    .container {
+    color: #333;
+    margin: 0 auto;
+    text-align: center;
+    }
+
+    h1 {
+    font-weight: normal;
+    letter-spacing: .125rem;
+    text-transform: uppercase;
+    }
+
+    li {
+    display: inline-block;
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 1em;
+    text-transform: uppercase;
+    }
+
+    li span {
+    display: block;
+    font-size: 4.5rem;
+    }
+
+    .emoji {
+    display: none;
+    padding: 1rem;
+    }
+
+    .emoji span {
+    font-size: 4rem;
+    padding: 0 .5rem;
+    }
+
+    @media all and (max-width: 768px) {
+    h1 {
+        font-size: calc(1.5rem * var(--smaller));
+    }
+    
+    li {
+        font-size: calc(1.125rem * var(--smaller));
+    }
+    
+    li span {
+        font-size: calc(3.375rem * var(--smaller));
+    }
+    }
+</style>
+
 </head>
 
 <body class="home blog">
@@ -289,24 +340,86 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
             });
         })
     })
-</script><section class="box-wedding-day wow fadeInUp" id="invitation" data-wow-duration="2s">
+</script>
+<section class="box-wedding-day wow fadeInUp" id="invitation" data-wow-duration="2s">
     <div class="container">
         <div class="box-head --has-flower text-center">
             <span class="sm text-uppercase">Save the date</span>
             <h2 class="main-title">Celebrate love with us</h2>
+            <div class="container">
+                <!-- <h1 id="headline">Countdown to my birthday</h1> -->
+                <div id="countdown">
+                  <ul>
+                    <li><span id="days"></span>Ngày</li>
+                    <li><span id="hours"></span>Giờ</li>
+                    <li><span id="minutes"></span>Phút</li>
+                    <li><span id="seconds"></span>Giây</li>
+                  </ul>
+                </div>
+                <div id="content" class="emoji">
+                  <span>🥳</span>
+                  <span>🎉</span>
+                  <span>🎂</span>
+                </div>
+            </div>
+            <script>
+            (function () {
+                const second = 1000,
+                        minute = second * 60,
+                        hour = minute * 60,
+                        day = hour * 24;
+        
+                //I'm adding this section so I don't have to keep updating this pen every year :-)
+                //remove this if you don't need it
+                let today = new Date(),
+                    dd = String(today.getDate()).padStart(2, "0"),
+                    mm = String(today.getMonth() + 1).padStart(2, "0"),
+                    yyyy = today.getFullYear(),
+                    nextYear = yyyy + 1,
+                    dayMonth = "04/01/",
+                    birthday = dayMonth + yyyy;
+                
+                today = mm + "/" + dd + "/" + yyyy;
+                if (today > birthday) {
+                    birthday = dayMonth + nextYear;
+                }
+                //end
+                
+                const countDown = new Date(birthday).getTime(),
+                    x = setInterval(function() {    
+        
+                        const now = new Date().getTime(),
+                            distance = countDown - now;
+        
+                        document.getElementById("days").innerText = Math.floor(distance / (day)),
+                        document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+                        document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+                        document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+        
+                        //do something later when date is reached
+                        if (distance < 0) {
+                        document.getElementById("headline").innerText = "It's my birthday!";
+                        document.getElementById("countdown").style.display = "none";
+                        document.getElementById("content").style.display = "block";
+                        clearInterval(x);
+                        }
+                        //seconds
+                    }, 0)
+                }());
+            </script>
         </div>
         <div class="ivitation">
             <p>Trân trọng kính mời <strong>bạn và người thương</strong> tới dự <strong>bữa cơm thân mật</strong> chung vui cùng Gia Đình chúng tôi, được tổ chức vào</p>
             <div class="ivi-date">
                 <span>Thứ Bảy</span>  <strong>01</strong>  <span>tháng Tư</span>            </div>
             <div class="ivi-location">
-                <div class="item">Nhà trai: Xóm 4, Yên Thượng, Khánh Thịnh, Yên Mô, Ninh Bình. <br><b>Thời gian: 17h00'</b>                </div>
-                <div class="item">Nhà gái: Thôn Bùi, Khánh An, Yên Khánh, Ninh Bình. <br><br><b>Thời gian: 17h00'</b>                </div>
+                <div class="item">Nhà trai: Xóm 4, Yên Thượng, Khánh Thịnh, Yên Mô, Ninh Bình. <br><b>Thời gian: 10h30' - 17h00'</b>                </div>
+                <div class="item">Nhà gái: Thôn Bùi, Khánh An, Yên Khánh, Ninh Bình. <br><br><b>Thời gian: 10h30' - 17h00'</b>                </div>
             </div>
             <div class="box-head --has-flower text-center">
                 <h2 class="main-title"></h2>
             </div>
-            <p><strong>Lễ thành hôn</strong> được tổ chức tại <strong>nhà trai</strong> vào lúc <b>10h00'</b> </p>
+            <p><strong>Lễ thành hôn</strong> được tổ chức tại <strong>nhà trai</strong> vào lúc <b>9h30'</b> </p>
             <div class="ivi-date">
                 <span>Chủ Nhật</span>  <strong>02 / 4</strong>  </div>
             <!-- <div class="box-button">
