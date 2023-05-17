@@ -1,0 +1,136 @@
+/**
+ * Header
+ */
+.header {
+    margin-top: 15%;
+    padding: $spacing-unit / 2 0;
+
+    .avatar {
+        max-width: 100px;
+        margin: 0 auto;
+        border: 1px solid #fff;
+        border-radius: 100%;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    .intro {
+        padding: $spacing-unit / 2 0;
+        text-align: center;
+
+        .name {
+            @include relative-font-size(2);
+            letter-spacing: -1px;
+        }
+
+        .desc {
+            @include relative-font-size(1.125);
+            color: $grey-color;
+            font-weight: 300;
+            font-style: normal;
+            margin: 0 auto;
+        }
+    }
+
+    .social {
+        .social-list {
+            @include relative-font-size(1.125);
+            margin-left: 0;
+            text-align: center;
+
+            li {
+                display: inline-block;
+                position: relative;
+                margin: $spacing-unit / 2;
+                transition-duration: 0.2s;
+                transition-property: transform;
+                transition-timing-function: ease-out;
+
+                &:active,
+                &:focus,
+                &:hover {
+                    color: $theme-color;
+                    transform: scale(1.5);
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Content
+ */
+.main {
+    width: $content-width;
+
+    @include media-query($on-laptop) {
+        width: auto;
+    }
+}
+
+.links, .content {
+    padding: $spacing-unit / 2;
+    word-break: break-word;
+}
+
+.links {
+    text-align: center;
+    @include relative-font-size(1.125);
+
+    .link {
+        color: $text-color;
+
+        @include  underline-from-center();
+
+        &:not(:first-child):not(:last-child) {
+            margin: 0 5px;
+        }
+
+        &:first-child {
+            margin-right: 5px;
+        }
+
+        &:last-child {
+            margin-left: 5px;
+        }
+    }
+}
+
+.main, .footer {
+    border-top: 1px solid $border-color;
+    padding: $spacing-unit 0;
+    position: relative;
+
+    &:before {
+        display: block;
+        content: " ";
+        width: 7px;
+        height: 7px;
+        border: $border-color 1px solid;
+        position: absolute;
+        top: -5px;
+        left: 50%;
+        margin-left: -5px;
+        background: #FFF;
+        box-shadow: #FFF 0 0 0 5px;
+        border-radius: 3px;
+    }
+}
+
+/**
+ * Footer
+ */
+.footer {
+    font-size: $small-font-size;
+    color: $grey-color;
+    text-align: center;
+    a {
+        color: $grey-color;
+        &:hover {
+            color: $theme-color;
+        }
+    }
+}

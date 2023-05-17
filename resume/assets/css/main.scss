@@ -1,0 +1,10 @@
+---
+---
+
+@charset "utf-8";
+
+$theme-color: {{ site.color.theme | default: "#42A8C0 !default" }};
+$text-color: {{ site.color.text | default: "#34495e !default" }};
+$background-color: {{ site.color.background | default: "#fdfdfd !default" }};
+
+@import "default";

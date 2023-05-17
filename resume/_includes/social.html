@@ -1,0 +1,138 @@
+{% assign social = site.data.data.social %}
+<ul class="social-list">
+    {% if social.email %}
+    <li class="email">
+        <a href="mailto:{{ social.email }}" target="_blank">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.phone %}
+    <li class="phone">
+        <a href="tel:{{ social.phone }}">
+            <i class="fas fa-phone"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.whatsapp %}
+    <li class="whatsapp">
+        <a href="https://wa.me/{{ social.whatsapp }}" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.telegram %}
+    <li class="telegram">
+        <a href="https://t.me/{{ social.telegram }}" target="_blank">
+            <i class="fab fa-telegram"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.medium %}
+    <li class="medium">
+        <a href="https://medium.com/@{{ social.medium }}" target="_blank">
+            <i class="fab fa-medium"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.linkedin %}
+    <li class="linkedin">
+        <a href="https://linkedin.com/in/{{ social.linkedin }}" target="_blank">
+            <i class="fab fa-linkedin"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.google-scholar %}
+    <li class="google-scholar">
+        <a href="https://scholar.google.com/citations?user={{ social.google-scholar }}" target="_blank">
+            <i class="ai ai-google-scholar"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.researchgate %}
+    <li class="researchgate">
+        <a href="https://www.researchgate.net/profile/{{ social.researchgate }}" target="_blank">
+            <i class="fab fa-researchgate"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.github %}
+    <li class="github">
+        <a href="https://github.com/{{ social.github }}" target="_blank">
+            <i class="fab fa-github"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.gitlab %}
+    <li class="gitlab">
+        <a href="https://gitlab.com/{{ social.gitlab }}" target="_blank">
+            <i class="fab fa-gitlab"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.bitbucket %}
+    <li class="bitbucket">
+        <a href="https://bitbucket.com/{{ social.bitbucket }}" target="_blank">
+            <i class="fab fa-bitbucket"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.twitter %}
+    <li class="twitter">
+        <a href="https://twitter.com/{{ social.twitter }}" target="_blank">
+            <i class="fab fa-twitter"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.stackoverflow %}
+    <li class="stackoverflow">
+        <a href="https://stackoverflow.com/users/{{ social.stackoverflow }}" target="_blank">
+            <i class="fab fa-stack-overflow"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.quora %}
+    <li class="quora">
+        <a href="https://www.quora.com/profile/{{ social.quora }}" target="_blank">
+            <i class="fab fa-quora"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.goodreads %}
+    <li class="goodreads">
+        <a href="https://www.goodreads.com/user/show/{{ social.goodreads }}" target="_blank">
+            <i class="fab fa-goodreads"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.weibo %}
+    <li class="weibo">
+        <a href="https://weibo.com/{{ social.weibo }}" target="_blank">
+            <i class="fab fa-weibo"></i>
+        </a>
+    </li>
+    {% endif %}
+
+    {% if social.steam %}
+    <li class="steam">
+        <a href="https://steamcommunity.com/profiles/{{ social.steam }}" target="_blank">
+            <i class="fab fa-steam"></i>
+        </a>
+    </li>
+    {% endif %}
+</ul>

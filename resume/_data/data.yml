@@ -1,0 +1,17 @@
+intro:
+    name: T
+    desc: Yet another programmer
+    avatar:
+        display: true
+        path: profile.png
+social:
+    email: m@tarrex.com
+    telegram: tarrex
+    github: tarrex
+    goodreads: 37642170-tarrex
+
+links:
+    - name: Blog
+      url: https://blog.tarrex.com
+    - name: Read
+      url: https://read.tarrex.com
