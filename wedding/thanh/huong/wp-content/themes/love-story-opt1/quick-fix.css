@@ -1,0 +1,196 @@
+
+/* Quick fix 14/03/2023 */
+ul.payment-item li span:first-child {
+  width: 145px;
+  display: inline-block;
+}
+
+ul.payment-item li span:last-child {
+    color: #517237;
+}
+ 
+ul.payment-item li:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+ul.payment-item li {
+    display: inline-flex;
+  }
+
+ul.payment-item {
+  list-style: none;
+  padding: 20px 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 15px;
+  max-width: 360px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  /* text-align: left; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.payment-list {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.box-wedding-day.--popup {
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    transform: translateY(-50%);
+    background-color: #fff;
+    display: none;
+    background-size: cover;
+    overflow: auto;
+}
+
+.box-wedding-day.--popup p {
+    font-size: 1.3888888889vw;
+}
+
+/* .popup-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+} */
+
+.qr-code {
+    display: flex;
+    justify-content: center;
+}
+
+.qr-code img {
+    width: 20%;
+    height: auto;
+    margin-top: 40px;
+}
+
+.close {
+    position: fixed;
+    z-index: 999999;
+    right: 30px;
+    top: 30px;
+    background-color: #517237;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+}
+
+.close img {
+    transition: all .4s ease;
+}
+
+.close:hover img {
+    transform: rotate(360deg);
+}
+
+.box-wedding-day .ivi-date {
+    flex-direction: column !important;
+}
+
+.box-wedding-day .ivi-date strong {
+    margin-top: 1.5vw !important;
+    margin-bottom: 1.5vw !important;
+}
+
+.map {
+    display: flex;
+    column-gap: 2.5vw;
+    margin-top: 3vw;
+}
+
+.map-item {
+    width: 50%;
+}
+
+.map-item iframe {
+    width: 100%;
+}
+
+@media (min-width: 767px) and (max-width: 1024px) {
+    .popup-main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width: 1024px) {
+    .box-wedding-day.--popup {
+        background-size: cover;
+    }
+    
+    .box-wedding-day.--popup p {
+        font-size: 1.7578125vw;
+    }
+}
+
+@media (max-width: 767px) {
+    .box-wedding-day.--popup p {
+        font-size: 4.2666666667vw;
+    }
+
+    .qr-code img {
+        width: 100%;
+    }
+
+    .qr-code {
+        flex-direction: column;
+    }
+
+    .box-wedding-day.--popup {
+        background-size: cover;
+        padding-top: 22.333333vw !important;
+    }
+
+    .close {
+        width: 30px;
+        height: 30px;
+        right: 15px;
+        top: 35px;
+    }
+
+    .close img {
+        width: 16px;
+    }
+
+    .box-home-banner .banner-container .name {
+        font-size: 20.333333vw !important;
+    }
+
+    .box-wedding-day .ivi-date {
+        flex-direction: column !important;
+    }
+
+    .box-wedding-day .ivi-date strong {
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+    }
+
+    .map {
+        flex-direction: column;
+    }
+
+    .map-item {
+        width: 100%;
+    }
+
+    .map-item:last-child {
+        margin-top: 20px;
+    }
+}
