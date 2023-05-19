@@ -39,7 +39,7 @@
 		  background-image: var(--body-bg);
 		  font-family: 'Open Sans','Nunito', sans-serif;
 		  font-weight: 400;
-		  line-height: 1.25em;
+		  line-height: 1.1em;
 		  letter-spacing: 0.025em;
 		}
 
@@ -52,7 +52,7 @@
 		  margin: 25px 10px;
 		  height: calc(100% - 20px);
 		  border: var(--border);
-		  border-radius: 15px;
+		  border-radius: 4px;
 		  background: var(--msger-bg);
 		  box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
 		}
@@ -100,7 +100,7 @@
 		}
 		.msg-bubble {
 		  max-width: 75%;
-		  padding: 15px;
+		  padding: 12px 15px 12px 15px;
 		  border-radius: 15px;
 		  background: var(--left-msg-bg);
 		}
@@ -222,7 +222,7 @@
 	<section class="msger">
 	  <header class="msger-header">
 	    <div class="msger-header-title">
-	      <i class="fas fa-comment-alt"></i>ChatGPT
+	      <i class="fas fa-comment-alt"></i> ChatGPT
 	    </div>
 	    <div class="msger-header-options">
 	      <form class="msger-clear-area"><button type="submit" class="msger-clear-btn">&#10005;</button></form>
@@ -331,7 +331,7 @@
 				removeLoading();
 				setTimeout(function() {
 					appendMessage('ERROR [' + jqXHR.status + ']', BOT_IMG, "left", msg);
-				}, 300);
+				}, 200);
 		        
             }
         });
