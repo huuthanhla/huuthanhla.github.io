@@ -171,7 +171,15 @@
 		  font-family: 'Open Sans','Nunito', sans-serif;
 		}
 		.msger-send-btn:hover {
-		  background: rgb(0, 128, 255);
+		  background: rgb(0, 180, 50);
+		}
+
+		.msger-clear-btn {
+		  padding-left: 5px;
+		  padding-right: 5px;
+		  cursor: pointer;
+		  transition: background 0.23s;
+		  font-family: 'Open Sans','Nunito', sans-serif;
 		}
 
 		.msger-chat {
@@ -185,19 +193,19 @@
 	<section class="msger">
 	  <header class="msger-header">
 	    <div class="msger-header-title">
-	      <i class="fas fa-comment-alt"></i> ChatGPT
+	      <i class="fas fa-comment-alt"></i>ChatGPT
 	    </div>
 	    <div class="msger-header-options">
-	      <span><i class="fas fa-cog"></i></span>
+	      <form class="msger-clear-area"><button type="submit" class="msger-clear-btn">X</button></form>
 	    </div>
 	  </header>
 
 	  <main class="msger-chat">
 	    <div class="msg left-msg">
-	      <div
+	      <!-- <div
 	       class="msg-img"
 	       style="background-image: url(https://picsum.photos/seed/picsum/200?blur=4)"
-	      ></div>
+	      ></div> -->
 
 	      <div class="msg-bubble">
 	        <div class="msg-info">
@@ -287,6 +295,7 @@
 	const msgerForm = get(".msger-inputarea");
 	const msgerInput = get(".msger-input");
 	const msgerChat = get(".msger-chat");
+	const msgerClear = get(".msger-clear-area");
 
 	// Icons made by Freepik from www.flaticon.com
 	const BOT_IMG = "https://picsum.photos/seed/picsum/200?blur=4";
@@ -309,7 +318,7 @@
 	function appendMessage(name, img, side, text) {
 	  const msgHTML = `
 	    <div class="msg ${side}-msg">
-	      <div class="msg-img" style="background-image: url(${img})"></div>
+	      <!--<div class="msg-img" style="background-image: url(${img})"></div> -->
 
 	      <div class="msg-bubble">
 	        <div class="msg-info">
@@ -324,6 +333,20 @@
 
 	  msgerChat.insertAdjacentHTML("beforeend", msgHTML);
 	  msgerChat.scrollTop += 500;
+	}
+
+	msgerClear.addEventListener("submit", event => {
+	  event.preventDefault();
+	  clear();
+	  showFirstMsg();
+	});
+
+	function showFirstMsg() {
+		appendMessage(BOT_NAME, BOT_IMG, "left", 'Xin chào! Tôi là trợ lý ảo GPT. Bạn cần giải đáp vấn đề gì?');
+	}
+
+	function clear() {
+		msgerChat.innerHTML = '';
 	}
 
 	// Utils
