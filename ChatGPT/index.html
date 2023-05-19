@@ -280,12 +280,15 @@
 	const BOT_NAME = "BOT";
 	const PERSON_NAME = "GUEST";
 
+	var isLoading = false;
+
 	showFirstMsg();
 
 	// ChatGPT
 	function sendMessage(msgText) {
 		console.log(msgText);
 		insertLoading();
+
         $.ajax({
             url: "https://api.openai.com/v1/chat/completions",
             headers: {
@@ -342,6 +345,10 @@
 
 	  const msgText = msgerInput.value;
 	  if (!msgText) return;
+	  if (isLoading) {
+		msgerInput.value = "";
+		return;
+	  }
 
 	  appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
 	  msgerInput.value = "";
@@ -370,6 +377,8 @@
 	}
 
 	function insertLoading() {
+	  isLoading = true;
+
 	  const msgHTML = `
 	    <div id="loading" class="msg left-msg">
 	      <div class="msg-bubble">
@@ -390,6 +399,10 @@
 	function removeLoading() {
 		const loading = document.getElementById("loading");
 		loading.remove();
+		
+		setTimeout(function() {
+			isLoading = false;
+		}, 200);
 	}
 
 	msgerClear.addEventListener("submit", event => {
