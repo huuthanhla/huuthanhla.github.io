@@ -196,7 +196,7 @@
 	    <div class="msg left-msg">
 	      <div
 	       class="msg-img"
-	       style="background-image: url(https://picsum.photos/seed/picsum/200)"
+	       style="background-image: url(https://picsum.photos/seed/picsum/200?blur=4)"
 	      ></div>
 
 	      <div class="msg-bubble">
@@ -257,8 +257,29 @@
                 var response = data.choices[0].message.content;
                 appendMessage(BOT_NAME, BOT_IMG, "left", response);
             },
-            error: function(xhr, status, error) {
-                console.error(xhr.responseText);
+            error: function (jqXHR, exception) {
+                console.error(jqXHR.status);
+
+                var msg = '';
+		        if (jqXHR.status === 0) {
+		            msg = 'Not connect.\n Verify Network.';
+		        } else if (jqXHR.status == 404) {
+		            msg = 'Requested page not found. [404]';
+		        } else if (jqXHR.status == 500) {
+		            msg = 'Internal Server Error [500].';
+		        } else if (exception === 'parsererror') {
+		            msg = 'Requested JSON parse failed.';
+		        } else if (exception === 'timeout') {
+		            msg = 'Time out error.';
+		        } else if (exception === 'abort') {
+		            msg = 'Ajax request aborted.';
+		        } else {
+		            msg = jqXHR.responseText;
+		        }
+
+		        console.error(msg);
+
+		        appendMessage('ERROR [' + jqXHR.status + ']', BOT_IMG, "left", msg);
             }
         });
     }
@@ -268,8 +289,8 @@
 	const msgerChat = get(".msger-chat");
 
 	// Icons made by Freepik from www.flaticon.com
-	const BOT_IMG = "https://picsum.photos/seed/picsum/200";
-	const PERSON_IMG = "https://picsum.photos/222";
+	const BOT_IMG = "https://picsum.photos/seed/picsum/200?blur=4";
+	const PERSON_IMG = "https://picsum.photos/222?blur=4";
 	const BOT_NAME = "BOT";
 	const PERSON_NAME = "GUEST";
 
