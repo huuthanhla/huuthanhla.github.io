@@ -751,6 +751,8 @@ small {
     break-before: avoid !important
   }
 
+  a.link {color: #1DA1F2 !important;}
+
   a,
   blockquote,
   pre {
