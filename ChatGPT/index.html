@@ -172,9 +172,18 @@
 		  cursor: pointer;
 		  transition: background 0.23s;
 		  font-family: 'Open Sans','Nunito', sans-serif;
+		  background-image: url('send.svg');
+		  background-size: contain;
+		  background-position: center;
+		  background-repeat: no-repeat;
+		  background-origin: content-box;
+		  
 		}
 		.msger-send-btn:hover {
-		  background: rgb(0, 180, 50);
+		  background: rgba(0, 196, 50, 0.75);
+		  background-image: url('send.svg');
+		  background-repeat: no-repeat;
+		  background-origin: content-box;
 		}
 
 		.msger-clear-btn {
@@ -265,7 +274,7 @@
 
 	  <form class="msger-inputarea">
 	    <input type="text" class="msger-input" placeholder="Nhập câu hỏi của bạn ?">
-	    <button type="submit" class="msger-send-btn">GỬI</button>
+	    <button type="submit" class="msger-send-btn" style="width: 64px;"></button>
 	  </form>
 	</section>
 </body>
