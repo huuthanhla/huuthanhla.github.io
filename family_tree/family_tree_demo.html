@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)https://shrihari-lib.netlify.app/demo -->
+<html lang="en">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Demo :: Family Tree">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="ShriHari">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Family Tree</title>
+        <script src="./family_tree_demo_files/jquery-3.6.0.js"></script>
+        <script src="./family_tree_demo_files/lineage.min.js"></script>
+        <script>
+            var jsonData = [
+                { "id": 1, "pid": 2, "gender": "male", "title": "Title", "name": "Grand Father", "photo": "", "addr": "RIP", "cn": "" },
+                { "id": 2, "pid": 1, "gender": "female", "title": "Title", "name": "Grand Mother", "photo": "", "addr": "London", "cn": "gb" },
+                { "id": 3, "pid": 4, "mid": 2, "fid": 1, "gender": "female", "title": "mother", "name": "Daughter", "photo": "https://unsplash.it/80/80", "addr": "USA", "cn": "us" },
+                { "id": 4, "pid": 3, "gender": "male", "title": "father", "name": "Son-in-Law", "photo": "", "addr": "IND", "cn": "in" },
+                { "id": 5, "pid": 6, "mid": 2, "fid": 1, "gender": "male", "title": "father", "name": "Son", "photo": "https://unsplash.it/81/81", "addr": "USA", "cn": "us" },
+                { "id": 6, "pid": 5, "gender": "female", "title": "mother", "name": "Daughter-in-Law", "photo": "", "addr": "WY", "cn": "us" },
+                { "id": 7, "mid": 3, "fid": 4, "gender": "female", "title": "Title", "name": "Daughter", "photo": "", "addr": "USA", "cn": "us" },
+                { "id": 8, "mid": 3, "fid": 4, "gender": "male", "title": "Title", "name": "Son", "photo": "", "addr": "USA", "cn": "us" },
+                { "id": 9, "mid": 6, "fid": 5, "gender": "female", "title": "Title", "name": "Daughter", "photo": "", "addr": "India", "cn": "in" },
+                { "id": 10, "mid": 6, "fid": 5, "gender": "male", "title": "Title", "name": "Son", "photo": "", "addr": "Canada", "cn": "ca" },
+            ];
+        </script>
+    <link href="./family_tree_demo_files/lineage.min.css" rel="stylesheet">
+    <script src="./family_tree_demo_files/34af8a80dc.js"></script>
+
+    </head>
+
+    <body>
+        <div id="divFamily"></div>
+        <script>
+            var params = {
+                data: jsonData,
+                search: true,
+                container: "divFamily",
+                template: "circle" // "rounded" // "raised" // "tilted"
+            };
+            var tree = new Lineage(params);
+            tree.load();
+
+        </script>
+        <div class="overlay" style="display: none;">
+            <div class="overlay__inner">
+                <div class="overlay__content"><span class="loader"></span></div>
+            </div>
+        </div>
+
+
+</body>
+</html>
