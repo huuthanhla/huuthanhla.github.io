@@ -361,7 +361,15 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
                   </ul>
                 </div>
                 
-                <span id="headline"></span>
+                <div class="container"><span id="headline"></span></div>
+
+                <div id="counter">
+                    <ul>
+                      <li id="year_label"><span id="years"></span>Năm</li>
+                      <li><span id="months"></span>Tháng</li>
+                      <li><span id="c_days"></span>Ngày</li>
+                    </ul>
+                  </div>
             </div>
             <script>
                 (function () {
@@ -370,10 +378,10 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
                     hour = minute * 60,
                     day = hour * 24;
             
-                    let today = new Date(),
-                    dd = String(today.getDate()).padStart(2, "0"),
-                    mm = String(today.getMonth() + 1).padStart(2, "0"),
-                    yyyy = today.getFullYear(),
+                    let weddingDay = new Date('2023-04-02'),
+                    dd = String(weddingDay.getDate()).padStart(2, "0"),
+                    mm = String(weddingDay.getMonth() + 1).padStart(2, "0"),
+                    yyyy = weddingDay.getFullYear(),
                     nextYear = yyyy + 1,
                     dayMonth = "04/02/",
                     wedding = dayMonth + yyyy;
@@ -383,18 +391,34 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
         
                         const now = new Date().getTime(),
                         distance = countDown - now;
-        
-                        document.getElementById("days").innerText = Math.floor(distance / (day)),
-                        document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
-                        document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
-                        document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+                        
+                        document.getElementById("days").innerText = Math.floor(Math.abs(distance) / (day)),
+                        document.getElementById("hours").innerText = Math.floor((Math.abs(distance) % (day)) / (hour)),
+                        document.getElementById("minutes").innerText = Math.floor((Math.abs(distance) % (hour)) / (minute)),
+                        document.getElementById("seconds").innerText = Math.floor((Math.abs(distance) % (minute)) / second);
         
                         //do something later when date is reached
                         if (distance < 0) {
-                            document.getElementById("headline").innerText = "🤵🏻‍♂️💍👰🏻‍♀️";
-                            document.getElementById("countdown").style.display = "none";
-                            document.getElementById("content").style.display = "block";
-                            clearInterval(x);
+                            document.getElementById("headline").innerText = "🤵🏻‍♂️💍👰🏻‍♀️ (2 Apr 2023)";
+                            // document.getElementById("countdown").style.display = "none";
+                            // document.getElementById("content").style.display = "block";
+                            // clearInterval(x);
+                            
+                            var today = new Date();
+                            const oneDay = 24 * 60 * 60 * 1000;
+                            var days = Math.abs(weddingDay - today) / oneDay;
+                            
+                            var countMonth = Math.floor(days/30);
+                            const countYear = Math.floor(countMonth/12);
+                            const delta = Math.floor(days - countMonth*30);
+
+                            if (countMonth < 12) {
+                                document.getElementById("year_label").style.display = "none";
+                            }
+
+                            document.getElementById("years").innerText = countYear,
+                            document.getElementById("months").innerText = countMonth,
+                            document.getElementById("c_days").innerText = delta;
                         }
                         //seconds
                     }, 0)
