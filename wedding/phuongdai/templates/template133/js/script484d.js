@@ -51,11 +51,11 @@
             rules: {
                 name: {
                     required: true,
-                    minlength: 5
+                    minlength: 1
                 },
                 content: {
                     required: true,
-                    minlength: 10
+                    minlength: 1
                 },
                 email: {
                     required: false,
@@ -66,11 +66,11 @@
             messages: {
                 name: {
                     required: '<span style="color:red;">Vui lòng nhập tên của bạn.</span>',
-                    minlength: '<span style="color:red;">Tên phải lớn hơn 5 ký tự.</span>',
+                    minlength: '<span style="color:red;">Tên không được để trống.</span>',
                 },
                 content: {
                     required: '<span style="color:red;">Vui lòng nhập lời chúc.</span>',
-                    minlength: '<span style="color:red;">Lời chúc phải lớn hơn 10 ký tự.</span>',
+                    minlength: '<span style="color:red;">Lời chúc không được để trống.</span>',
                 },
                 email: {
                     email: '<span style="color:red;">Địa chỉ email không hợp lệ.</span>'
