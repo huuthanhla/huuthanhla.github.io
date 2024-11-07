@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8"/>
+	<meta content="width=device-width,initial-scale=1,user-scalable=no" name="viewport"/>
+	<title>QRCode generator</title>
+	<link rel="shortcut icon" href="favicon.png" type="image/png"/>
+
+	<style type="text/css">
+	
+		*			{margin:0; padding:0; box-sizing:border-box;}
+		#box			{background:url('data:image/gif;base64,R0lGODlhBgAGAIAAAO7u7t7e3iH5BAAAAAAALAAAAAAGAAYAAAIKhIOXgKGuDIOzAAA7') #eeeff1;}
+
+
+		body			{font-size:12px; background:#ffe;}
+		body,
+		textarea		{text-align:center; font-family:arial;}
+
+
+		input			{}
+		input[type='number'],
+		input[type='color']	{width:5em;}
+		input[type='number']	{padding:0.25em; text-align:right;}
+		select			{width:9em; font-size:11px; padding:0.25em 0.2em;}
+		option			{padding:0.25em 0.2em;}
+		textarea		{resize:none; padding:2.5em; color:#358; background:#eef2f4; font-size:2em; border:0; width:100%;}
+
+
+		#set			{user-select:none; background:#fff; overflow:hidden;}
+		#set table		{border-collapse:collapse; padding:2em; font-size:11px; text-transform:uppercase; margin:2em auto;}
+		#set th,
+		#set td			{padding:0.4em 0.5em;}
+		#set th			{text-align:right; color:#567;}
+		#set td			{text-align:left;}
+
+
+		/* res beautifier */
+		#res			{color:#789; padding:2em; text-align:left; font-family:'Lucida Console', Monaco, monospace;}
+		#res b			{font-weight:normal;}
+		#res i			{font-style:normal;}
+		#res .obj		{color:#789;}
+		#res .obj b		{color:#345; font-weight:bold;}
+		#res .key		{color:#45a;}
+		#res .num		{color:#12a;}
+		#res .txt		{color:#9ab;}
+		#res .txt i		{color:#384;}
+		#res .clr		{color:#9ab;}
+		#res .clr i		{color:#731;}
+		#res a			{color:#67a;}
+		#res a:hover		{color:#67e;}
+
+
+		#box			{overflow:hidden; position:relative; height:300px; padding:3em;}
+		#box svg		{display:block; position:absolute; right:50%; bottom:50%; transform:translate( 50%, 50%); cursor:pointer;}
+		#box svg		{max-width:100%; max-height:100%;}
+
+
+		/* minimized options for small screen */
+		.opt			{display:block; padding:1em; background:#0ae; color:#fff; text-decoration:none;}
+		.opt:hover		{background:#0af;}
+
+		#op2.opt		{background:#ea0;}
+		#op2.opt:hover		{background:#fa0;}
+
+		#set table,
+		#set .legend,
+		#set #op2.opt,
+		#set.show #op1.opt	{display:none;}
+
+		#set.show table		{display:table;}
+		#set.show #op2.opt	{display:block;}
+
+	@media (min-width: 620px) {
+
+		html,
+		body,			
+		#box,
+		#set,
+		#txt,
+		#msg,
+		#hnt			{display:block; position:absolute; top:0; right:0; left:0; bottom:0;}
+
+		html,
+		body			{overflow:hidden;}
+		#box			{height:auto;}
+
+		#txt,
+		#hnt			{height:250px; top:auto; border-top:3px #eee solid;}
+
+		#set,
+		#hnt			{width:270px; left:auto;}
+		#set table		{font-size:10px;}
+
+		#box,
+		#txt			{right:270px}
+
+		#box,
+		#set			{bottom:250px;}
+
+		#hnt			{overflow:auto;}
+		#msg			{width:100%; height:100%;}
+
+		#set			{overflow-y:auto;}
+		#set .legend		{display:block;}
+		#set table		{display:table;}
+		#set .opt		{display:none !important;}
+	}
+
+	@media (min-width:900px) {
+
+		#set,
+		#hnt			{width:30%}
+		#box,
+		#txt			{right:30%}
+	}
+
+	@media (min-width:1024px) {
+
+		#set table		{font-size:11px;}
+	}
+
+	@media (min-width:1600px) {
+
+		#set,
+		#hnt			{width:480px}
+		#box,
+		#txt			{right:480px}
+	}
+
+		.legend			{padding:1.5em 0.5em; border-bottom:1px #eee solid;}
+
+	</style>
+
+	<script src="qrcode.min.js"></script>
+
+</head>
+<body>
+
+<div id="box"></div>
+
+<div id="set">
+
+<a id="op1" class="opt" href="#">Show settings</a>
+<a id="op2" class="opt" href="#">Hide settings</a>
+
+<div class="legend">
+
+	<h3>QRCODE SETTINGS</h3>
+
+</div>
+
+<table><tr><th>
+
+<label for="in1">Dimension</label></th><td><input
+	id="in1" type="number" value="256" min="256" max="61440" step="64"/></td></tr><tr><th>
+
+<label for="in2">Padding</label></th><td><input
+	id="in2" type="number" value="4" min="0" max="10"/></td></tr><tr><th>
+
+<label for="in3">PATTERN</label></th><td><select
+	id="in3">
+	<option value="-1" selected="selected">(AUTO)</option>
+	<option value="0" >TYPE 0</option>
+	<option value="1" >TYPE 1</option>
+	<option value="2" >TYPE 2</option>
+	<option value="3" >TYPE 3</option>
+	<option value="4" >TYPE 4</option>
+	<option value="5" >TYPE 5</option>
+	<option value="6" >TYPE 6</option>
+	<option value="7" >TYPE 7</option>
+</select></td></tr><tr><th>
+
+<label for="in4">ECL</label></th><td><select
+	id="in4" size="4">
+	<option value="L">LOW</option>
+	<option value="M" selected="selected">MEDIUM</option>
+	<option value="Q">QUARTILE</option>
+	<option value="H">HIGH</option>
+</select></td></tr><tr><th>
+
+<label for="in5">Boost ECL</label></th><td><input
+	id="in5" type="checkbox" checked="checked"/></td></tr><tr><th>
+
+<label for="in6">Faces</label></th><td><input
+	id="in6" type="color" value="#000000"/></td></tr><tr><th>
+
+<label for="in7">Background color</label></th><td><input
+	id="in7" type="color" value="#f2f4f8"/></td></tr><tr><th>
+
+<label for="in8">Background opaque</label></th><td><input
+	id="in8" type="checkbox"/></td></tr><tr><th>
+
+<label for="in9">Optimized SVG SIZE</label></th><td><input
+	id="in9" type="checkbox" checked="checked"/></td></tr></table>
+
+</div>
+
+<div id="txt"><textarea id="msg"></textarea></div>
+
+<div id="hnt"><pre id="res"></pre></div>
+
+
+<script>
+
+	'use strict';
+
+	(function() {
+
+	/**
+		This script is not optimized
+	*/
+
+		var
+		box = document.getElementById('box'),
+		txt = document.getElementById('msg'),
+		res = document.getElementById('res'),
+
+		set = document.getElementById('set'),
+		op1 = document.getElementById('op1'),
+		op2 = document.getElementById('op2'),
+
+		in1 = document.getElementById('in1'),
+		in2 = document.getElementById('in2'),
+		in3 = document.getElementById('in3'),
+		in4 = document.getElementById('in4'),
+		in5 = document.getElementById('in5'),
+		in6 = document.getElementById('in6'),
+		in7 = document.getElementById('in7'),
+		in8 = document.getElementById('in8'),
+		in9 = document.getElementById('in9'),
+
+		current = function( o ) {
+
+				o._value = o.value;
+			},
+
+		updated = function( o ) {
+
+				return o._value == o.value;
+			},
+
+		clear = function( o ) {
+
+				while( o.childNodes[ 0 ] ) {
+
+					o.removeChild( o.childNodes[ 0 ] );
+				}
+			},
+
+		hint = function( d ) {
+
+				var
+				c = 0,
+				s = [];
+
+				/* beautify: remove default values */
+				if( 256  == d.dim ) delete d.dim;
+				if(   4  == d.pad ) delete d.pad;
+				if(  -1  == d.mtx ) delete d.mtx;
+				if(  'M' == d.ecl ) delete d.ecl;
+				if(   1  == d.ecb ) delete d.ecb;
+				if(   0  == d.pal[ 1 ] ) delete d.pal.pop();
+				if(   d.pal[ 0 ] == '#000000' && !d.pal[ 1 ] ) delete d.pal;
+				if(   0  == d.vrb ) delete d.vrb;
+
+				for( var k in d ) {
+
+					var
+					v = d[ k ];
+
+					if( 1 * v == v )
+					v = '  <i class="num">' + v + '</i>';
+
+					else if ( Array == v.constructor )
+					v = '[<i class="clr">"<i>' + v.join('</i>"</i>, <i class="clr">"<i>') + '</i>"</i>]';
+
+					else
+					v = ' <i class="txt">"<i>' + v + '</i>"</i>';
+
+					s.push( (s.length ? ',' : ' ') + '<b class="key">' + k + '</b> : ' + v );
+					c++;
+				}
+
+				//if( 1 == c )	else
+				res.innerHTML = '<b class="obj"><b>QRCode</b>(</b>'
+					+ (( 1 == c )
+					? '<i class="txt">"<i>' + d.msg + '</i>"</i>'
+					: '{\n\n    ' + s.join('\n    ') + '\n\n}')
+					+ '<b class="obj">)</b>;\n'
+					+ '\n\n/**\n\n     Source code and documentation:\n     <a href="https://github.com/datalog/qrcode-svg">https://github.com/datalog/qrcode-svg</a>\n\n*/\n\n\n';
+
+		},
+
+		download = function( d ) {
+
+
+			/**
+				ATTN!
+				We are going to download "WHAT WAS RENDERED" by browser
+				not "WHAT WAS GENERATED" by qrcode.js
+			*/
+
+			function replace( d, r ) { 
+
+				return d.replace( new RegExp( Object.keys( r ).join('|'), 'gi'), function( m ) {
+
+					return r[ m ];
+				}); 
+			} 
+
+			var
+			d = '<!--\n\nhttps://github.com/datalog/qrcode-svg\n\n-->' + replace( d, {
+
+				/* removing useless spaces */
+				 'M '	: 'M'
+				,' M '	: 'M'
+				,' V '	: 'V'
+				,' v '	: 'v'
+				,' H '	: 'H'
+				,' h '	: 'h'
+				,' Z'	: 'Z'			
+				,' z'	: 'z'
+				,' />'	: '/>'
+
+				,'></path>': '/>'
+				,'svg xmlns="http://www.w3.org/2000/svg"':'svg'
+			}),
+
+			n = 'qrcode-' + replace( new Date().toISOString().slice( 0, 19 ), {
+
+	 			 ':'	: ''
+	 			,'-'	: ''
+	 			,'T'	: '-'
+
+			}) + '.svg',
+
+			b = new Blob( [ d ], { type:'image/svg+xml'} );
+
+			if( window.navigator.msSaveOrOpenBlob ) {
+
+				window.navigator.msSaveOrOpenBlob( b, n );
+
+			} else {
+
+				var
+				a = document.createElement("a"),
+				u = URL.createObjectURL( b );
+
+				a.href = u;
+				a.download = n;
+
+				document.body.appendChild( a );
+				a.click();
+
+				setTimeout( function() {
+
+					document.body.removeChild( a );
+					window.URL.revokeObjectURL( u );
+
+				}, 0); 
+			}
+
+			return false;
+		};
+
+		op1.onclick = function() {
+
+					set.className = 'show';
+					return false;
+		};
+
+		op2.onclick = function() {
+
+					set.className = 'hide';
+					return false;
+		};
+
+		in1.onchange =
+		in2.onchange =
+		in3.onchange =
+		in4.onchange =
+		in5.onchange =
+		in6.onchange =
+		in8.onchange =
+		in9.onchange = function() {
+
+					box.update();
+			};
+
+		in7.onchange = function() {
+
+					in8.checked = true;
+					box.update();
+			};
+
+		txt.onkeyup = function() {
+
+					if( updated( txt ) ) return;
+
+					box.update();
+					current( txt );
+			};
+
+		box.update = function() {
+
+					clear( box );
+
+					var
+					time = new Date(),
+					data = {
+
+						 msg  :   txt.value
+						,dim  :   in1.value | 0
+						,pad  :   in2.value | 0
+						,mtx  :   in3.value
+						,ecl  :   in4.value
+						,ecb  :   in5.checked | 0
+						,pal  : [ in6.value, in8.checked | 0 && in7.value ]
+						,vrb  : ( in9.checked ) ? 0 : 1
+					};
+
+					box.appendChild( QRCode( data ) )
+
+						.onclick = function() {
+
+							return download( box.innerHTML );
+						};
+
+					console.log('QRCode generation time: ' + ( new Date() - time ) + ' ms');
+
+					hint( data );
+			};
+
+		txt.value = [
+				 'Your message here'
+				,'https://github.com/datalog/qrcode-svg'
+				,'Pure javascript QRCode generator'
+				,'Type here...'
+				,'This is QRCode'
+				,'Abyssus abyssum invocat'
+				,'Amor non est medicabilis herbis'
+				,'Nulla dies sine linea'
+				,'Cogitations poenam nemo patitur'
+				,'Verbaque praevisam rem non invita sequentur'
+			][ ( Math.random() * 10 ) | 0 ];
+
+		current( txt );
+		box.update();
+		txt.focus();
+	})();
+
+</script>
+
+
+</body>
+</html>
