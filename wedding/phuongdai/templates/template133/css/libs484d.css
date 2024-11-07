@@ -6692,7 +6692,7 @@ fieldset:disabled .btn {
     --bs-aspect-ratio: 56.25%;
 }
 .ratio-9x16 {
-    --bs-aspect-ratio: 177.78%;
+    --bs-aspect-ratio: 100%;
 }
 .ratio-21x9 {
     --bs-aspect-ratio: 42.8571428571%;
