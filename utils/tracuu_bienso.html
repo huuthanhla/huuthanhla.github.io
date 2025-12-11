@@ -159,6 +159,13 @@
 <div class="container">
     <h1>Tra Cứu Biển Số Xe</h1>
 
+    <div id="result">
+        <div class="result-title" id="resTitle">Kết quả</div>
+        <div class="result-value" id="resContent">--</div>
+    </div>
+
+    <div class="divider"></div>
+
     <div class="input-group">
         <label for="plateNumber">Nhập đầu số biển xe (Ví dụ: 29)</label>
         <div class="search-box">
@@ -175,11 +182,6 @@
             <input type="text" id="provinceName" placeholder="Ví dụ: Ha Noi..." onkeypress="handleEnter(event, 'btnName')">
             <button id="btnName" onclick="searchByName()">Tra cứu</button>
         </div>
-    </div>
-
-    <div id="result">
-        <div class="result-title" id="resTitle">Kết quả</div>
-        <div class="result-value" id="resContent">--</div>
     </div>
 </div>
 
