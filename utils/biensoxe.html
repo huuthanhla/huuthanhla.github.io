@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Biển Số Xe</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden; /* Để bo góc hoạt động tốt */
+            display: flex;
+            flex-direction: column;
+            height: 85vh; /* Chiều cao cố định để scroll bên trong */
+        }
+
+        /* --- HEADER & SEARCH --- */
+        .header-section {
+            padding: 20px 20px 15px 20px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 10;
+        }
+
+        h1 {
+            margin: 0 0 15px 0;
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px 12px 40px; /* Padding trái lớn để chứa icon */
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.2s;
+            background-color: #f9fafb;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        /* --- LIST CONTENT --- */
+        .list-container {
+            flex: 1; /* Chiếm phần còn lại */
+            overflow-y: auto; /* Cuộn dọc */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background-color: #f9fafb;
+            color: #4b5563;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            padding: 12px 20px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid var(--border-color);
+            z-index: 5;
+        }
+
+        tbody td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+        /* --- BADGES --- */
+        .badge {
+            display: inline-block;
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-right: 6px;
+            margin-bottom: 4px;
+            border: 1px solid #dbeafe;
+        }
+
+        .province-name {
+            font-weight: 600;
+            color: #374151;
+            font-size: 1rem;
+        }
+
+        /* --- EMPTY STATE --- */
+        .no-result {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+        
+        .no-result-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            body { padding: 0; }
+            .container { 
+                height: 100vh; 
+                max-width: 100%; 
+                border-radius: 0; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-section">
+        <h1>Biển Số Xe Toàn Quốc</h1>
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Tìm theo đầu số (29) hoặc tên (Ha Noi)..." onkeyup="filterTable()">
+        </div>
+    </div>
+
+    <div class="list-container">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th width="40%">Đầu số</th>
+                    <th>Tỉnh / Thành phố</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Dữ liệu
+    const database = [
+        { codes: [11], name: "Cao Bằng" },
+        { codes: [12], name: "Lạng Sơn" },
+        { codes: [14], name: "Quảng Ninh" },
+        { codes: [15, 16], name: "Hải Phòng" },
+        { codes: [17], name: "Thái Bình" },
+        { codes: [18], name: "Nam Định" },
+        { codes: [19], name: "Phú Thọ" },
+        { codes: [20], name: "Thái Nguyên" },
+        { codes: [21], name: "Yên Bái" },
+        { codes: [22], name: "Tuyên Quang" },
+        { codes: [23], name: "Hà Giang" },
+        { codes: [24], name: "Lào Cai" },
+        { codes: [25], name: "Lai Châu" },
+        { codes: [26], name: "Sơn La" },
+        { codes: [27], name: "Điện Biên" },
+        { codes: [28], name: "Hòa Bình" },
+        { codes: [29, 30, 31, 32, 33, 40], name: "Hà Nội" },
+        { codes: [34], name: "Hải Dương" },
+        { codes: [35], name: "Ninh Bình" },
+        { codes: [36], name: "Thanh Hóa" },
+        { codes: [37], name: "Nghệ An" },
+        { codes: [38], name: "Hà Tĩnh" },
+        { codes: [43], name: "TP. Đà Nẵng" },
+        { codes: [47], name: "Đắk Lắk" },
+        { codes: [48], name: "Đắk Nông" },
+        { codes: [49], name: "Lâm Đồng" },
+        { codes: [41, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59], name: "TP. Hồ Chí Minh" },
+        { codes: [39, 60], name: "Đồng Nai" },
+        { codes: [61], name: "Bình Dương" },
+        { codes: [62], name: "Long An" },
+        { codes: [63], name: "Tiền Giang" },
+        { codes: [64], name: "Vĩnh Long" },
+        { codes: [65], name: "Cần Thơ" },
+        { codes: [66], name: "Đồng Tháp" },
+        { codes: [67], name: "An Giang" },
+        { codes: [68], name: "Kiên Giang" },
+        { codes: [69], name: "Cà Mau" },
+        { codes: [70], name: "Tây Ninh" },
+        { codes: [71], name: "Bến Tre" },
+        { codes: [72], name: "Bà Rịa - Vũng Tàu" },
+        { codes: [73], name: "Quảng Bình" },
+        { codes: [74], name: "Quảng Trị" },
+        { codes: [75], name: "Thừa Thiên Huế" },
+        { codes: [76], name: "Quảng Ngãi" },
+        { codes: [77], name: "Bình Định" },
+        { codes: [78], name: "Phú Yên" },
+        { codes: [79], name: "Khánh Hòa" },
+        { codes: [80], name: "Cục CSGT ĐB-ĐS" },
+        { codes: [81], name: "Gia Lai" },
+        { codes: [82], name: "Kon Tum" },
+        { codes: [83], name: "Sóc Trăng" },
+        { codes: [84], name: "Trà Vinh" },
+        { codes: [85], name: "Ninh Thuận" },
+        { codes: [86], name: "Bình Thuận" },
+        { codes: [88], name: "Vĩnh Phúc" },
+        { codes: [89], name: "Hưng Yên" },
+        { codes: [90], name: "Hà Nam" },
+        { codes: [92], name: "Quảng Nam" },
+        { codes: [93], name: "Bình Phước" },
+        { codes: [94], name: "Bạc Liêu" },
+        { codes: [95], name: "Hậu Giang" },
+        { codes: [97], name: "Bắc Cạn" },
+        { codes: [98], name: "Bắc Giang" },
+        { codes: [99], name: "Bắc Ninh" }
+    ];
+
+    const tableBody = document.getElementById("tableBody");
+    const searchInput = document.getElementById("searchInput");
+
+    // Hàm bỏ dấu tiếng Việt
+    function removeAccents(str) {
+        return str.normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+                  .toLowerCase();
+    }
+
+    // Hàm render bảng
+    function renderTable(data) {
+        if (data.length === 0) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="2" class="no-result">
+                        <span class="no-result-icon">📭</span>
+                        Không tìm thấy kết quả phù hợp
+                    </td>
+                </tr>`;
+            return;
+        }
+
+        let html = '';
+        data.forEach(item => {
+            const codesHtml = item.codes.map(code => `<span class="badge">${code}</span>`).join('');
+            html += `
+                <tr>
+                    <td>${codesHtml}</td>
+                    <td><span class="province-name">${item.name}</span></td>
+                </tr>
+            `;
+        });
+        tableBody.innerHTML = html;
+    }
+
+    // Hàm lọc
+    function filterTable() {
+        const query = removeAccents(searchInput.value.trim());
+
+        // Nếu input rỗng, hiển thị toàn bộ
+        if (!query) {
+            renderTable(database);
+            return;
+        }
+
+        const filteredData = database.filter(item => {
+            // Tìm theo tên
+            const nameMatch = removeAccents(item.name).includes(query);
+            // Tìm theo số (chuyển mảng số thành chuỗi để tìm)
+            const codesString = item.codes.join(' '); 
+            const codeMatch = codesString.includes(query);
+
+            return nameMatch || codeMatch;
+        });
+
+        renderTable(filteredData);
+    }
+
+    // Khởi chạy lần đầu: hiển thị toàn bộ danh sách
+    renderTable(database);
+
+    // Focus vào ô tìm kiếm ngay khi mở trang
+    window.onload = function() {
+        searchInput.focus();
+    }
+</script>
+
+</body>
+</html>
