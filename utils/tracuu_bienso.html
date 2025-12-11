@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra Cứu Biển Số Xe</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+        }
+
+        button {
+            padding: 0 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        #result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: #eff6ff;
+            border-radius: 8px;
+            text-align: center;
+            display: none; /* Ẩn mặc định */
+            border: 1px solid #dbeafe;
+        }
+
+        #result.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-title {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #e5e7eb;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .divider span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--card-bg);
+            padding: 0 10px;
+            color: #9ca3af;
+            font-size: 0.8rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+            .result-value {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Tra Cứu Biển Số Xe</h1>
+
+    <div class="input-group">
+        <label for="plateNumber">Nhập đầu số biển xe (Ví dụ: 29)</label>
+        <div class="search-box">
+            <input type="number" id="plateNumber" placeholder="Nhập số..." onkeypress="handleEnter(event, 'btnNum')">
+            <button id="btnNum" onclick="searchByNumber()">Tra cứu</button>
+        </div>
+    </div>
+
+    <div class="divider"><span>HOẶC</span></div>
+
+    <div class="input-group">
+        <label for="provinceName">Nhập tên Tỉnh / Thành phố</label>
+        <div class="search-box">
+            <input type="text" id="provinceName" placeholder="Ví dụ: Ha Noi..." onkeypress="handleEnter(event, 'btnName')">
+            <button id="btnName" onclick="searchByName()">Tra cứu</button>
+        </div>
+    </div>
+
+    <div id="result">
+        <div class="result-title" id="resTitle">Kết quả</div>
+        <div class="result-value" id="resContent">--</div>
+    </div>
+</div>
+
+<script>
+    // Dữ liệu từ hình ảnh
+    const database = [
+        { codes: [11], name: "Cao Bằng" },
+        { codes: [12], name: "Lạng Sơn" },
+        { codes: [14], name: "Quảng Ninh" },
+        { codes: [15, 16], name: "Hải Phòng" },
+        { codes: [17], name: "Thái Bình" },
+        { codes: [18], name: "Nam Định" },
+        { codes: [19], name: "Phú Thọ" },
+        { codes: [20], name: "Thái Nguyên" },
+        { codes: [21], name: "Yên Bái" },
+        { codes: [22], name: "Tuyên Quang" },
+        { codes: [23], name: "Hà Giang" },
+        { codes: [24], name: "Lào Cai" },
+        { codes: [25], name: "Lai Châu" },
+        { codes: [26], name: "Sơn La" },
+        { codes: [27], name: "Điện Biên" },
+        { codes: [28], name: "Hòa Bình" },
+        { codes: [29, 30, 31, 32, 33, 40], name: "Hà Nội" },
+        { codes: [34], name: "Hải Dương" },
+        { codes: [35], name: "Ninh Bình" },
+        { codes: [36], name: "Thanh Hóa" },
+        { codes: [37], name: "Nghệ An" },
+        { codes: [38], name: "Hà Tĩnh" },
+        { codes: [43], name: "TP. Đà Nẵng" },
+        { codes: [47], name: "Đắk Lắk" },
+        { codes: [48], name: "Đắk Nông" },
+        { codes: [49], name: "Lâm Đồng" },
+        { codes: [41, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59], name: "TP. Hồ Chí Minh" },
+        { codes: [39, 60], name: "Đồng Nai" },
+        { codes: [61], name: "Bình Dương" },
+        { codes: [62], name: "Long An" },
+        { codes: [63], name: "Tiền Giang" },
+        { codes: [64], name: "Vĩnh Long" },
+        { codes: [65], name: "Cần Thơ" },
+        { codes: [66], name: "Đồng Tháp" },
+        { codes: [67], name: "An Giang" },
+        { codes: [68], name: "Kiên Giang" },
+        { codes: [69], name: "Cà Mau" },
+        { codes: [70], name: "Tây Ninh" },
+        { codes: [71], name: "Bến Tre" },
+        { codes: [72], name: "Bà Rịa - Vũng Tàu" },
+        { codes: [73], name: "Quảng Bình" },
+        { codes: [74], name: "Quảng Trị" },
+        { codes: [75], name: "Thừa Thiên Huế" },
+        { codes: [76], name: "Quảng Ngãi" },
+        { codes: [77], name: "Bình Định" },
+        { codes: [78], name: "Phú Yên" },
+        { codes: [79], name: "Khánh Hòa" },
+        { codes: [80], name: "Cục CSGT ĐB-ĐS" },
+        { codes: [81], name: "Gia Lai" },
+        { codes: [82], name: "Kon Tum" },
+        { codes: [83], name: "Sóc Trăng" },
+        { codes: [84], name: "Trà Vinh" },
+        { codes: [85], name: "Ninh Thuận" },
+        { codes: [86], name: "Bình Thuận" },
+        { codes: [88], name: "Vĩnh Phúc" },
+        { codes: [89], name: "Hưng Yên" },
+        { codes: [90], name: "Hà Nam" },
+        { codes: [92], name: "Quảng Nam" },
+        { codes: [93], name: "Bình Phước" },
+        { codes: [94], name: "Bạc Liêu" },
+        { codes: [95], name: "Hậu Giang" },
+        { codes: [97], name: "Bắc Cạn" },
+        { codes: [98], name: "Bắc Giang" },
+        { codes: [99], name: "Bắc Ninh" }
+    ];
+
+    const resultDiv = document.getElementById('result');
+    const resTitle = document.getElementById('resTitle');
+    const resContent = document.getElementById('resContent');
+
+    // Hàm chuẩn hóa tiếng Việt không dấu để tìm kiếm
+    function removeAccents(str) {
+        return str.normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, '')
+                  .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+                  .toLowerCase();
+    }
+
+    // Xử lý phím Enter
+    function handleEnter(e, btnId) {
+        if (e.key === 'Enter') {
+            document.getElementById(btnId).click();
+        }
+    }
+
+    function showResult(title, content, isError = false) {
+        resultDiv.classList.remove('active');
+        void resultDiv.offsetWidth; // Trigger reflow
+        
+        resTitle.innerText = title;
+        resContent.innerText = content;
+        resContent.style.color = isError ? '#ef4444' : '#2563eb';
+        
+        resultDiv.classList.add('active');
+    }
+
+    function searchByNumber() {
+        const inputVal = parseInt(document.getElementById('plateNumber').value);
+        if (!inputVal) {
+            showResult('Lỗi', 'Vui lòng nhập số biển', true);
+            return;
+        }
+
+        const found = database.find(item => item.codes.includes(inputVal));
+
+        if (found) {
+            showResult(`Biển số ${inputVal} thuộc về`, found.name);
+        } else {
+            showResult('Thông báo', `Không tìm thấy thông tin cho đầu số ${inputVal}`, true);
+        }
+    }
+
+    function searchByName() {
+        const inputVal = removeAccents(document.getElementById('provinceName').value.trim());
+        if (!inputVal) {
+            showResult('Lỗi', 'Vui lòng nhập tên tỉnh', true);
+            return;
+        }
+
+        // Tìm tất cả các tỉnh có tên chứa từ khóa
+        const foundItems = database.filter(item => removeAccents(item.name).includes(inputVal));
+
+        if (foundItems.length > 0) {
+            // Nếu tìm thấy 1 hoặc nhiều kết quả
+            const content = foundItems.map(item => `${item.name}: ${item.codes.join(', ')}`).join('<br>');
+            showResult('Kết quả tìm kiếm', '', false);
+            resContent.innerHTML = content; // Dùng innerHTML để xuống dòng
+        } else {
+            showResult('Thông báo', 'Không tìm thấy tỉnh/thành phố nào.', true);
+        }
+    }
+</script>
+
+</body>
+</html>
