@@ -1,0 +1,412 @@
+{
+    "thong_tin_chung":
+    {
+        "tieu_de": "PHẢ ĐỒ DÒNG HỌ LÃ HỮU",
+        "dia_chi": "Thôn Yên Liêu Thượng, xã Khánh Thịnh, huyện Yên Mô, tỉnh Ninh Bình",
+        "nguon_goc": "Tổ họ Lã đã có mặt tại đất Yên Liêu đến nay đời thứ 3 không ghi chép hết được. Theo gia phả để lại, tổ họ Lã là cụ Lã Hữu Giữa.",
+        "thuy_to": "LÃ HỮU GIỮA"
+    },
+    "cay_pha_he":
+    [
+        {
+            "doi": 1,
+            "ho_ten": "LÃ HỮU GIỮA",
+            "ten_khac": "LÃ HỮU TRỌNG",
+            "con_cai":
+            [
+                {
+                    "doi": 2,
+                    "ho_ten": "LÃ HỮU ĐIỀN",
+                    "vo": "DƯƠNG THỊ CỦA",
+                    "con_cai":
+                    [
+                        {
+                            "doi": 3,
+                            "ho_ten": "LÃ HỮU LÝ",
+                            "chuc_vu": "Thủ Hợp - Hậu Thần",
+                            "vo": "LÃ THỊ TẠI"
+                        },
+                        {
+                            "doi": 3,
+                            "ho_ten": "LÃ HỮU KHU",
+                            "con_cai":
+                            [
+                                {
+                                    "doi": 4,
+                                    "ho_ten": "LÃ HỮU VƯỢNG",
+                                    "vo":
+                                    [
+                                        "LÊ THỊ PHÚC",
+                                        "VŨ THỊ ĐÀO"
+                                    ],
+                                    "con_cai":
+                                    [
+                                        {
+                                            "doi": 5,
+                                            "ho_ten": "LÃ THỊ QUYNH"
+                                        },
+                                        {
+                                            "doi": 5,
+                                            "ho_ten": "LÃ HỮU KHẮC",
+                                            "vo":
+                                            [
+                                                "LÃ THỊ HAI",
+                                                "NGUYỄN THỊ SẮN"
+                                            ],
+                                            "con_cai":
+                                            [
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ HỮU NGHI"
+                                                },
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ THỊ PHẬN"
+                                                },
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ HỮU HỘI",
+                                                    "vo": "DƯƠNG THỊ DÂU",
+                                                    "con_cai":
+                                                    [
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ THỊ NHUẬN"
+                                                        },
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ THỊ ÓN"
+                                                        },
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ HỮU ĐÔNG",
+                                                            "vo":
+                                                            [
+                                                                "TRỊNH THỊ NHỚN",
+                                                                "PHẠM THỊ KIỆM"
+                                                            ],
+                                                            "con_cai":
+                                                            [
+                                                                {
+                                                                    "doi": 8,
+                                                                    "ho_ten": "LÃ HỮU THU",
+                                                                    "vo": "VŨ THỊ MỰU",
+                                                                    "con_cai":
+                                                                    [
+                                                                        {
+                                                                            "doi": 9,
+                                                                            "ho_ten": "LÃ HỮU XỨNG",
+                                                                            "vo": "LÃ THỊ THẢO",
+                                                                            "con_cai":
+                                                                            [
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ HỮU RY",
+                                                                                    "vo":
+                                                                                    [
+                                                                                        "TRỊNH THỊ LUẬT",
+                                                                                        "VŨ THỊ NGUYỆT"
+                                                                                    ],
+                                                                                    "con_cai":
+                                                                                    [
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ CHUNG"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ CÀI"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ NGA"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ NGẦN"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ VẢI"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ VÓC"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU TÍN"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU TRUYỀN",
+                                                                                            "vo": "ĐINH THỊ NHIÊN",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ ANH"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ PHƯƠNG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ HUYỀN"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ MY"
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ HỮU TẮC",
+                                                                                    "vo":
+                                                                                    [
+                                                                                        "DƯƠNG THỊ PHƯƠNG",
+                                                                                        "TRỊNH THỊ LOAN"
+                                                                                    ],
+                                                                                    "con_cai":
+                                                                                    [
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ TUẤT"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ CÚC"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ QUẾ"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ HUỆ"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU ĐỘ",
+                                                                                            "ghi_chu": "mất sớm"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ HỮU THOẠI",
+                                                                                    "vo":
+                                                                                    [
+                                                                                        "LÃ THỊ NHỊ",
+                                                                                        "LÃ THỊ BÚT"
+                                                                                    ],
+                                                                                    "con_cai":
+                                                                                    [
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU CƯỜNG",
+                                                                                            "vo": "DƯƠNG THỊ NHÀI",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU QUANG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU DÂNG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ DUNG"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ KIÊN"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU THỊNH",
+                                                                                            "vo": "DƯƠNG THỊ NGHIÊM",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU THÀNH",
+                                                                                                    "vo": "ĐINH THỊ HƯƠNG",
+                                                                                                    "con_cai":
+                                                                                                    [
+                                                                                                        {
+                                                                                                            "doi": 13,
+                                                                                                            "ho_ten": "LÃ THANH TÙNG"
+                                                                                                        }
+                                                                                                    ]
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ THỦY",
+                                                                                                    "chong": "PHẠM QUỐC ĐẠT",
+                                                                                                    "con_cai":
+                                                                                                    [
+                                                                                                        {
+                                                                                                            "doi": 13,
+                                                                                                            "ho_ten": "PHẠM MAI ANH"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "doi": 13,
+                                                                                                            "ho_ten": "PHẠM KHÁNH DƯƠNG"
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU VĂN",
+                                                                                            "vo": "LÃ THỊ BÍCH",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU BA"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU CẦN"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU THƠ",
+                                                                                            "vo": "LÃ THỊ NGA",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU TRƯỜNG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ THƯƠNG"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ THIỀU"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ THỊ THỤC"
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ THỊ TRÀ"
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ HỮU TỨ",
+                                                                                    "vo": "BÙI THỊ NHƯỜNG",
+                                                                                    "con_cai":
+                                                                                    [
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ HƯƠNG"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ NGUYỆT"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ TUYẾT"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ MAI"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU MINH",
+                                                                                            "vo": "HOÀNG THỊ HOA HỒNG",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ MINH THƯ"
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "doi": 9,
+                                                                            "ho_ten": "LÃ THỊ PHỤNG"
+                                                                        },
+                                                                        {
+                                                                            "doi": 9,
+                                                                            "ho_ten": "LÃ THỊ GÁI"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "doi": 8,
+                                                                    "ho_ten": "LÃ THỊ ĐƯỜNG"
+                                                                },
+                                                                {
+                                                                    "doi": 8,
+                                                                    "ho_ten": "LÃ THỊ TÍU"
+                                                                },
+                                                                {
+                                                                    "doi": 8,
+                                                                    "ho_ten": "LÃ HỮU NHO",
+                                                                    "vo":
+                                                                    [
+                                                                        "HOÀNG THỊ THƯ",
+                                                                        "DƯƠNG THỊ TÂM"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ HỮU TIẾT"
+                                                        },
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ HỮU HỌT"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ THỊ TỰ"
+                                                },
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ HỮU HẠNH",
+                                                    "vo": "TRỊNH THỊ NẺ"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
