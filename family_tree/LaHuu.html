@@ -10,8 +10,144 @@
         
         /* HEADER */
         header { text-align: center; border-bottom: 2px solid #ffd700; padding-bottom: 20px; margin-bottom: 20px; }
+
+
+        .header-title-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
         h1 { color: #d32f2f; margin: 0; text-transform: uppercase; }
         .subtitle { color: #666; font-style: italic; margin-top: 5px; }
+
+        p.note-address {
+            color: #d32f2f; /* Màu đỏ để nổi bật ghi chú */
+            font-weight: bold;
+            font-size: 0.95em;
+            margin-top: 0;
+        }
+
+        .btn-history {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .btn-history:hover {
+            background-color: #004d40;
+        }
+
+        .btn-history:before {
+            content: "📜"; 
+        }
+
+        /* Modal Styles */
+        .modal1 {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6); 
+            animation: fadeIn 0.3s;
+        }
+
+        .modal1-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            animation: slideIn 0.3s;
+        }
+
+        .modal1-header {
+            padding: 15px 20px;
+            background-color: #d32f2f;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal1-header h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ffd700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal1-body {
+            padding: 20px 30px;
+            line-height: 1.8;
+            font-size: 16px;
+            text-align: justify;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .history-text p {
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        
+        .highlight-text {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .modal1-footer {
+            padding: 10px 20px;
+            background-color: #eee;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            text-align: right;
+            font-style: italic;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
+        @keyframes slideIn { from {transform: translateY(-50px); opacity: 0} to {transform: translateY(0); opacity: 1} }
+        
+        @media screen and (max-width: 600px) {
+            .modal-content { width: 95%; margin: 10% auto; }
+            .header-title-row { flex-direction: column; }
+        }
         
         /* TOOLBAR (Load/Save JSON) */
         .toolbar { background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -61,137 +197,6 @@
         .btn-confirm { background: #d32f2f; color: white; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; }
 
         .no-result { text-align: center; color: #777; font-style: italic; }
-
-
-
-        .header-title-row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-
-        .btn-history {
-            background-color: #00796b;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: background 0.3s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .btn-history:hover {
-            background-color: #004d40;
-        }
-
-        .btn-history:before {
-            content: "📜"; 
-        }
-
-
-        /* Modal Styles */
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6); 
-            animation: fadeIn 0.3s;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 0;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 800px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            animation: slideIn 0.3s;
-        }
-
-        .modal-header {
-            padding: 15px 20px;
-            background-color: #d32f2f;
-            color: white;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-size: 1.2em;
-        }
-
-        .close {
-            color: white;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #ffd700;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-body {
-            padding: 20px 30px;
-            line-height: 1.8;
-            font-size: 16px;
-            text-align: justify;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-
-        .history-text p {
-            margin-bottom: 15px;
-            text-indent: 20px;
-        }
-        
-        .highlight-text {
-            color: #d32f2f;
-            font-weight: bold;
-        }
-
-        .modal-footer {
-            padding: 10px 20px;
-            background-color: #eee;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            text-align: right;
-            font-style: italic;
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
-        @keyframes slideIn { from {transform: translateY(-50px); opacity: 0} to {transform: translateY(0); opacity: 1} }
-        
-        @media screen and (max-width: 600px) {
-            .modal-content { width: 95%; margin: 10% auto; }
-            .header-title-row { flex-direction: column; }
-        }
     </style>
 </head>
 <body>
@@ -199,11 +204,11 @@
 <div class="container">
     <header>
         <div class="header-title-row">
-            <h1>Tra Cứu Phả Hệ Lã Hữu</h1>
+        <h1>Quản Lý Phả Hệ Lã Hữu</h1>
             <button class="btn-history" onclick="openModal()"></button>
         </div>
-        <p class="subtitle" id="oldAddress">Thôn Yên Liêu Thượng, xã Khánh Thịnh, huyện Yên Mô, tỉnh Ninh Bình</p>
-        <p class="note-address" id="newAddress"></p>
+        <p class="subtitle">Thôn Yên Liêu Thượng, xã Khánh Thịnh, huyện Yên Mô, Ninh Bình</p>
+        <p class="note-address" id="newAddress">(Sau sát nhập là: Thôn Yên Liêu Thượng, Xã Yên Mô, tỉnh Ninh Bình)</p>
     </header>
 
     <div class="toolbar">
@@ -220,6 +225,31 @@
 
     <div id="resultsArea">
         <p class="no-result">Nhập tên vào ô tìm kiếm để bắt đầu tra cứu và chỉnh sửa.</p>
+    </div>
+</div>
+
+
+<div id="historyModal" class="modal">
+    <div class="modal1-content">
+        <div class="modal1-header">
+            <h2>TRÍCH ĐOẠN GIA PHẢ HỌ LÃ HỮU</h2>
+            <span class="close" onclick="closeModal1()">&times;</span>
+        </div>
+        <div class="modal1-body">
+            <div class="history-text">
+                <p>Nguồn gốc họ Lã Hữu qua tìm hiểu văn bia, truyền khẩu và giấy tờ Gia Phả để lại thì khoảng cuối thế kỷ 16 thủy tổ họ Lã đã có mặt trên đất Yên Liêu, đến đời thứ 3 không ghi được hết. Theo gia phả để lại viễn tổ họ Lã là cụ <span class="highlight-text">Lã Hữu Giữa</span>, sinh hạ được cụ Lã Hữu Điền. Cụ Lã Hữu Điền sinh được 2 nam (Lã Hữu Lý, Lã Hữu Khu) và 2 nữ.</p>
+                <p>Sinh thời cụ <span class="highlight-text">Lã Hữu Lý</span> được Triều đình nhà Lê thụ phong chức Thủ Hợp, cụ lấy bà Lã Thị Tại, con cụ Lã Hữu Kim làm Tri phủ Đồng Tiêu. Ông bà sinh hạ được 9 người con, kinh tế gia đình khá giả.</p>
+                <p>Năm Mậu Tuất 1778 mất mùa, lại chiến tranh, dân tình thiếu thốn đói rét, một số người chết. Gia đình đã dành dụm cứu đói bà con trong thôn ấp, cùng lúc đó gia đình thường mua ván giúp đỡ những người chết không nơi nương tựa.</p>
+                <p>Năm 1788 Vua Quang Trung tấn công ra Bắc, lúc đó một số người chịu ơn vua Lê tìm cách chống lại. Một người tên Sáu người Hà Dương, Hà Trung, Thanh Hóa có âm mưu chống lại nhà Tây Sơn và lẩn trốn ở nhà bố vợ quê ngoại làng Yên Liêu để ẩn dật. Sau này quân Tây Sơn bắt được ở sông Vân Sàng, đồng thời về làng bắt thêm 3 người nữa để tra xét.</p>
+                <p>Cụ Lã Hữu Lý nguyên Thủ Hợp, ông Dương Thị Hoàn làm tri sự, ông Lã Đình Thức là lão thành, bị bắt đem đi tra khảo. Sau một thời gian hai ông được tha về rồi mất. Riêng cụ Lã Hữu Lý còn tại giam đến ngày 04/12/1789 (âm lịch). Cụ bị đánh đập và hy sinh trong nhà tù. Dân làng biết được tin này họp lại để nhớ ơn 3 cụ chịu đòn oan và đề nghị cấp trên minh xét.</p>
+                <p>Cụ Lê Đình Thức và cụ Dương Thị Hoàn vì dân mà chịu đòn tan được dân làng trông coi vợ con một đời. Còn cụ Lã Hữu Lý được dân làng, cấp trên xét là người có đức, có nhân, giúp người đói khổ, chịu đòn oan lúc cần chiến sự. Cụ được phong hai chữ: <span class="highlight-text">"Hậu Thần"</span>.</p>
+                <p>Hậu Thần làng sống Tết chết Giỗ.</p>
+                <p style="text-align: center; font-weight: bold; font-style: italic;">"Trải qua hơn 300 năm, Tổ tiên dòng họ Lã Hữu trồng đức trồng nhân, đời này qua đời khác uống nước nhớ nguồn!"</p>
+            </div>
+        </div>
+        <div class="modal1-footer">
+            Người lập phả đồ: Ông Lã Ngọc Anh (Lã Hữu Bang) F11 - Tháng 10/2017
+        </div>
     </div>
 </div>
 
@@ -273,32 +303,6 @@
     </div>
 </div>
 
-
-
-<div id="historyModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>TRÍCH ĐOẠN GIA PHẢ HỌ LÃ HỮU</h2>
-            <span class="close" onclick="closeModal()">&times;</span>
-        </div>
-        <div class="modal-body">
-            <div class="history-text">
-                <p>Nguồn gốc họ Lã Hữu qua tìm hiểu văn bia, truyền khẩu và giấy tờ Gia Phả để lại thì khoảng cuối thế kỷ 16 thủy tổ họ Lã đã có mặt trên đất Yên Liêu, đến đời thứ 3 không ghi được hết. Theo gia phả để lại viễn tổ họ Lã là cụ <span class="highlight-text">Lã Hữu Giữa</span>, sinh hạ được cụ Lã Hữu Điền. Cụ Lã Hữu Điền sinh được 2 nam (Lã Hữu Lý, Lã Hữu Khu) và 2 nữ.</p>
-                <p>Sinh thời cụ <span class="highlight-text">Lã Hữu Lý</span> được Triều đình nhà Lê thụ phong chức Thủ Hợp, cụ lấy bà Lã Thị Tại, con cụ Lã Hữu Kim làm Tri phủ Đồng Tiêu. Ông bà sinh hạ được 9 người con, kinh tế gia đình khá giả.</p>
-                <p>Năm Mậu Tuất 1778 mất mùa, lại chiến tranh, dân tình thiếu thốn đói rét, một số người chết. Gia đình đã dành dụm cứu đói bà con trong thôn ấp, cùng lúc đó gia đình thường mua ván giúp đỡ những người chết không nơi nương tựa.</p>
-                <p>Năm 1788 Vua Quang Trung tấn công ra Bắc, lúc đó một số người chịu ơn vua Lê tìm cách chống lại. Một người tên Sáu người Hà Dương, Hà Trung, Thanh Hóa có âm mưu chống lại nhà Tây Sơn và lẩn trốn ở nhà bố vợ quê ngoại làng Yên Liêu để ẩn dật. Sau này quân Tây Sơn bắt được ở sông Vân Sàng, đồng thời về làng bắt thêm 3 người nữa để tra xét.</p>
-                <p>Cụ Lã Hữu Lý nguyên Thủ Hợp, ông Dương Thị Hoàn làm tri sự, ông Lã Đình Thức là lão thành, bị bắt đem đi tra khảo. Sau một thời gian hai ông được tha về rồi mất. Riêng cụ Lã Hữu Lý còn tại giam đến ngày 04/12/1789 (âm lịch). Cụ bị đánh đập và hy sinh trong nhà tù. Dân làng biết được tin này họp lại để nhớ ơn 3 cụ chịu đòn oan và đề nghị cấp trên minh xét.</p>
-                <p>Cụ Lê Đình Thức và cụ Dương Thị Hoàn vì dân mà chịu đòn tan được dân làng trông coi vợ con một đời. Còn cụ Lã Hữu Lý được dân làng, cấp trên xét là người có đức, có nhân, giúp người đói khổ, chịu đòn oan lúc cần chiến sự. Cụ được phong hai chữ: <span class="highlight-text">"Hậu Thần"</span>.</p>
-                <p>Hậu Thần làng sống Tết chết Giỗ.</p>
-                <p style="text-align: center; font-weight: bold; font-style: italic;">"Trải qua hơn 300 năm, Tổ tiên dòng họ Lã Hữu trồng đức trồng nhân, đời này qua đời khác uống nước nhớ nguồn!"</p>
-            </div>
-        </div>
-        <div class="modal-footer">
-            Người lập phả đồ: Ông Lã Ngọc Anh (Lã Hữu Bang) F11 - Tháng 10/2017
-        </div>
-    </div>
-</div>
-
 <script>
     // --- 1. DỮ LIỆU GỐC (Backup) ---
     const defaultData = {
@@ -306,7 +310,6 @@
     {
         "tieu_de": "PHẢ ĐỒ DÒNG HỌ LÃ HỮU",
         "dia_chi": "Thôn Yên Liêu Thượng, xã Khánh Thịnh, huyện Yên Mô, tỉnh Ninh Bình",
-        "nguon_goc": "Tổ họ Lã đã có mặt tại đất Yên Liêu đến nay đời thứ 3 không ghi chép hết được. Theo gia phả để lại, tổ họ Lã là cụ Lã Hữu Giữa.",
         "thuy_to": "LÃ HỮU GIỮA"
     },
     "cay_pha_he":
@@ -941,11 +944,10 @@
 
     var modal = document.getElementById("historyModal");
     function openModal() { modal.style.display = "block"; }
-    function closeModal() { modal.style.display = "none"; }
+    function closeModal1() { modal.style.display = "none"; }
     window.onclick = function(event) {
         if (event.target == modal) { modal.style.display = "none"; }
     }
-
 </script>
 
 </body>
