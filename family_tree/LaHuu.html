@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Phả Hệ Dòng Họ Lã Hữu</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f4f9; padding: 20px; color: #333; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        /* HEADER */
+        header { text-align: center; border-bottom: 2px solid #ffd700; padding-bottom: 20px; margin-bottom: 20px; }
+        h1 { color: #d32f2f; margin: 0; text-transform: uppercase; }
+        .subtitle { color: #666; font-style: italic; margin-top: 5px; }
+        
+        /* TOOLBAR (Load/Save JSON) */
+        .toolbar { background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .toolbar input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .btn-tool { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; color: white; }
+        .btn-load { background: #0288d1; }
+        .btn-save { background: #2e7d32; }
+        .btn-tool:hover { opacity: 0.9; }
+
+        /* SEARCH BOX */
+        .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
+        .search-box input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; outline: none; }
+        .search-box input:focus { border-color: #d32f2f; }
+        .btn-search { padding: 12px 25px; background: #d32f2f; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .btn-search:hover { background: #b71c1c; }
+
+        /* RESULT LIST */
+        .result-list { list-style: none; padding: 0; }
+        .member-card { background: #fff8e1; border: 1px solid #ffe0b2; padding: 20px; margin-bottom: 15px; border-radius: 8px; position: relative; }
+        .member-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #d7ccc8; padding-bottom: 10px; margin-bottom: 10px; }
+        .member-name { font-size: 1.3em; font-weight: bold; color: #d32f2f; }
+        .member-gen { background: #5d4037; color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.85em; }
+        .member-info { margin: 8px 0; font-size: 1em; }
+        .label { font-weight: bold; color: #555; display: inline-block; min-width: 100px; }
+        
+        /* EDIT ACTIONS */
+        .actions { margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee; display: flex; gap: 10px; }
+        .btn-action { padding: 5px 10px; border: 1px solid #aaa; background: white; border-radius: 4px; cursor: pointer; font-size: 0.9em; }
+        .btn-action:hover { background: #eee; }
+        .btn-add-spouse { color: #e91e63; border-color: #e91e63; }
+        .btn-add-child { color: #009688; border-color: #009688; }
+        
+        /* CHILDREN LIST */
+        .children-list { background: white; padding: 10px; border-radius: 5px; border: 1px solid #eee; margin-top: 10px; }
+        .children-label { font-weight: bold; color: #d32f2f; display: block; margin-bottom: 5px; }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .modal-content { background: white; margin: 10% auto; padding: 20px; width: 400px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .modal-header h3 { margin: 0; color: #333; }
+        .close-modal { font-size: 24px; cursor: pointer; color: #999; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .modal-footer { text-align: right; margin-top: 20px; }
+        .btn-confirm { background: #d32f2f; color: white; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; }
+
+        .no-result { text-align: center; color: #777; font-style: italic; }
+
+
+
+        .header-title-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+
+        .btn-history {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .btn-history:hover {
+            background-color: #004d40;
+        }
+
+        .btn-history:before {
+            content: "📜"; 
+        }
+
+
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6); 
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            animation: slideIn 0.3s;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            background-color: #d32f2f;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ffd700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 20px 30px;
+            line-height: 1.8;
+            font-size: 16px;
+            text-align: justify;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .history-text p {
+            margin-bottom: 15px;
+            text-indent: 20px;
+        }
+        
+        .highlight-text {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .modal-footer {
+            padding: 10px 20px;
+            background-color: #eee;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            text-align: right;
+            font-style: italic;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
+        @keyframes slideIn { from {transform: translateY(-50px); opacity: 0} to {transform: translateY(0); opacity: 1} }
+        
+        @media screen and (max-width: 600px) {
+            .modal-content { width: 95%; margin: 10% auto; }
+            .header-title-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-title-row">
+            <h1>Tra Cứu Phả Hệ Lã Hữu</h1>
+            <button class="btn-history" onclick="openModal()"></button>
+        </div>
+        <p class="subtitle" id="oldAddress">Thôn Yên Liêu Thượng, xã Khánh Thịnh, huyện Yên Mô, tỉnh Ninh Bình</p>
+        <p class="note-address" id="newAddress"></p>
+    </header>
+
+    <div class="toolbar">
+        <label><b>Nguồn dữ liệu:</b></label>
+        <input type="text" id="jsonUrl" placeholder="Dán link JSON vào đây (để trống sẽ dùng dữ liệu gốc)">
+        <button class="btn-tool btn-load" onclick="loadDataFromUrl()">Import JSON</button>
+        <button class="btn-tool btn-save" onclick="downloadJSON()">Backup JSON</button>
+    </div>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Nhập tên thành viên cần tìm...">
+        <button class="btn-search" onclick="searchMember()">Tìm kiếm</button>
+    </div>
+
+    <div id="resultsArea">
+        <p class="no-result">Nhập tên vào ô tìm kiếm để bắt đầu tra cứu và chỉnh sửa.</p>
+    </div>
+</div>
+
+<div id="spouseModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Thêm Vợ/Chồng</h3>
+            <span class="close-modal" onclick="closeModal('spouseModal')">&times;</span>
+        </div>
+        <div class="form-group">
+            <label>Họ tên:</label>
+            <input type="text" id="spouseName">
+        </div>
+        <div class="form-group">
+            <label>Vai trò:</label>
+            <select id="spouseRole">
+                <option value="vo">Vợ</option>
+                <option value="chong">Chồng</option>
+            </select>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-confirm" onclick="confirmAddSpouse()">Lưu lại</button>
+        </div>
+    </div>
+</div>
+
+<div id="childModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Thêm Con</h3>
+            <span class="close-modal" onclick="closeModal('childModal')">&times;</span>
+        </div>
+        <div class="form-group">
+            <label>Họ tên con:</label>
+            <input type="text" id="childName">
+        </div>
+        <div class="form-group">
+            <label>Giới tính:</label>
+            <select id="childGender">
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Ghi chú (nếu có):</label>
+            <input type="text" id="childNote">
+        </div>
+        <div class="modal-footer">
+            <button class="btn-confirm" onclick="confirmAddChild()">Lưu lại</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="historyModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>TRÍCH ĐOẠN GIA PHẢ HỌ LÃ HỮU</h2>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="history-text">
+                <p>Nguồn gốc họ Lã Hữu qua tìm hiểu văn bia, truyền khẩu và giấy tờ Gia Phả để lại thì khoảng cuối thế kỷ 16 thủy tổ họ Lã đã có mặt trên đất Yên Liêu, đến đời thứ 3 không ghi được hết. Theo gia phả để lại viễn tổ họ Lã là cụ <span class="highlight-text">Lã Hữu Giữa</span>, sinh hạ được cụ Lã Hữu Điền. Cụ Lã Hữu Điền sinh được 2 nam (Lã Hữu Lý, Lã Hữu Khu) và 2 nữ.</p>
+                <p>Sinh thời cụ <span class="highlight-text">Lã Hữu Lý</span> được Triều đình nhà Lê thụ phong chức Thủ Hợp, cụ lấy bà Lã Thị Tại, con cụ Lã Hữu Kim làm Tri phủ Đồng Tiêu. Ông bà sinh hạ được 9 người con, kinh tế gia đình khá giả.</p>
+                <p>Năm Mậu Tuất 1778 mất mùa, lại chiến tranh, dân tình thiếu thốn đói rét, một số người chết. Gia đình đã dành dụm cứu đói bà con trong thôn ấp, cùng lúc đó gia đình thường mua ván giúp đỡ những người chết không nơi nương tựa.</p>
+                <p>Năm 1788 Vua Quang Trung tấn công ra Bắc, lúc đó một số người chịu ơn vua Lê tìm cách chống lại. Một người tên Sáu người Hà Dương, Hà Trung, Thanh Hóa có âm mưu chống lại nhà Tây Sơn và lẩn trốn ở nhà bố vợ quê ngoại làng Yên Liêu để ẩn dật. Sau này quân Tây Sơn bắt được ở sông Vân Sàng, đồng thời về làng bắt thêm 3 người nữa để tra xét.</p>
+                <p>Cụ Lã Hữu Lý nguyên Thủ Hợp, ông Dương Thị Hoàn làm tri sự, ông Lã Đình Thức là lão thành, bị bắt đem đi tra khảo. Sau một thời gian hai ông được tha về rồi mất. Riêng cụ Lã Hữu Lý còn tại giam đến ngày 04/12/1789 (âm lịch). Cụ bị đánh đập và hy sinh trong nhà tù. Dân làng biết được tin này họp lại để nhớ ơn 3 cụ chịu đòn oan và đề nghị cấp trên minh xét.</p>
+                <p>Cụ Lê Đình Thức và cụ Dương Thị Hoàn vì dân mà chịu đòn tan được dân làng trông coi vợ con một đời. Còn cụ Lã Hữu Lý được dân làng, cấp trên xét là người có đức, có nhân, giúp người đói khổ, chịu đòn oan lúc cần chiến sự. Cụ được phong hai chữ: <span class="highlight-text">"Hậu Thần"</span>.</p>
+                <p>Hậu Thần làng sống Tết chết Giỗ.</p>
+                <p style="text-align: center; font-weight: bold; font-style: italic;">"Trải qua hơn 300 năm, Tổ tiên dòng họ Lã Hữu trồng đức trồng nhân, đời này qua đời khác uống nước nhớ nguồn!"</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            Người lập phả đồ: Ông Lã Ngọc Anh (Lã Hữu Bang) F11 - Tháng 10/2017
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- 1. DỮ LIỆU GỐC (Backup) ---
+    const defaultData = {
+    "thong_tin_chung":
+    {
+        "tieu_de": "PHẢ ĐỒ DÒNG HỌ LÃ HỮU",
+        "dia_chi": "Thôn Yên Liêu Thượng, xã Khánh Thịnh, huyện Yên Mô, tỉnh Ninh Bình",
+        "nguon_goc": "Tổ họ Lã đã có mặt tại đất Yên Liêu đến nay đời thứ 3 không ghi chép hết được. Theo gia phả để lại, tổ họ Lã là cụ Lã Hữu Giữa.",
+        "thuy_to": "LÃ HỮU GIỮA"
+    },
+    "cay_pha_he":
+    [
+        {
+            "doi": 1,
+            "ho_ten": "LÃ HỮU GIỮA",
+            "ten_khac": "LÃ HỮU TRỌNG",
+            "con_cai":
+            [
+                {
+                    "doi": 2,
+                    "ho_ten": "LÃ HỮU ĐIỀN",
+                    "vo": "DƯƠNG THỊ CỦA",
+                    "con_cai":
+                    [
+                        {
+                            "doi": 3,
+                            "ho_ten": "LÃ HỮU LÝ",
+                            "chuc_vu": "Thủ Hợp - Hậu Thần",
+                            "vo": "LÃ THỊ TẠI"
+                        },
+                        {
+                            "doi": 3,
+                            "ho_ten": "LÃ HỮU KHU",
+                            "con_cai":
+                            [
+                                {
+                                    "doi": 4,
+                                    "ho_ten": "LÃ HỮU VƯỢNG",
+                                    "vo":
+                                    [
+                                        "LÊ THỊ PHÚC",
+                                        "VŨ THỊ ĐÀO"
+                                    ],
+                                    "con_cai":
+                                    [
+                                        {
+                                            "doi": 5,
+                                            "ho_ten": "LÃ THỊ QUYNH"
+                                        },
+                                        {
+                                            "doi": 5,
+                                            "ho_ten": "LÃ HỮU KHẮC",
+                                            "vo":
+                                            [
+                                                "LÃ THỊ HAI",
+                                                "NGUYỄN THỊ SẮN"
+                                            ],
+                                            "con_cai":
+                                            [
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ HỮU NGHI"
+                                                },
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ THỊ PHẬN"
+                                                },
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ HỮU HỘI",
+                                                    "vo": "DƯƠNG THỊ DÂU",
+                                                    "con_cai":
+                                                    [
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ THỊ NHUẬN"
+                                                        },
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ THỊ ÓN"
+                                                        },
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ HỮU ĐÔNG",
+                                                            "vo":
+                                                            [
+                                                                "TRỊNH THỊ NHỚN",
+                                                                "PHẠM THỊ KIỆM"
+                                                            ],
+                                                            "con_cai":
+                                                            [
+                                                                {
+                                                                    "doi": 8,
+                                                                    "ho_ten": "LÃ HỮU THU",
+                                                                    "vo": "VŨ THỊ MỰU",
+                                                                    "con_cai":
+                                                                    [
+                                                                        {
+                                                                            "doi": 9,
+                                                                            "ho_ten": "LÃ HỮU XỨNG",
+                                                                            "vo": "LÃ THỊ THẢO",
+                                                                            "con_cai":
+                                                                            [
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ HỮU RY",
+                                                                                    "vo":
+                                                                                    [
+                                                                                        "TRỊNH THỊ LUẬT",
+                                                                                        "VŨ THỊ NGUYỆT"
+                                                                                    ],
+                                                                                    "con_cai":
+                                                                                    [
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ CHUNG"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ CÀI"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ NGA"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ NGẦN"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ VẢI"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ VÓC"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU TÍN"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU TRUYỀN",
+                                                                                            "vo": "ĐINH THỊ NHIÊN",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ ANH"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ PHƯƠNG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ HUYỀN"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ MY"
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ HỮU TẮC",
+                                                                                    "vo":
+                                                                                    [
+                                                                                        "DƯƠNG THỊ PHƯƠNG",
+                                                                                        "TRỊNH THỊ LOAN"
+                                                                                    ],
+                                                                                    "con_cai":
+                                                                                    [
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ TUẤT"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ CÚC"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ QUẾ"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ HUỆ"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU ĐỘ",
+                                                                                            "ghi_chu": "mất sớm"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ HỮU THOẠI",
+                                                                                    "vo":
+                                                                                    [
+                                                                                        "LÃ THỊ NHỊ",
+                                                                                        "LÃ THỊ BÚT"
+                                                                                    ],
+                                                                                    "con_cai":
+                                                                                    [
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU CƯỜNG",
+                                                                                            "vo": "DƯƠNG THỊ NHÀI",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU QUANG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU DÂNG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ DUNG"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ KIÊN"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU THỊNH",
+                                                                                            "vo": "DƯƠNG THỊ NGHIÊM",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU THÀNH",
+                                                                                                    "vo": "ĐINH THỊ HƯƠNG",
+                                                                                                    "con_cai":
+                                                                                                    [
+                                                                                                        {
+                                                                                                            "doi": 13,
+                                                                                                            "ho_ten": "LÃ THANH TÙNG"
+                                                                                                        }
+                                                                                                    ]
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ THỦY",
+                                                                                                    "chong": "PHẠM QUỐC ĐẠT",
+                                                                                                    "con_cai":
+                                                                                                    [
+                                                                                                        {
+                                                                                                            "doi": 13,
+                                                                                                            "ho_ten": "PHẠM MAI ANH"
+                                                                                                        },
+                                                                                                        {
+                                                                                                            "doi": 13,
+                                                                                                            "ho_ten": "PHẠM KHÁNH DƯƠNG"
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU VĂN",
+                                                                                            "vo": "LÃ THỊ BÍCH",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU BA"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU CẦN"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU THƠ",
+                                                                                            "vo": "LÃ THỊ NGA",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ HỮU TRƯỜNG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ THƯƠNG"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ THIỀU"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ THỊ THỤC"
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ THỊ TRÀ"
+                                                                                },
+                                                                                {
+                                                                                    "doi": 10,
+                                                                                    "ho_ten": "LÃ HỮU TỨ",
+                                                                                    "vo": "BÙI THỊ NHƯỜNG",
+                                                                                    "con_cai":
+                                                                                    [
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ HƯƠNG"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ NGUYỆT"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ TUYẾT"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ THỊ MAI"
+                                                                                        },
+                                                                                        {
+                                                                                            "doi": 11,
+                                                                                            "ho_ten": "LÃ HỮU MINH",
+                                                                                            "vo": "HOÀNG THỊ HOA HỒNG",
+                                                                                            "con_cai":
+                                                                                            [
+                                                                                                {
+                                                                                                    "doi": 12,
+                                                                                                    "ho_ten": "LÃ THỊ MINH THƯ"
+                                                                                                }
+                                                                                            ]
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "doi": 9,
+                                                                            "ho_ten": "LÃ THỊ PHỤNG"
+                                                                        },
+                                                                        {
+                                                                            "doi": 9,
+                                                                            "ho_ten": "LÃ THỊ GÁI"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "doi": 8,
+                                                                    "ho_ten": "LÃ THỊ ĐƯỜNG"
+                                                                },
+                                                                {
+                                                                    "doi": 8,
+                                                                    "ho_ten": "LÃ THỊ TÍU"
+                                                                },
+                                                                {
+                                                                    "doi": 8,
+                                                                    "ho_ten": "LÃ HỮU NHO",
+                                                                    "vo":
+                                                                    [
+                                                                        "HOÀNG THỊ THƯ",
+                                                                        "DƯƠNG THỊ TÂM"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ HỮU TIẾT"
+                                                        },
+                                                        {
+                                                            "doi": 7,
+                                                            "ho_ten": "LÃ HỮU HỌT"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ THỊ TỰ"
+                                                },
+                                                {
+                                                    "doi": 6,
+                                                    "ho_ten": "LÃ HỮU HẠNH",
+                                                    "vo": "TRỊNH THỊ NẺ"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
+    // --- 2. QUẢN LÝ DỮ LIỆU ---
+    let genealogyData = JSON.parse(JSON.stringify(defaultData)); // Clone dữ liệu gốc
+    let flatMap = new Map(); // Lưu tham chiếu ID -> Object để chỉnh sửa nhanh
+    let currentEditId = null;
+
+    // Hàm đánh chỉ mục ID cho từng node để quản lý
+    function indexData(members, parentId = 'root') {
+        if (!members) return;
+        members.forEach((member, index) => {
+            // Tạo ID duy nhất nếu chưa có
+            if (!member._id) {
+                member._id = parentId + '_' + index + '_' + Math.random().toString(36).substr(2, 5);
+            }
+            flatMap.set(member._id, member);
+            
+            if (member.con_cai && member.con_cai.length > 0) {
+                indexData(member.con_cai, member._id);
+            }
+        });
+    }
+
+    // Khởi tạo
+    function init() {
+        flatMap.clear();
+        indexData(genealogyData.cay_pha_he);
+    }
+    init();
+
+    // --- 3. TÌM KIẾM VÀ HIỂN THỊ ---
+    function formatSpouseData(spouseData) {
+        if (!spouseData) return null;
+        if (Array.isArray(spouseData)) return spouseData.join(", ");
+        return spouseData;
+    }
+
+    function formatChildren(childrenArray) {
+        if (!childrenArray || childrenArray.length === 0) return null;
+        return childrenArray.map(child => child.ho_ten).join(", ");
+    }
+
+    function searchMember() {
+        const query = document.getElementById('searchInput').value.toLowerCase().trim();
+        const resultsArea = document.getElementById('resultsArea');
+        
+        if (!query) {
+            resultsArea.innerHTML = '<p class="no-result">Vui lòng nhập tên để tìm kiếm.</p>';
+            return;
+        }
+
+        const results = [];
+        flatMap.forEach(member => {
+            if (member.ho_ten.toLowerCase().includes(query)) {
+                results.push(member);
+            }
+        });
+
+        if (results.length === 0) {
+            resultsArea.innerHTML = '<p class="no-result">Không tìm thấy thành viên nào có tên "' + query + '".</p>';
+        } else {
+            let html = '<ul class="result-list">';
+            results.forEach(mem => {
+                let spouseHtml = '';
+                if (mem.vo) spouseHtml = `<div class="member-info"><span class="label">Vợ:</span> ${formatSpouseData(mem.vo)}</div>`;
+                else if (mem.chong) spouseHtml = `<div class="member-info"><span class="label">Chồng:</span> ${formatSpouseData(mem.chong)}</div>`;
+                else spouseHtml = `<div class="member-info"><span class="label">Vợ/Chồng:</span> <span style="color:#999; font-style:italic">Chưa cập nhật</span></div>`;
+
+                const childrenStr = formatChildren(mem.con_cai);
+                const childrenHtml = childrenStr 
+                    ? `<div class="children-list"><span class="children-label">Các con:</span>${childrenStr}</div>` 
+                    : '';
+
+                html += `
+                    <li class="member-card">
+                        <div class="member-header">
+                            <span class="member-name">${mem.ho_ten}</span>
+                            <span class="member-gen">Đời thứ ${mem.doi}</span>
+                        </div>
+                        ${mem.ten_khac ? `<div class="member-info"><span class="label">Tên khác:</span> ${mem.ten_khac}</div>` : ''}
+                        ${mem.chuc_vu ? `<div class="member-info"><span class="label">Chức vụ:</span> ${mem.chuc_vu}</div>` : ''}
+                        ${spouseHtml}
+                        ${mem.ghi_chu ? `<div class="member-info"><span class="label">Ghi chú:</span> ${mem.ghi_chu}</div>` : ''}
+                        ${childrenHtml}
+
+                        <div class="actions">
+                            <button class="btn-action btn-add-spouse" onclick="openSpouseModal('${mem._id}')">+ Thêm Vợ/Chồng</button>
+                            <button class="btn-action btn-add-child" onclick="openChildModal('${mem._id}')">+ Thêm Con</button>
+                        </div>
+                    </li>
+                `;
+            });
+            html += '</ul>';
+            resultsArea.innerHTML = html;
+        }
+    }
+
+    // Hỗ trợ ấn Enter để tìm
+    document.getElementById("searchInput").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") searchMember();
+    });
+
+    // --- 4. CHỨC NĂNG CHỈNH SỬA (Thêm Vợ/Chồng/Con) ---
+    function openSpouseModal(id) {
+        currentEditId = id;
+        document.getElementById('spouseName').value = '';
+        document.getElementById('spouseModal').style.display = 'block';
+    }
+
+    function openChildModal(id) {
+        currentEditId = id;
+        document.getElementById('childName').value = '';
+        document.getElementById('childNote').value = '';
+        document.getElementById('childModal').style.display = 'block';
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+        currentEditId = null;
+    }
+
+    function confirmAddSpouse() {
+        if (!currentEditId) return;
+        const name = document.getElementById('spouseName').value.trim();
+        const role = document.getElementById('spouseRole').value; // 'vo' hoặc 'chong'
+
+        if (!name) { alert("Vui lòng nhập tên!"); return; }
+
+        const member = flatMap.get(currentEditId);
+        if (member) {
+            // Logic thêm vợ/chồng: Nếu đã có thì chuyển thành mảng hoặc thêm vào mảng
+            if (!member[role]) {
+                member[role] = name;
+            } else {
+                if (Array.isArray(member[role])) {
+                    member[role].push(name);
+                } else {
+                    member[role] = [member[role], name];
+                }
+            }
+            alert("Đã thêm thành công!");
+            closeModal('spouseModal');
+            searchMember(); // Tải lại kết quả để thấy thay đổi
+        }
+    }
+
+    function confirmAddChild() {
+        if (!currentEditId) return;
+        const name = document.getElementById('childName').value.trim();
+        const gender = document.getElementById('childGender').value;
+        const note = document.getElementById('childNote').value.trim();
+
+        if (!name) { alert("Vui lòng nhập tên con!"); return; }
+
+        const parent = flatMap.get(currentEditId);
+        if (parent) {
+            if (!parent.con_cai) parent.con_cai = [];
+            
+            const newChild = {
+                "doi": parent.doi + 1,
+                "ho_ten": name,
+                "gioi_tinh": gender
+            };
+            if (note) newChild.ghi_chu = note;
+
+            parent.con_cai.push(newChild);
+
+            // Re-index để con mới có ID
+            init(); 
+            
+            alert("Đã thêm con thành công!");
+            closeModal('childModal');
+            searchMember();
+        }
+    }
+
+    // --- 5. TẢI VÀ LƯU FILE JSON ---
+    async function loadDataFromUrl() {
+        const url = document.getElementById('jsonUrl').value.trim();
+        if (!url) {
+            alert("Đang sử dụng dữ liệu mặc định.");
+            genealogyData = JSON.parse(JSON.stringify(defaultData));
+            init();
+            return;
+        }
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error("Không thể tải file.");
+            const jsonData = await response.json();
+            genealogyData = jsonData;
+            init();
+            alert("Đã tải dữ liệu mới thành công!");
+            document.getElementById('resultsArea').innerHTML = '<p class="no-result">Dữ liệu đã cập nhật. Hãy tìm kiếm lại.</p>';
+        } catch (error) {
+            alert("Lỗi: " + error.message + "\nHãy đảm bảo link là Raw JSON (ví dụ từ GitHub Raw).");
+        }
+    }
+
+    function downloadJSON() {
+        // Xóa các trường _id tạm thời trước khi lưu để file sạch đẹp
+        const cleanData = JSON.parse(JSON.stringify(genealogyData));
+        function removeTempIds(list) {
+            if(!list) return;
+            list.forEach(item => {
+                delete item._id;
+                if (item.con_cai) removeTempIds(item.con_cai);
+            });
+        }
+        removeTempIds(cleanData.cay_pha_he);
+
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(cleanData, null, 4));
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "GiaPha_LaHuu_CapNhat.json");
+        document.body.appendChild(downloadAnchorNode); // Firefox required
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+    }
+
+    // Đóng modal khi click ra ngoài
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = "none";
+        }
+    }
+
+    var modal = document.getElementById("historyModal");
+    function openModal() { modal.style.display = "block"; }
+    function closeModal() { modal.style.display = "none"; }
+    window.onclick = function(event) {
+        if (event.target == modal) { modal.style.display = "none"; }
+    }
+
+</script>
+
+</body>
+</html>
