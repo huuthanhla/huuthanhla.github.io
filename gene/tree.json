@@ -1,172 +1,546 @@
 {
-    "thong_tin_chung": {
+    "thong_tin_chung":
+    {
         "tieu_de": "PHẢ ĐỒ DÒNG HỌ LÃ HỮU",
         "dia_chi": "Thôn Yên Liêu Thượng, xã Khánh Thịnh, huyện Yên Mô, tỉnh Ninh Bình",
         "dia_chi_moi": "Sau sát nhập: Thôn Yên Liêu Thượng, Xã Yên Mô, tỉnh Ninh Bình",
         "thuy_to": "LÃ HỮU GIỮA"
     },
-    "genealogy": [
+    "genealogy":
+    [
         {
-            "generation": 1,
+            "gen": 1,
             "ho_ten": "LÃ HỮU GIỮA",
             "ten_khac": "LÃ HỮU TRỌNG",
-            "children": [
+            "children":
+            [
                 {
-                    "generation": 2,
+                    "gen": 2,
                     "ho_ten": "LÃ HỮU ĐIỀN",
                     "vo": "DƯƠNG THỊ CỦA",
-                    "children": [
+                    "children":
+                    [
                         {
-                            "generation": 3,
+                            "gen": 3,
                             "ho_ten": "LÃ HỮU LÝ",
-                            "ngay_sinh": "",
                             "death": "04/12/1789",
                             "chuc_vu": "Thủ Hợp - Hậu Thần",
                             "vo": "LÃ THỊ TẠI",
-                            "children": [
+                            "children":
+                            [
                                 {
-                                    "generation": 4,
-                                    "ho_ten": "LÃ HỮU VƯỢNG",
-                                    "vo": ["LÊ THỊ PHÚC", "VŨ THỊ ĐÀO"],
-                                    "children": [
-                                        { "generation": 5, "ho_ten": "LÃ THỊ QUYNH" },
+                                    "gen": 4,
+                                    "ho_ten": "LÃ HỮU CHẤN",
+                                    "vo":
+                                    [
+                                        "DƯƠNG THỊ ĐOÀN",
+                                        "DƯƠNG THỊ LÂN"
+                                    ],
+                                    "children":
+                                    [
                                         {
-                                            "generation": 5, "ho_ten": "LÃ HỮU KHẮC", "vo": ["LÃ THỊ HAI", "NGUYỄN THỊ SẮN"],
-                                            "children": [
-                                                { "generation": 6, "ho_ten": "LÃ HỮU NGHI" },
-                                                { "generation": 6, "ho_ten": "LÃ THỊ PHẬN" },
+                                            "gen": 5,
+                                            "ho_ten": "LÃ THỊ THIA",
+                                            "gioi_tinh": "Nữ"
+                                        },
+                                        {
+                                            "gen": 5,
+                                            "ho_ten": "LÃ THỊ TÙY",
+                                            "gioi_tinh": "Nữ"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ HỮU CHI",
+                                    "vo":
+                                    [
+                                        "NGUYỄN THỊ HÀO"
+                                    ],
+                                    "children":
+                                    [
+                                        {
+                                            "gen": 5,
+                                            "ho_ten": "LÃ HỮU GƯƠNG",
+                                            "children":
+                                            [
                                                 {
-                                                    "generation": 6, "ho_ten": "LÃ HỮU HỘI", "vo": "DƯƠNG THỊ DÂU",
-                                                    "children": [
-                                                        { "generation": 7, "ho_ten": "LÃ THỊ NHUẬN" },
-                                                        { "generation": 7, "ho_ten": "LÃ THỊ ÓN" },
+                                                    "gen": 6,
+                                                    "ho_ten": "LÃ HỮU HOẠT",
+                                                    "children":
+                                                    []
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "gen": 5,
+                                            "ho_ten": "LÃ HỮU BÙI"
+                                        },
+                                        {
+                                            "gen": 5,
+                                            "ho_ten": "LÃ THỊ TÙY",
+                                            "gioi_tinh": "Nữ"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ THỊ PHẤN",
+                                    "gioi_tinh": "Nữ"
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ THỊ QUYNH",
+                                    "gioi_tinh": "Nữ"
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ HỮU VƯỢNG",
+                                    "vo":
+                                    [
+                                        "LÊ THỊ PHÚC",
+                                        "VŨ THỊ ĐÀO"
+                                    ],
+                                    "children":
+                                    [
+                                        {
+                                            "gen": 5,
+                                            "ho_ten": "LÃ THỊ QUYNH"
+                                        },
+                                        {
+                                            "gen": 5,
+                                            "ho_ten": "LÃ HỮU KHẮC",
+                                            "vo":
+                                            [
+                                                "LÃ THỊ HAI",
+                                                "NGUYỄN THỊ SẮN"
+                                            ],
+                                            "children":
+                                            [
+                                                {
+                                                    "gen": 6,
+                                                    "ho_ten": "LÃ HỮU NGHI"
+                                                },
+                                                {
+                                                    "gen": 6,
+                                                    "ho_ten": "LÃ THỊ PHẬN"
+                                                },
+                                                {
+                                                    "gen": 6,
+                                                    "ho_ten": "LÃ HỮU HỘI",
+                                                    "vo": "DƯƠNG THỊ DÂU",
+                                                    "children":
+                                                    [
                                                         {
-                                                            "generation": 7, "ho_ten": "LÃ HỮU ĐÔNG", "vo": ["TRỊNH THỊ NHỚN", "PHẠM THỊ KIỆM"],
-                                                            "children": [
+                                                            "gen": 7,
+                                                            "ho_ten": "LÃ THỊ NHUẬN"
+                                                        },
+                                                        {
+                                                            "gen": 7,
+                                                            "ho_ten": "LÃ THỊ ÓN"
+                                                        },
+                                                        {
+                                                            "gen": 7,
+                                                            "ho_ten": "LÃ HỮU ĐÔNG",
+                                                            "vo":
+                                                            [
+                                                                "TRỊNH THỊ NHỚN",
+                                                                "PHẠM THỊ KIỆM"
+                                                            ],
+                                                            "children":
+                                                            [
                                                                 {
-                                                                    "generation": 8, "ho_ten": "LÃ HỮU THU", "vo": "VŨ THỊ MỰU",
-                                                                    "children": [
+                                                                    "gen": 8,
+                                                                    "ho_ten": "LÃ HỮU THU",
+                                                                    "vo": "VŨ THỊ MỰU",
+                                                                    "children":
+                                                                    [
                                                                         {
-                                                                            "generation": 9, "ho_ten": "LÃ HỮU XỨNG", "vo": "LÃ THỊ THẢO",
-                                                                            "children": [
+                                                                            "gen": 9,
+                                                                            "ho_ten": "LÃ HỮU XỨNG",
+                                                                            "vo": "LÃ THỊ THẢO",
+                                                                            "children":
+                                                                            [
                                                                                 {
-                                                                                    "generation": 10, "ho_ten": "LÃ HỮU RY", "vo": ["TRỊNH THỊ LUẬT", "VŨ THỊ NGUYỆT"],
-                                                                                    "children": [
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ CHUNG" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ CÀI" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ NGA" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ NGẦN" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ VẢI" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ VÓC" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ HỮU TÍN" },
+                                                                                    "gen": 10,
+                                                                                    "ho_ten": "LÃ HỮU RY",
+                                                                                    "vo":
+                                                                                    [
+                                                                                        "TRỊNH THỊ LUẬT",
+                                                                                        "VŨ THỊ NGUYỆT"
+                                                                                    ],
+                                                                                    "children":
+                                                                                    [
                                                                                         {
-                                                                                            "generation": 11, "ho_ten": "LÃ HỮU TRUYỀN", "vo": "ĐINH THỊ NHIÊN",
-                                                                                            "children": [
-                                                                                                { "generation": 12, "ho_ten": "LÃ THỊ ANH" },
-                                                                                                { "generation": 12, "ho_ten": "LÃ THỊ PHƯƠNG" },
-                                                                                                { "generation": 12, "ho_ten": "LÃ THỊ HUYỀN" },
-                                                                                                { "generation": 12, "ho_ten": "LÃ THỊ MY" }
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ CHUNG"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ CÀI"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ NGA"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ NGẦN"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ VẢI"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ VÓC"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ HỮU TÍN"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ HỮU TRUYỀN",
+                                                                                            "vo": "ĐINH THỊ NHIÊN",
+                                                                                            "children":
+                                                                                            [
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ THỊ ANH"
+                                                                                                },
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ THỊ PHƯƠNG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ THỊ HUYỀN"
+                                                                                                },
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ THỊ MY"
+                                                                                                }
                                                                                             ]
                                                                                         }
                                                                                     ]
                                                                                 },
                                                                                 {
-                                                                                    "generation": 10, "ho_ten": "LÃ HỮU TẮC", "vo": ["DƯƠNG THỊ PHƯƠNG", "TRỊNH THỊ LOAN"],
-                                                                                    "children": [
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ TUẤT" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ CÚC" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ QUẾ" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ HUỆ" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ HỮU ĐỘ", "ghi_chu": "mất sớm" }
+                                                                                    "gen": 10,
+                                                                                    "ho_ten": "LÃ HỮU TẮC",
+                                                                                    "vo":
+                                                                                    [
+                                                                                        "DƯƠNG THỊ PHƯƠNG",
+                                                                                        "TRỊNH THỊ LOAN"
+                                                                                    ],
+                                                                                    "children":
+                                                                                    [
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ TUẤT"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ CÚC"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ QUẾ"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ HUỆ"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ HỮU ĐỘ",
+                                                                                            "ghi_chu": "mất sớm"
+                                                                                        }
                                                                                     ]
                                                                                 },
                                                                                 {
-                                                                                    "generation": 10, "ho_ten": "LÃ HỮU THOẠI", "vo": ["LÃ THỊ NHỊ", "LÃ THỊ BÚT"],
-                                                                                    "children": [
+                                                                                    "gen": 10,
+                                                                                    "ho_ten": "LÃ HỮU THOẠI",
+                                                                                    "vo":
+                                                                                    [
+                                                                                        "LÃ THỊ NHỊ",
+                                                                                        "LÃ THỊ BÚT"
+                                                                                    ],
+                                                                                    "children":
+                                                                                    [
                                                                                         {
-                                                                                            "generation": 11, "ho_ten": "LÃ HỮU CƯỜNG", "vo": "DƯƠNG THỊ NHÀI",
-                                                                                            "children": [
-                                                                                                { "generation": 12, "ho_ten": "LÃ HỮU QUANG" },
-                                                                                                { "generation": 12, "ho_ten": "LÃ HỮU DÂNG" },
-                                                                                                { "generation": 12, "ho_ten": "LÃ THỊ DUNG" }
-                                                                                            ]
-                                                                                        },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ KIÊN" },
-                                                                                        {
-                                                                                            "generation": 11, "ho_ten": "LÃ HỮU THỊNH", "vo": "DƯƠNG THỊ NGHIÊM",
-                                                                                            "children": [
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ HỮU CƯỜNG",
+                                                                                            "vo": "DƯƠNG THỊ NHÀI",
+                                                                                            "children":
+                                                                                            [
                                                                                                 {
-                                                                                                    "generation": 12, "ho_ten": "LÃ HỮU THÀNH", "vo": "ĐINH THỊ HƯƠNG",
-                                                                                                    "children": [{ "generation": 13, "ho_ten": "LÃ THANH TÙNG" }]
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ HỮU QUANG"
                                                                                                 },
                                                                                                 {
-                                                                                                    "generation": 12, "ho_ten": "LÃ THỊ THỦY", "chong": "PHẠM QUỐC ĐẠT",
-                                                                                                    "children": [
-                                                                                                        { "generation": 13, "ho_ten": "PHẠM MAI ANH" },
-                                                                                                        { "generation": 13, "ho_ten": "PHẠM KHÁNH DƯƠNG" }
-                                                                                                    ]
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ HỮU DÂNG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ THỊ DUNG"
                                                                                                 }
                                                                                             ]
                                                                                         },
                                                                                         {
-                                                                                            "generation": 11, "ho_ten": "LÃ HỮU VĂN", "vo": "LÃ THỊ BÍCH",
-                                                                                            "children": [
-                                                                                                { "generation": 12, "ho_ten": "LÃ HỮU BA" },
-                                                                                                { "generation": 12, "ho_ten": "LÃ HỮU CẦN" }
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ KIÊN"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ HỮU THỊNH",
+                                                                                            "vo": "DƯƠNG THỊ NGHIÊM",
+                                                                                            "children":
+                                                                                            [
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ HỮU THÀNH",
+                                                                                                    "vo": "ĐINH THỊ HƯƠNG",
+                                                                                                    "ngay_sinh": "25/10/1990",
+                                                                                                    "children":
+                                                                                                    [
+                                                                                                        {
+                                                                                                            "gen": 13,
+                                                                                                            "ho_ten": "LÃ THANH TÙNG",
+                                                                                                            "ngay_sinh": "31/05/2024"
+                                                                                                        }
+                                                                                                    ]
+                                                                                                },
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ THỊ THỦY"
+                                                                                                }
                                                                                             ]
                                                                                         },
                                                                                         {
-                                                                                            "generation": 11, "ho_ten": "LÃ HỮU THƠ", "vo": "LÃ THỊ NGA",
-                                                                                            "children": [
-                                                                                                { "generation": 12, "ho_ten": "LÃ HỮU TRƯỜNG" },
-                                                                                                { "generation": 12, "ho_ten": "LÃ THỊ THƯƠNG" }
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ HỮU VĂN",
+                                                                                            "vo": "LÃ THỊ BÍCH",
+                                                                                            "children":
+                                                                                            [
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ HỮU BA"
+                                                                                                },
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ HỮU CẦN"
+                                                                                                }
                                                                                             ]
                                                                                         },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ THIỀU" }
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ HỮU THƠ",
+                                                                                            "vo": "LÃ THỊ NGA",
+                                                                                            "children":
+                                                                                            [
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ HỮU TRƯỜNG"
+                                                                                                },
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ THỊ THƯƠNG"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ THIỀU"
+                                                                                        }
                                                                                     ]
                                                                                 },
-                                                                                { "generation": 10, "ho_ten": "LÃ THỊ THỤC" },
-                                                                                { "generation": 10, "ho_ten": "LÃ THỊ TRÀ" },
                                                                                 {
-                                                                                    "generation": 10, "ho_ten": "LÃ HỮU TỨ", "vo": "BÙI THỊ NHƯỜNG",
-                                                                                    "children": [
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ HƯƠNG" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ NGUYỆT" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ TUYẾT" },
-                                                                                        { "generation": 11, "ho_ten": "LÃ THỊ MAI" },
+                                                                                    "gen": 10,
+                                                                                    "ho_ten": "LÃ THỊ THỤC"
+                                                                                },
+                                                                                {
+                                                                                    "gen": 10,
+                                                                                    "ho_ten": "LÃ THỊ TRÀ"
+                                                                                },
+                                                                                {
+                                                                                    "gen": 10,
+                                                                                    "ho_ten": "LÃ HỮU TỨ",
+                                                                                    "vo": "BÙI THỊ NHƯỜNG",
+                                                                                    "children":
+                                                                                    [
                                                                                         {
-                                                                                            "generation": 11, "ho_ten": "LÃ HỮU MINH", "vo": "HOÀNG THỊ HOA HỒNG",
-                                                                                            "children": [{ "generation": 12, "ho_ten": "LÃ THỊ MINH THƯ" }]
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ HƯƠNG"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ NGUYỆT"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ TUYẾT"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ THỊ MAI"
+                                                                                        },
+                                                                                        {
+                                                                                            "gen": 11,
+                                                                                            "ho_ten": "LÃ HỮU MINH",
+                                                                                            "vo": "HOÀNG THỊ HOA HỒNG",
+                                                                                            "children":
+                                                                                            [
+                                                                                                {
+                                                                                                    "gen": 12,
+                                                                                                    "ho_ten": "LÃ THỊ MINH THƯ"
+                                                                                                }
+                                                                                            ]
                                                                                         }
                                                                                     ]
                                                                                 }
                                                                             ]
                                                                         },
-                                                                        { "generation": 9, "ho_ten": "LÃ THỊ PHỤNG" },
-                                                                        { "generation": 9, "ho_ten": "LÃ THỊ GÁI" }
+                                                                        {
+                                                                            "gen": 9,
+                                                                            "ho_ten": "LÃ THỊ PHỤNG"
+                                                                        },
+                                                                        {
+                                                                            "gen": 9,
+                                                                            "ho_ten": "LÃ THỊ GÁI"
+                                                                        }
                                                                     ]
                                                                 },
-                                                                { "generation": 8, "ho_ten": "LÃ THỊ ĐƯỜNG" },
-                                                                { "generation": 8, "ho_ten": "LÃ THỊ TÍU" },
-                                                                { "generation": 8, "ho_ten": "LÃ HỮU NHO", "vo": ["HOÀNG THỊ THƯ", "DƯƠNG THỊ TÂM"] }
+                                                                {
+                                                                    "gen": 8,
+                                                                    "ho_ten": "LÃ THỊ ĐƯỜNG"
+                                                                },
+                                                                {
+                                                                    "gen": 8,
+                                                                    "ho_ten": "LÃ THỊ TÍU"
+                                                                },
+                                                                {
+                                                                    "gen": 8,
+                                                                    "ho_ten": "LÃ HỮU NHO",
+                                                                    "vo":
+                                                                    [
+                                                                        "HOÀNG THỊ THƯ",
+                                                                        "DƯƠNG THỊ TÂM"
+                                                                    ]
+                                                                }
                                                             ]
                                                         },
-                                                        { "generation": 7, "ho_ten": "LÃ HỮU TIẾT" },
-                                                        { "generation": 7, "ho_ten": "LÃ HỮU HỌT" }
+                                                        {
+                                                            "gen": 7,
+                                                            "ho_ten": "LÃ HỮU TIẾT"
+                                                        },
+                                                        {
+                                                            "gen": 7,
+                                                            "ho_ten": "LÃ HỮU HỌT"
+                                                        }
                                                     ]
                                                 },
-                                                { "generation": 6, "ho_ten": "LÃ THỊ TỰ" },
-                                                { "generation": 6, "ho_ten": "LÃ HỮU HẠNH", "vo": "TRỊNH THỊ NẺ" }
+                                                {
+                                                    "gen": 6,
+                                                    "ho_ten": "LÃ THỊ TỰ"
+                                                },
+                                                {
+                                                    "gen": 6,
+                                                    "ho_ten": "LÃ HỮU HẠNH",
+                                                    "vo": "TRỊNH THỊ NẺ"
+                                                }
                                             ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ THỊ SỬ",
+                                    "gioi_tinh": "Nữ"
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ THỊ ĐƯƠNG",
+                                    "gioi_tinh": "Nữ"
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ THỊ GẠO",
+                                    "gioi_tinh": "Nữ"
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ THỊ KÝ",
+                                    "gioi_tinh": "Nữ"
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ HỮU XIÊNG",
+                                    "vo": "LÃ THI NHU",
+                                    "children":
+                                    [
+                                        {
+                                            "gen": 5,
+                                            "ho_ten": "LÃ HỮU VI",
+                                            "ten_khac": "LÃ HỮU VE",
+                                            "children":
+                                            [
+                                                {
+                                                    "gen": 6,
+                                                    "ho_ten": "LÃ HỮU ĐOÀN"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "gen": 5,
+                                            "ho_ten": "LÃ THỊ ÊM"
                                         }
                                     ]
                                 }
                             ]
                         },
                         {
-                            "generation": 3,
+                            "gen": 3,
+                            "ho_ten": "LÃ THỊ MẬU",
+                            "gioi_tinh": "Nữ"
+                        },
+                        {
+                            "gen": 3,
+                            "ho_ten": "LÃ THỊ TA",
+                            "gioi_tinh": "Nữ"
+                        },
+                        {
+                            "gen": 3,
+                            "ho_ten": "LÃ HỮU VÍ"
+                        },
+                        {
+                            "gen": 3,
                             "ho_ten": "LÃ HỮU KHU",
-                            "vo": "LÃ THỊ UẨN"
+                            "vo": "LÃ THỊ UẨN",
+                            "children":
+                            [
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ HỮU TRÁNG"
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ HỮU NGÔ",
+                                    "children":
+                                    [
+                                        {
+                                            "gen": 5,
+                                            "ho_ten": "LÃ HỮU ĐỒNG"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "gen": 4,
+                                    "ho_ten": "LÃ HỮU VỊ",
+                                    "ten_khac": "LÃ HỮU VỌNG"
+                                }
+                            ]
                         }
                     ]
                 }

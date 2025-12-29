@@ -209,7 +209,7 @@ function searchMember() {
             let spouseHtml = '';
             if (mem.vo) spouseHtml = `<div class="mb-1">Vợ: ${formatSpouseData(mem.vo)}</div>`;
             else if (mem.chong) spouseHtml = `<div class="mb-1"><span class="label-text">Chồng:</span> ${formatSpouseData(mem.chong)}</div>`;
-            else spouseHtml = `<div class="mb-1"><span class="label-text">Vợ/Chồng:</span> <span class="text-muted fst-italic">Chưa cập nhật</span></div>`;
+            else spouseHtml = ``;
 
             // --- XỬ LÝ CHA/MẸ (BOX RIÊNG) ---
             let parentHtml = '';
@@ -219,7 +219,7 @@ function searchMember() {
                     parentHtml = `
                         <div class="children-box mb-2" style="background-color: #f8f9fa; border-left: 4px solid #0d6efd;">
                             <small class="text-primary fw-bold d-block mb-1">
-                                <i class="fas fa-arrow-up me-1"></i>Con ông/bà:
+                                <i class="fas fa-arrow-up me-1"></i>Con ông:
                             </small>
                             <span class="fw-bold text-dark fs-6">${parent.ho_ten}</span>
                         </div>`;
@@ -237,7 +237,7 @@ function searchMember() {
                 : '';
             
             const birthInfo = mem.ngay_sinh ? `<span class="badge bg-secondary ms-2"><i class="fas fa-birthday-cake me-1"></i>${mem.ngay_sinh}</span>` : '';
-            const gen = mem.generation || mem.doi;
+            const gen = mem.gen || mem.doi;
 
             html += `
                 <div class="col-12">
@@ -352,10 +352,10 @@ function confirmAddChild() {
         if (!parent.children) parent.children = [];
         // Nếu dữ liệu cũ dùng 'con_cai', ta vẫn push vào children cho nhất quán về sau
         
-        const parentGen = parent.generation || parent.doi || 0;
+        const parentGen = parent.gen || parent.doi || 0;
         
         const newChild = {
-            "generation": parentGen + 1,
+            "gen": parentGen + 1,
             "ho_ten": name,
             "gioi_tinh": gender
         };
