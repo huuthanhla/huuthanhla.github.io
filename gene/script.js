@@ -27,8 +27,8 @@ function init() {
     }
 
     // Cập nhật địa chỉ header
-    if(genealogyData.thong_tin_chung && genealogyData.thong_tin_chung.ghi_chu_dia_chi) {
-        document.getElementById("newAddress").innerText = genealogyData.thong_tin_chung.ghi_chu_dia_chi;
+    if(genealogyData.thong_tin_chung && genealogyData.thong_tin_chung.dia_chi_moi) {
+        document.getElementById("newAddress").innerText = genealogyData.thong_tin_chung.dia_chi_moi;
     }
 
     // Đánh chỉ mục
@@ -43,7 +43,7 @@ function saveData() {
     localStorage.setItem('genealogyData', JSON.stringify(genealogyData));
 }
 
-// Hàm đánh chỉ mục ID và lưu ID cha để tiện cho việc xóa
+// Hàm đánh chỉ mục ID và lưu ID cha để tiện cho việc xóa và hiển thị cha mẹ
 function indexData(members, parentId = 'root') {
     if (!members) return;
     members.forEach((member, index) => {
@@ -51,7 +51,7 @@ function indexData(members, parentId = 'root') {
         if (!member._id) {
             member._id = parentId + '_' + index + '_' + Math.random().toString(36).substr(2, 5);
         }
-        // Lưu tham chiếu ID cha vào object (để dùng khi xóa)
+        // Lưu tham chiếu ID cha vào object
         member._parentId = parentId;
 
         flatMap.set(member._id, member);
@@ -204,11 +204,29 @@ function searchMember() {
     } else {
         let html = '<div class="row g-4">';
         results.forEach(mem => {
+
+            // --- XỬ LÝ VỢ/CHỒNG ---
             let spouseHtml = '';
-            if (mem.vo) spouseHtml = `<div class="mb-1"><span class="label-text">Vợ:</span>${formatSpouseData(mem.vo)}</div>`;
+            if (mem.vo) spouseHtml = `<div class="mb-1">Vợ: ${formatSpouseData(mem.vo)}</div>`;
             else if (mem.chong) spouseHtml = `<div class="mb-1"><span class="label-text">Chồng:</span> ${formatSpouseData(mem.chong)}</div>`;
             else spouseHtml = `<div class="mb-1"><span class="label-text">Vợ/Chồng:</span> <span class="text-muted fst-italic">Chưa cập nhật</span></div>`;
 
+            // --- XỬ LÝ CHA/MẸ (BOX RIÊNG) ---
+            let parentHtml = '';
+            if (mem._parentId && mem._parentId !== 'root') {
+                const parent = flatMap.get(mem._parentId);
+                if (parent) {
+                    parentHtml = `
+                        <div class="children-box mb-2" style="background-color: #f8f9fa; border-left: 4px solid #0d6efd;">
+                            <small class="text-primary fw-bold d-block mb-1">
+                                <i class="fas fa-arrow-up me-1"></i>Con ông/bà:
+                            </small>
+                            <span class="fw-bold text-dark fs-6">${parent.ho_ten}</span>
+                        </div>`;
+                }
+            }
+
+            // --- XỬ LÝ CON CÁI ---
             let children = mem.children || mem.con_cai;
             const childrenStr = formatChildren(children);
             const childrenHtml = childrenStr 
@@ -218,9 +236,7 @@ function searchMember() {
                    </div>` 
                 : '';
             
-            // Ngày sinh của chính người đó
             const birthInfo = mem.ngay_sinh ? `<span class="badge bg-secondary ms-2"><i class="fas fa-birthday-cake me-1"></i>${mem.ngay_sinh}</span>` : '';
-            // Đời (hỗ trợ cả generation và doi)
             const gen = mem.generation || mem.doi;
 
             html += `
@@ -234,13 +250,13 @@ function searchMember() {
                                         ${birthInfo}
                                     </div>
                                     ${mem.ten_khac ? `<small class="text-muted">(${mem.ten_khac})</small>` : ''}
-                                </div>
-                                <span class="badge badge-gen rounded-pill">Đời thứ ${gen}</span>
+                                    <span>${spouseHtml}</span>   
+                                </div> 
+                                <span class="badge badge-gen rounded-pill">Thế hệ F${gen}</span>
                             </div>
 
-                            <div class="mb-3">
-                                ${mem.chuc_vu ? `<div class="mb-1"><span class="label-text">Chức vụ:</span> ${mem.chuc_vu}</div>` : ''}
-                                ${spouseHtml}
+                            <div class="mb-3">                                                            
+                                ${parentHtml} ${mem.chuc_vu ? `<div class="mb-1"><span class="label-text">Chức vụ:</span> ${mem.chuc_vu}</div>` : ''}                                
                                 ${mem.ghi_chu ? `<div class="mb-1"><span class="label-text">Ghi chú:</span> ${mem.ghi_chu}</div>` : ''}
                                 ${childrenHtml}
                             </div>
@@ -314,7 +330,7 @@ function confirmAddSpouse() {
             }
         }
         
-        saveData(); // Lưu thay đổi
+        saveData(); 
         alert("Đã thêm thành công!");
         modalSpouse.hide();
         searchMember();
@@ -334,8 +350,7 @@ function confirmAddChild() {
     if (parent) {
         // Chuẩn hóa tên trường con cái (dùng 'children' làm chuẩn)
         if (!parent.children) parent.children = [];
-        // Nếu dữ liệu cũ dùng 'con_cai', chuyển sang 'children' nếu muốn, hoặc push vào đúng mảng đó
-        // Ở đây ta ưu tiên 'children'
+        // Nếu dữ liệu cũ dùng 'con_cai', ta vẫn push vào children cho nhất quán về sau
         
         const parentGen = parent.generation || parent.doi || 0;
         
@@ -380,7 +395,7 @@ function confirmEditMember() {
     if (newDob) member.ngay_sinh = newDob; else delete member.ngay_sinh;
     member.gioi_tinh = newGender;
 
-    saveData(); // Lưu thay đổi
+    saveData(); 
     alert("Cập nhật thành công!");
     modalEdit.hide();
     searchMember();
@@ -414,7 +429,7 @@ function deleteMember(id) {
         }
     }
 
-    saveData(); // Lưu thay đổi
+    saveData(); 
     alert("Đã xóa thành công!");
     init(); 
     searchMember(); 

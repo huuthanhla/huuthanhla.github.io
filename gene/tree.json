@@ -1,4 +1,4 @@
-const defaultData = {
+{
     "thong_tin_chung": {
         "tieu_de": "PHẢ ĐỒ DÒNG HỌ LÃ HỮU",
         "dia_chi": "Thôn Yên Liêu Thượng, xã Khánh Thịnh, huyện Yên Mô, tỉnh Ninh Bình",
@@ -19,6 +19,8 @@ const defaultData = {
                         {
                             "generation": 3,
                             "ho_ten": "LÃ HỮU LÝ",
+                            "ngay_sinh": "",
+                            "death": "04/12/1789",
                             "chuc_vu": "Thủ Hợp - Hậu Thần",
                             "vo": "LÃ THỊ TẠI",
                             "children": [
@@ -163,11 +165,12 @@ const defaultData = {
                         },
                         {
                             "generation": 3,
-                            "ho_ten": "LÃ HỮU KHU"
+                            "ho_ten": "LÃ HỮU KHU",
+                            "vo": "LÃ THỊ UẨN"
                         }
                     ]
                 }
             ]
         }
     ]
-};
+}
