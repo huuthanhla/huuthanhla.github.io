@@ -131,7 +131,12 @@ function downloadJSON() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(cleanData, null, 4));
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "GiaPha_LaHuu_CapNhat.json");
+
+    const timestamp = new Date().toLocaleString('sv-SE').replace(/[-: ]/g,'')
+    // .replace('T','_')
+    .replace(/(\d{8})(\d{6})/,'$1_$2');;
+    
+    downloadAnchorNode.setAttribute("download", "GiaPha_LaHuu_CapNhat_" + timestamp + ".json");
     document.body.appendChild(downloadAnchorNode);
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
