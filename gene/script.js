@@ -181,6 +181,8 @@ function formatChildren(childrenArray) {
     }).join(", ");
 }
 
+const noAccent = str => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g,'d').replace(/Đ/g,'D');
+
 function searchMember() {
     const query = document.getElementById('searchInput').value.toLowerCase().trim();
     const resultsArea = document.getElementById('resultsArea');
@@ -196,7 +198,8 @@ function searchMember() {
 
     const results = [];
     flatMap.forEach(member => {
-        if (member.ho_ten.toLowerCase().includes(query)) {
+        let searchStr = noAccent(member.ho_ten + ' ' + member.vo + ' ' + member.chong).toLowerCase();
+        if (searchStr.includes(noAccent(query))) {
             results.push(member);
         }
     });
@@ -213,7 +216,7 @@ function searchMember() {
             // --- XỬ LÝ VỢ/CHỒNG ---
             let spouseHtml = '';
             if (mem.vo) spouseHtml = `<div class="mb-1">Vợ: ${formatSpouseData(mem.vo)}</div>`;
-            else if (mem.chong) spouseHtml = `<div class="mb-1"><span class="label-text">Chồng:</span> ${formatSpouseData(mem.chong)}</div>`;
+            else if (mem.chong) spouseHtml = `<div class="mb-1">Chồng: ${formatSpouseData(mem.chong)}</div>`;
             else spouseHtml = ``;
 
             // --- XỬ LÝ CHA/MẸ (BOX RIÊNG) ---
@@ -257,7 +260,7 @@ function searchMember() {
                                     ${mem.ten_khac ? `<small class="text-muted">(${mem.ten_khac})</small>` : ''}
                                     <span>${spouseHtml}</span>   
                                 </div> 
-                                <span class="badge badge-gen rounded-pill">Thế hệ F${gen}</span>
+                                <span class="badge badge-gen rounded-pill">F${gen}</span>
                             </div>
 
                             <div class="mb-3">                                                            
