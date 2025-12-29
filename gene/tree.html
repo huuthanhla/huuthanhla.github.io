@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sơ Đồ Phả Hệ Dòng Họ Lã Hữu</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+        }
+        #tree {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://balkan.app/js/FamilyTree.js"></script>
+</head>
+<body>
+    <div id="tree"></div>
+
+    <script src="data.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // --- 1. CẤU HÌNH TEMPLATE MOBILE (Giao diện Sáng - Bản Rộng) ---
+            
+            // Kích thước thẻ mới: Rộng 200, Cao 220
+            const nodeWidth = 160;
+            const nodeHeight = 220;
+            const imgSize = 140; // Kích thước ảnh
+            const imgX = (nodeWidth - imgSize) / 2; // Căn giữa ảnh: (200 - 100) / 2 = 50
+
+            FamilyTree.templates.base.defs = 
+                `<g transform="matrix(1,0,0,1,0,0)" id="dot"><circle class="ba-fill" cx="0" cy="0" r="5" stroke="#aeaeae" stroke-width="1"></circle></g>
+                <g id="base_node_menu" style="cursor:pointer;">
+                    <rect x="0" y="0" fill="transparent" width="22" height="22"></rect>
+                    <circle cx="4" cy="11" r="2" fill="#212529"></circle>
+                    <circle cx="11" cy="11" r="2" fill="#212529"></circle>
+                    <circle cx="18" cy="11" r="2" fill="#212529"></circle>
+                </g>
+                <g style="cursor: pointer;" id="base_tree_menu">
+                    <rect x="0" y="0" width="25" height="25" fill="transparent"></rect>
+                    ${FamilyTree.icon.addUser(13, 13, '#212529', 0, 0)}
+                </g>
+                <clipPath id="base_img_0">
+                    <rect id="base_img_0_stroke" stroke-width="3" x="${imgX}" y="15" rx="15" ry="15" width="${imgSize}" height="${imgSize}"></rect>
+                </clipPath>`;
+
+            FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
+            FamilyTree.templates.myTemplate.size = [nodeWidth, nodeHeight];
+            
+            FamilyTree.templates.myTemplate_male = Object.assign({}, FamilyTree.templates.myTemplate);
+            FamilyTree.templates.myTemplate_female = Object.assign({}, FamilyTree.templates.myTemplate);
+
+            // --- ĐỊNH NGHĨA MÀU SẮC NODE ---
+            
+            // Nam: Xanh dương nhạt (#E3F2FD), Viền xanh đậm hơn (#90CAF9)
+            FamilyTree.templates.myTemplate_male.node = 
+                `<rect x="0" y="0" height="{h}" width="{w}" stroke-width="2" fill="#E3F2FD" stroke="#90CAF9" rx="15" ry="15"></rect>`;
+            
+            // Nữ: Xanh lá nhạt (#E8F5E9), Viền xanh đậm hơn (#A5D6A7)
+            FamilyTree.templates.myTemplate_female.node = 
+                `<rect x="0" y="0" height="{h}" width="{w}" stroke-width="2" fill="#E8F5E9" stroke="#A5D6A7" rx="15" ry="15"></rect>`;
+
+            // Style cho Tên (Màu đen, chữ to)
+            const textStyle = `style="font-size: 16px; font-weight: bold; font-family: 'Segoe UI';" fill="#212529" x="${nodeWidth/2}" y="${imgSize + 20 * 2}" text-anchor="middle"`;
+            // Style cho Chức vụ/Ngày sinh (Màu xám, chữ nhỏ)
+            const subTextStyle = `style="font-size: 13px;" fill="#6c757d" x="${nodeWidth/2}" y="${imgSize + 20 * 3}" text-anchor="middle"`;
+            
+            FamilyTree.templates.myTemplate.field_0 = 
+            FamilyTree.templates.myTemplate_male.field_0 =
+            FamilyTree.templates.myTemplate_female.field_0 =
+                `<text data-width="${nodeWidth - 20}" data-text-overflow="ellipsis" ${textStyle}>{val}</text>`;
+            
+            FamilyTree.templates.myTemplate.field_1 = 
+            FamilyTree.templates.myTemplate_male.field_1 =
+            FamilyTree.templates.myTemplate_female.field_1 =
+                `<text data-width="${nodeWidth - 20}" data-text-overflow="ellipsis" ${subTextStyle}>{val}</text>`;
+
+            // Ảnh đại diện
+            FamilyTree.templates.myTemplate.img_0 =
+            FamilyTree.templates.myTemplate_male.img_0 =
+            FamilyTree.templates.myTemplate_female.img_0 =
+                `<use xlink:href="#base_img_0_stroke" />
+                <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_0)" xlink:href="{val}" x="${imgX}" y="15" width="${imgSize}" height="${imgSize}"></image>`;
+
+            // Nút Menu (Căn chỉnh lại vị trí do thẻ rộng hơn)
+            FamilyTree.templates.myTemplate.nodeTreeMenuButton = 
+            FamilyTree.templates.myTemplate_male.nodeTreeMenuButton = 
+            FamilyTree.templates.myTemplate_female.nodeTreeMenuButton = 
+                `<use ${'data-ctrl-n-t-menu-id'}="{id}" x="${nodeWidth - 35}" y="185" xlink:href="#base_tree_menu" />`;
+
+            FamilyTree.templates.myTemplate.nodeMenuButton =
+            FamilyTree.templates.myTemplate_male.nodeMenuButton =
+            FamilyTree.templates.myTemplate_female.nodeMenuButton =
+                `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="10" y="185" xlink:href="#base_node_menu" />`;
+
+
+            // --- 2. CHUYỂN ĐỔI DỮ LIỆU ---
+            let nodes = [];
+            let autoId = 1;
+
+            // Ưu tiên dữ liệu từ LocalStorage
+            let sourceData = defaultData;
+            const stored = localStorage.getItem('genealogyData');
+            if (stored) {
+                try {
+                    sourceData = JSON.parse(stored);
+                } catch (e) { console.error("Lỗi đọc LocalStorage"); }
+            }
+
+            function detectGender(member) {
+                if (member.gioi_tinh) return member.gioi_tinh === 'Nữ' ? 'female' : 'male';
+                if (member.ho_ten && member.ho_ten.toUpperCase().includes(" THỊ ")) return 'female';
+                return 'male';
+            }
+
+            function getChildren(member) {
+                return member.children || member.con_cai || [];
+            }
+
+            function parseMember(member, fatherId = null, motherId = null) {
+                if (!member) return;
+
+                let currentId = autoId++;
+                let gender = detectGender(member);
+                let gen = member.generation || member.doi || "";
+                
+                // Ảnh mặc định
+                let maleAvatar = 'https://static.vecteezy.com/system/resources/previews/045/944/199/non_2x/male-default-placeholder-avatar-profile-gray-picture-isolated-on-background-man-silhouette-picture-for-user-profile-in-social-media-forum-chat-greyscale-illustration-vector.jpg';
+                let femaleAvatar = 'https://static.vecteezy.com/system/resources/previews/053/406/442/non_2x/female-person-default-woman-avatar-image-for-social-media-forums-dating-sites-gray-profile-anonymous-face-picture-vector.jpg';
+
+                let personNode = {
+                    id: currentId,
+                    mid: motherId,
+                    fid: fatherId,
+                    Name: member.ho_ten,
+                    Title: member.chuc_vu || (gen ? `Đời thứ ${gen}` : ""),
+                    Gender: gender,
+                    Photo: member.anh_dai_dien || (gender === 'male' ? maleAvatar : femaleAvatar)
+                };
+                
+                if (member.ngay_sinh) personNode.Title += ` (${member.ngay_sinh})`;
+
+                let partnerIds = [];
+                let spouses = [];
+
+                if (member.vo) {
+                    let list = Array.isArray(member.vo) ? member.vo : [member.vo];
+                    list.forEach(v => spouses.push({type: 'vo', data: v}));
+                }
+                if (member.chong) {
+                    let list = Array.isArray(member.chong) ? member.chong : [member.chong];
+                    list.forEach(c => spouses.push({type: 'chong', data: c}));
+                }
+
+                spouses.forEach(spouse => {
+                    let sId = autoId++;
+                    let sName = (typeof spouse.data === 'object') ? spouse.data.ho_ten : spouse.data;
+                    let sTitle = (spouse.type === 'vo') ? 'Vợ' : 'Chồng';
+                    let sGender = (spouse.type === 'vo') ? 'female' : 'male';
+                    
+                    let spouseNode = {
+                        id: sId,
+                        pids: [currentId],
+                        Name: sName,
+                        Title: sTitle,
+                        Gender: sGender,
+                        Photo: (sGender === 'male' ? maleAvatar : femaleAvatar)
+                    };
+                    
+                    if (typeof spouse.data === 'object' && spouse.data.ngay_sinh) {
+                        spouseNode.Title += ` (${spouse.data.ngay_sinh})`;
+                    }
+
+                    nodes.push(spouseNode);
+                    partnerIds.push(sId);
+                });
+
+                if (partnerIds.length > 0) personNode.pids = partnerIds;
+                nodes.push(personNode);
+
+                let childrenList = getChildren(member);
+                if (childrenList && childrenList.length > 0) {
+                    let childFid = (personNode.Gender === 'male') ? currentId : null;
+                    let childMid = (personNode.Gender === 'female') ? currentId : null;
+
+                    if (partnerIds.length === 1) {
+                        if (personNode.Gender === 'male') childMid = partnerIds[0];
+                        else childFid = partnerIds[0];
+                    }
+
+                    childrenList.forEach(child => {
+                        parseMember(child, childFid, childMid);
+                    });
+                }
+            }
+
+            if (sourceData) {
+                let rootData = sourceData.genealogy || sourceData.cay_pha_he;
+                if (rootData && Array.isArray(rootData)) {
+                    rootData.forEach(root => parseMember(root));
+                }
+            }
+
+            // --- 3. KHỞI TẠO BIỂU ĐỒ ---
+            let family = new FamilyTree(document.getElementById("tree"), {
+                template: 'myTemplate',
+                orientation: FamilyTree.orientation.top,
+                enableSearch: true,
+                scaleInitial: FamilyTree.match.boundary,
+                nodeBinding: {
+                    field_0: "Name",
+                    field_1: "Title",
+                    img_0: "Photo"
+                }
+            });
+
+            family.load(nodes);
+        });
+    </script>
+</body>
+</html>
