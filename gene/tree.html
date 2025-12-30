@@ -1,157 +1,130 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://balkan.app/js/FamilyTree.js"></script>
     <title>Sơ Đồ Phả Hệ Dòng Họ Lã Hữu</title>
     <style>
-        html, body {
-            width: 100%;
-            height: 100%;
-            padding: 0;
-            margin: 0;
-            overflow: hidden;
-            font-family: 'Nunito', Helvetica, Arial, sans-serif;
-            background-color: #ffffff;
-        }
-        #tree {
-            width: 100%;
-            height: 100%;
-        }
+    /*CSS*/
+    html, body{
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin:0;
+      overflow: hidden;
+      font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+      background-color: #ffffff;
+    }
+    #tree{
+      width:100%;
+      height:100%;
+    }
 
-        /* --- CSS HIỆU ỨNG HIGHLIGHT --- */
-        /* Định nghĩa animation nhấp nháy đường viền */
-        @keyframes highlight-pulse {
-            0% { stroke: #FF0000; stroke-width: 4px; stroke-opacity: 1; }
-            50% { stroke: #FF0000; stroke-width: 8px; stroke-opacity: 0.5; }
-            100% { stroke: #FF0000; stroke-width: 4px; stroke-opacity: 1; }
-        }
+    /* --- CSS HIỆU ỨNG HIGHLIGHT --- */
+    /* Định nghĩa animation nhấp nháy đường viền */
+    @keyframes highlight-pulse {
+        0% { stroke: #FF0000; stroke-width: 4px; stroke-opacity: 1; }
+        50% { stroke: #FF0000; stroke-width: 8px; stroke-opacity: 0.5; }
+        100% { stroke: #FF0000; stroke-width: 4px; stroke-opacity: 1; }
+    }
 
-        /* Class này sẽ được thêm vào Node khi tìm kiếm/click */
-        .node-highlight rect {
-            stroke: #FF0000 !important; /* Màu đỏ */
-            animation: highlight-pulse 1.5s infinite; /* Chạy hiệu ứng liên tục */
-        }
+    /* Class này sẽ được thêm vào Node khi tìm kiếm/click */
+    .node-highlight rect {
+        stroke: #FF0000 !important; /* Màu đỏ */
+        animation: highlight-pulse 1.5s infinite; /* Chạy hiệu ứng liên tục */
+    }
 
-        /* --- CSS CHO NODE GỐC (ROOT NODE) --- */
-        /* Class này được tự động sinh ra khi node có tags: ['root_node'] */
-        .node-root_node rect {
-            /* Màu viền vàng nổi bật */
-            stroke: #FFD700 !important; 
-            /* Viền dày hơn các node thường */
-            stroke-width: 6px !important;
-            /* Thêm hiệu ứng đổ bóng vàng cho rực rỡ hơn */
-            filter: drop-shadow(0 0 5px #FFD700);
-        }
+    /* --- CSS CHO NODE GỐC (ROOT NODE) --- */
+    /* Class này được tự động sinh ra khi node có tags: ['root_node'] */
+    .node-root_node rect {
+        /* Màu viền vàng nổi bật */
+        stroke: #FFD700 !important; 
+        /* Viền dày hơn các node thường */
+        stroke-width: 6px !important;
+        /* Thêm hiệu ứng đổ bóng vàng cho rực rỡ hơn */
+        filter: drop-shadow(0 0 5px #FFD700);
+    }
     </style>
-    <script src="https://balkan.app/js/FamilyTree.js"></script>
 </head>
 <body>
     <div id="tree"></div>
-
+    
     <script src="data.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
-            // --- 1. CẤU HÌNH TEMPLATE MOBILE (Giao diện Sáng - Bản Rộng) ---
-            
-            // Kích thước thẻ mới: Rộng 200, Cao 220
-            const nodeWidth = 160;
-            const nodeHeight = 220;
-            const imgSize = 140; // Kích thước ảnh
-            const imgX = (nodeWidth - imgSize) / 2; // Căn giữa ảnh: (200 - 100) / 2 = 50
+            // --- 1. CẤU HÌNH TEMPLATE ---
+            FamilyTree.SEARCH_PLACEHOLDER = "Tìm kiếm thành viên...";
 
             FamilyTree.templates.base.defs = 
                 `<g transform="matrix(1,0,0,1,0,0)" id="dot"><circle class="ba-fill" cx="0" cy="0" r="5" stroke="#aeaeae" stroke-width="1"></circle></g>
                 <g id="base_node_menu" style="cursor:pointer;">
                     <rect x="0" y="0" fill="transparent" width="22" height="22"></rect>
-                    <circle cx="4" cy="11" r="2" fill="#212529"></circle>
-                    <circle cx="11" cy="11" r="2" fill="#212529"></circle>
-                    <circle cx="18" cy="11" r="2" fill="#212529"></circle>
-                </g>
-                <g style="cursor: pointer;" id="base_tree_menu">
-                    <rect x="0" y="0" width="25" height="25" fill="transparent"></rect>
-                    ${FamilyTree.icon.addUser(13, 13, '#212529', 0, 0)}
-                </g>
-                <clipPath id="base_img_0">
-                    <rect id="base_img_0_stroke" stroke-width="3" x="${imgX}" y="15" rx="15" ry="15" width="${imgSize}" height="${imgSize}"></rect>
-                </clipPath>`;
+                    <circle cx="4" cy="11" r="2" fill="#fff"></circle>
+                    <circle cx="11" cy="11" r="2" fill="#fff"></circle>
+                    <circle cx="18" cy="11" r="2" fill="#fff"></circle>
+                </g>`;
 
-            FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
-            FamilyTree.templates.myTemplate.size = [nodeWidth, nodeHeight];
+            FamilyTree.templates.treeLaHuu = Object.assign({}, FamilyTree.templates.tommy);
+            FamilyTree.templates.treeLaHuu.size = [120, 180];
             
-            FamilyTree.templates.myTemplate_male = Object.assign({}, FamilyTree.templates.tommy);
-            FamilyTree.templates.myTemplate_female = Object.assign({}, FamilyTree.templates.tommy);
+            FamilyTree.templates.treeLaHuu_male = Object.assign({}, FamilyTree.templates.treeLaHuu);
+            FamilyTree.templates.treeLaHuu_female = Object.assign({}, FamilyTree.templates.treeLaHuu);
+
+            // Cấu hình khung thẻ
+            FamilyTree.templates.treeLaHuu_male.node = 
+                `<rect x="0" y="0" height="{h}" width="{w}" stroke-width="1" fill="#039BE5" stroke="#aeaeae" rx="10" ry="10"></rect>`;
+            FamilyTree.templates.treeLaHuu_female.node = 
+                `<rect x="0" y="0" height="{h}" width="{w}" stroke-width="1" fill="#CDB38B" stroke="#aeaeae" rx="10" ry="10"></rect>`;
+
+            // field_0: TÊN (Đẩy lên y=65 để nhường chỗ cho field_1)
+            FamilyTree.templates.treeLaHuu.field_0 = 
+            FamilyTree.templates.treeLaHuu_male.field_0 =
+            FamilyTree.templates.treeLaHuu_female.field_0 =
+                `<text data-width="100" data-text-overflow="multiline" style="font-size: 18px; font-weight: bold;" fill="#fff" x="60" y="65" text-anchor="middle">{val}</text>`;
+
+            // field_1: TITLE (Chức vụ hoặc Đời) - Hiển thị ngay dưới field_0
+            FamilyTree.templates.treeLaHuu.field_1 = 
+            FamilyTree.templates.treeLaHuu_male.field_1 =
+            FamilyTree.templates.treeLaHuu_female.field_1 =
+                `<text data-width="100" data-text-overflow="multiline" style="font-size: 13px;" fill="#f0f0f0" x="60" y="110" text-anchor="middle">{val}</text>`;
+
+            // Menu nút bấm
+            FamilyTree.templates.treeLaHuu.nodeTreeMenuButton = 
+            FamilyTree.templates.treeLaHuu_male.nodeTreeMenuButton = 
+            FamilyTree.templates.treeLaHuu_female.nodeTreeMenuButton = "";
+                // `<use ${'data-ctrl-n-t-menu-id'}="{id}" x="90" y="5" xlink:href="#base_tree_menu" />`;
+
+            FamilyTree.templates.treeLaHuu.nodeMenuButton =
+            FamilyTree.templates.treeLaHuu_male.nodeMenuButton =
+            FamilyTree.templates.treeLaHuu_female.nodeMenuButton =
+                `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="5" y="5" xlink:href="#base_node_menu" />`;
+
+            // Xóa ảnh
+            FamilyTree.templates.treeLaHuu.img_0 = "";
+            FamilyTree.templates.treeLaHuu_male.img_0 = "";
+            FamilyTree.templates.treeLaHuu_female.img_0 = "";
+
+            FamilyTree.templates.root_node = Object.assign({}, FamilyTree.templates.treeLaHuu);
+            FamilyTree.templates.root_node.node = 
+                `<rect x="0" y="0" height="{h}" width="{w}" stroke-width="3" fill="#FF0000" stroke="#FFD700" rx="10" ry="10"></rect>`;
+
+            FamilyTree.templates.mark_node = Object.assign({}, FamilyTree.templates.treeLaHuu);
+            FamilyTree.templates.mark_node.node = 
+                `<rect x="0" y="0" height="{h}" width="{w}" stroke-width="3" fill="#66CD00" stroke="#0000FF" rx="10" ry="10"></rect>`;
+
+
+            // --- 2. XỬ LÝ DỮ LIỆU ---
             
-
-            FamilyTree.SEARCH_PLACEHOLDER = "Tìm kiếm thành viên...";
-
-            // --- THAY ĐỔI MÀU ĐƯỜNG LINK ---
-            // stroke: Màu đường nối (Vàng cam #FF9800)
-            // stroke-width: Độ dày (2px)
-            // FamilyTree.templates.myTemplate.link = 
-            //     '<path stroke="#FF9800" stroke-width="2" fill="none" data-l-id="[{id}][{child-id}]" d="M{xa},{ya} C{xb},{yb} {xc},{yc} {xd},{yd}" />';
-
-            // --- ĐỊNH NGHĨA MÀU SẮC NODE ---
-            
-            // Nam: Xanh da trời (#4FC3F7), Viền xanh đậm (#0288D1)
-            FamilyTree.templates.myTemplate_male.node = 
-                `<rect x="0" y="0" height="220" width="160" stroke-width="2" fill="#4FC3F7" stroke="#0288D1" rx="15" ry="15"></rect>`;
-            
-            // Nữ: Màu cam (#FF9800), Viền cam đậm (#F57C00)
-            FamilyTree.templates.myTemplate_female.node = 
-                `<rect x="0" y="0" height="220" width="160" stroke-width="2" fill="#FF9800" stroke="#F57C00" rx="15" ry="15"></rect>`;
-
-            // FamilyTree.templates.myTemplate.node = 
-            //     '<rect x="0" y="0" height="220" width="160" fill="#FFFF00" stroke-width="3" rx="7" ry="7" filter="url(#shadow)" ></rect>';
-
-
-            // Style cho Tên (Màu đen, chữ to)
-            const textStyle = `style="font-size: 15px; font-weight: bold; font-family: 'Nunito';" fill="#fff" x="${nodeWidth/2}" y="${imgSize + 20 * 2}" text-anchor="middle"`;
-            // Style cho Chức vụ/Ngày sinh (Màu xám, chữ nhỏ)
-            const subTextStyle = `style="font-size: 13px;" fill="#fff" x="${nodeWidth/2}" y="${imgSize + 20 * 3}" text-anchor="middle"`;
-            
-            FamilyTree.templates.myTemplate.field_0 = 
-            FamilyTree.templates.myTemplate_male.field_0 =
-            FamilyTree.templates.myTemplate_female.field_0 =
-                `<text data-width="${nodeWidth - 20}" data-text-overflow="ellipsis" ${textStyle}>{val}</text>`;
-            
-            FamilyTree.templates.myTemplate.field_1 = 
-            FamilyTree.templates.myTemplate_male.field_1 =
-            FamilyTree.templates.myTemplate_female.field_1 =
-                `<text data-width="${nodeWidth - 20}" data-text-overflow="ellipsis" ${subTextStyle}>{val}</text>`;
-
-            // Ảnh đại diện
-            FamilyTree.templates.myTemplate.img_0 =
-            FamilyTree.templates.myTemplate_male.img_0 =
-            FamilyTree.templates.myTemplate_female.img_0 =
-                `<use xlink:href="#base_img_0_stroke" />
-                <image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_0)" xlink:href="{val}" x="${imgX}" y="15" width="${imgSize}" height="${imgSize}"></image>`;
-
-            // Nút Menu (Căn chỉnh lại vị trí do thẻ rộng hơn)
-            FamilyTree.templates.myTemplate.nodeTreeMenuButton = 
-            FamilyTree.templates.myTemplate_male.nodeTreeMenuButton = 
-            FamilyTree.templates.myTemplate_female.nodeTreeMenuButton = 
-                `<use ${'data-ctrl-n-t-menu-id'}="{id}" x="${nodeWidth - 35}" y="185" xlink:href="#base_tree_menu" />`;
-
-            FamilyTree.templates.myTemplate.nodeMenuButton =
-            FamilyTree.templates.myTemplate_male.nodeMenuButton =
-            FamilyTree.templates.myTemplate_female.nodeMenuButton =
-                `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="10" y="185" xlink:href="#base_node_menu" />`;
-                
-
-            // --- 2. CHUYỂN ĐỔI DỮ LIỆU ---
             let nodes = [];
             let autoId = 1;
-
-            // Ưu tiên dữ liệu từ LocalStorage
             let sourceData = defaultData;
+
             const stored = localStorage.getItem('genealogyData');
             if (stored) {
-                try {
-                    sourceData = JSON.parse(stored);
-                } catch (e) { console.error("Lỗi đọc LocalStorage"); }
+                try { sourceData = JSON.parse(stored); } catch (e) {}
             }
 
             function detectGender(member) {
@@ -169,32 +142,26 @@
 
                 let currentId = autoId++;
                 let gender = detectGender(member);
-                let gen = member.generation || member.doi || "";
                 
-                // Ảnh mặc định
-                let maleAvatar = './avatar_male.jpg';
-                let femaleAvatar = './avatar_female.jpg';
-                // let maleAvatar = 'https://gimgs2.nohat.cc/thumb/f/350/male-face-icon-default-profile-image--c3f2c592f9.jpg';
-                // let maleAvatar = 'https://static.vecteezy.com/system/resources/previews/045/944/199/non_2x/male-default-placeholder-avatar-profile-gray-picture-isolated-on-background-man-silhouette-picture-for-user-profile-in-social-media-forum-chat-greyscale-illustration-vector.jpg';
-                // let femaleAvatar = 'https://static.vecteezy.com/system/resources/previews/053/406/442/non_2x/female-person-default-woman-avatar-image-for-social-media-forums-dating-sites-gray-profile-anonymous-face-picture-vector.jpg';
+                // Lấy thông tin thế hệ (hỗ trợ nhiều key khác nhau)
+                let gen = member.gen || member.doi || member.generation || "";
+                
+                // Tạo Title theo yêu cầu: Chức vụ HOẶC "Đời thứ X"
+                let title = member.chuc_vu || (gen ? `Thế hệ F${gen}` : "");
 
-                // KIỂM TRA NODE GỐC: Nếu không có cha (fatherId == null) và mẹ (motherId == null) thì là gốc
                 let isRootNode = (fatherId === null && motherId === null);
 
                 let personNode = {
                     id: currentId,
                     mid: motherId,
                     fid: fatherId,
-                    Name: member.ho_ten,
-                    Title: member.chuc_vu || (gen ? `Đời thứ ${gen}` : ""),
-                    Gender: gender,
-                    Photo: member.anh_dai_dien || (gender === 'male' ? maleAvatar : femaleAvatar),
+                    name: member.ho_ten,
+                    title: title, // Binding vào field_1
+                    gender: gender,
                     // Gán thẻ 'root_node' nếu là gốc để CSS nhận biết
-                    tags: isRootNode ? ['root_node'] : []
+                    tags: isRootNode ? ['root_node'] : (member.mark ? ['mark_node'] : []),
                 };
                 
-                if (member.ngay_sinh) personNode.Title += ` (${member.ngay_sinh})`;
-
                 let partnerIds = [];
                 let spouses = [];
 
@@ -210,24 +177,22 @@
                 spouses.forEach(spouse => {
                     let sId = autoId++;
                     let sName = (typeof spouse.data === 'object') ? spouse.data.ho_ten : spouse.data;
-                    let sTitle = (spouse.type === 'vo') ? 'Vợ' : 'Chồng';
                     let sGender = (spouse.type === 'vo') ? 'female' : 'male';
                     
+                    // Title cho vợ/chồng
+                    let sTitle = (typeof spouse.data === 'object' && spouse.data.chuc_vu) 
+                        ? spouse.data.chuc_vu 
+                        : (spouse.type === 'vo' ? 'Vợ' : 'Chồng');
+
                     let spouseNode = {
                         id: sId,
                         pids: [currentId],
-                        Name: sName,
-                        Title: sTitle,
-                        Gender: sGender,
-                        Photo: (sGender === 'male' ? maleAvatar : femaleAvatar),
+                        name: sName,
+                        title: sTitle,
+                        gender: sGender,
                         // Nếu chồng/vợ chính là gốc, thì người phối ngẫu cũng được tính là gốc
                         tags: isRootNode ? ['root_node'] : []
                     };
-                    
-                    if (typeof spouse.data === 'object' && spouse.data.ngay_sinh) {
-                        spouseNode.Title += ` (${spouse.data.ngay_sinh})`;
-                    }
-
                     nodes.push(spouseNode);
                     partnerIds.push(sId);
                 });
@@ -237,11 +202,11 @@
 
                 let childrenList = getChildren(member);
                 if (childrenList && childrenList.length > 0) {
-                    let childFid = (personNode.Gender === 'male') ? currentId : null;
-                    let childMid = (personNode.Gender === 'female') ? currentId : null;
+                    let childFid = (personNode.gender === 'male') ? currentId : null;
+                    let childMid = (personNode.gender === 'female') ? currentId : null;
 
                     if (partnerIds.length === 1) {
-                        if (personNode.Gender === 'male') childMid = partnerIds[0];
+                        if (personNode.gender === 'male') childMid = partnerIds[0];
                         else childFid = partnerIds[0];
                     }
 
@@ -260,18 +225,30 @@
 
             // --- 3. KHỞI TẠO BIỂU ĐỒ ---
             let family = new FamilyTree(document.getElementById("tree"), {
-                template: 'myTemplate',
-                orientation: FamilyTree.orientation.top,
-                enableSearch: true,
+                mode: 'light',
+                nodeTreeMenu: true,
                 scaleInitial: FamilyTree.match.boundary,
+                template: 'treeLaHuu',
                 menu: {
                     pdf: { text: "Export PDF" },
                     json: { text: "Export JSON" }
                 },
+                // nodeMenu: {
+                //     details: { text: "Chi tiết" },
+                //     edit: { text: "Sửa" }
+                // },
+                mouseScrool: FamilyTree.action.zoom,
                 nodeBinding: {
-                    field_0: "Name",
-                    field_1: "Title",
-                    img_0: "Photo"
+                    field_0: "name",  // Tên
+                    field_1: "title"  // Chức vụ / Đời
+                },
+                tags: {
+                    root_node: {
+                        template: 'root_node'
+                    },
+                    mark_node: {
+                        template: 'mark_node'
+                    }
                 }
             });
 

@@ -502,6 +502,7 @@ const defaultData = {
                                                                                                 {
                                                                                                     "gen": 12,
                                                                                                     "ho_ten": "LÃ HỮU THÀNH",
+                                                                                                    "mark": true,
                                                                                                     "vo": "ĐINH THỊ HƯƠNG",
                                                                                                     "ngay_sinh": "25/10/1990",
                                                                                                     "children": [
